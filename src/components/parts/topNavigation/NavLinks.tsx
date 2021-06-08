@@ -43,6 +43,9 @@ export const NavLinks:FC<IProps> = ({ isMobile }) => {
         <Link
           to="/"
           className={styles.navLink}
+          onClick={() => {
+            setOpen(false);
+          }}
         >
           Home
         </Link>

@@ -30,7 +30,20 @@ export const ShowDetails = () => {
   const { data, loading, error } = usePalette(`https://image.tmdb.org/t/p/original${show && show.poster_path}`);
 
   return (
-    <div className={styles.showDetails} style={{ backgroundColor: data.vibrant }}>
+    <div
+      className={styles.showDetails}
+      style={{ backgroundColor: data.vibrant }}
+    >
+      <div
+        className={styles.backdrop}
+        style={{ backgroundImage: `url(https://image.tmdb.org/t/p/original${show && show.backdrop_path})` }}
+      >
+        <img
+          className={styles.poster}
+          src={`https://image.tmdb.org/t/p/original${show && show.poster_path}`}
+          alt={`${show && show.name}`}
+        />
+      </div>
       {show && show.name}
       {id}
     </div>
