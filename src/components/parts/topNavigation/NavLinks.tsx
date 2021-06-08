@@ -40,33 +40,6 @@ export const NavLinks:FC<IProps> = ({ isMobile }) => {
   return (
     <ul>
       <li>
-        <Link
-          to="/"
-          className={styles.navLink}
-          onClick={() => setOpen(false)}
-        >
-          Shows
-        </Link>
-      </li>
-      <li>
-        <Link
-          to="/"
-          className={styles.navLink}
-          onClick={() => setOpen(false)}
-        >
-          Movies
-        </Link>
-      </li>
-      <li>
-        <Link
-          to="/"
-          className={styles.navLink}
-          onClick={() => setOpen(false)}
-        >
-          People
-        </Link>
-      </li>
-      <li>
         {authorized
           ? (
             <Link

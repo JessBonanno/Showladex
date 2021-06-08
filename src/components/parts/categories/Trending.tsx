@@ -2,8 +2,10 @@ import React, { useContext, useEffect, useState } from 'react';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import { APIContext } from '../../../context/APIContext';
 import { ShowsContext, IShow as Show } from '../../../context/ShowsContext';
-import ShowCard from '../../common/mediaCards/ShowCard';
+import ShowCard from '../../common/poster/ShowPoster';
 import styles from './trending.module.scss';
+
+const dummyArray = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 25];
 
 export const Trending = () => {
   const { trending, setTrending } = useContext(ShowsContext);
@@ -37,13 +39,18 @@ export const Trending = () => {
           dataLength={(trending && trending.length) || []}
           next={getShows}
           hasMore={hasMore}
-          loader={<h4>Loading...</h4>}
+          loader={dummyArray.map((number, idx) => {
+            return (
+              <div className={styles.skeleton}></div>
+            );
+          })}
         >
           {trending && trending.length > 0 && trending.map((result: Show) => {
             return (
               <ShowCard media={result} key={result.id} />
             );
           })}
+
         </InfiniteScroll>
       </div>
     </div>

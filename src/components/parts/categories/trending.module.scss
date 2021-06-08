@@ -15,4 +15,12 @@
     width: 100%;
     flex-wrap: wrap;
   }
+
+  .skeleton {
+    width: 28%;
+    background-color: lighten($black, 2%);
+    margin: .5em;
+    aspect-ratio: 2/3;
+    filter: blur(2px)
+  }
 }

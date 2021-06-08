@@ -1,7 +1,7 @@
 import React, {
   FC, useContext, useEffect, useState,
 } from 'react';
-import styles from './showCard.module.scss';
+import styles from './showPoster.module.scss';
 import { IShow as Show, IShowDetails as ShowDetails } from '../../../context/ShowsContext';
 import { APIContext } from '../../../context/APIContext';
 
