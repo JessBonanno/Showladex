@@ -7,6 +7,7 @@ import { IShowDetails as Show } from '../../../context/ShowsContext';
 import Header from './Header';
 import ScoreAndTrailer from './ScoreAndTrailer';
 import Classification from './Classification';
+import Overview from './Overview';
 
 type ShowParams = {
   id: string
@@ -47,6 +48,7 @@ export const ShowDetails = () => {
       <Header show={show} />
       <ScoreAndTrailer show={show} trailer={trailer} />
       <Classification show={show} rating={rating} />
+      <Overview show={show} />
     </div>
   );
 };
