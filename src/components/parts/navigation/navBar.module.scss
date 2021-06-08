@@ -64,14 +64,14 @@
 
   .mobileNavigation {
     display: none;
-    @media (max-width: 990px) {
+    @media (max-width: 900px) {
       display: flex;
       align-items: center;
     }
   }
 
   .navigation {
-    @media (max-width: 990px) {
+    @media (max-width: 900px) {
       display: none;
     }
   }

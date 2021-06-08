@@ -5,12 +5,13 @@ import React, {
 export const UsersContext: Context<any> = createContext({});
 
 export const UsersProvider: FC = ({ children }) => {
-  const [userToken, setUserToken] = useState('');
+  const [authorized, setAuthorized] = useState(false);
+
   return (
     <UsersContext.Provider
       value={{
-        userToken,
-        setUserToken,
+        authorized,
+        setAuthorized,
       }}
     >
       {children}
