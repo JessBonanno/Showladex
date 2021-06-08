@@ -2,8 +2,7 @@
 
 .showDetails {
   padding-top: 80px;
-  color: #3b3b3b;
-  font-weight: bold;
+  color:  white;
   font-family: $roboto;
   display: flex;
   flex-direction: column;
@@ -52,7 +51,7 @@
       .rating {
         p:first-child {
           margin-right: .5em;
-          border: 3px solid rgb(5, 158, 5);
+          border: 3px solid rgb(14, 201, 14);
           border-radius: 100%;
           padding: .5em .4em .4em;
         }
@@ -64,7 +63,7 @@
 
     .divider {
       width: 1px;
-      background: lighten(#3b3b3b, 5%);
+      background: lighten(white, 5%);
       align-self: stretch;
     }
 
@@ -73,9 +72,8 @@
       outline: none;
       border: none;
       font-size: 1rem;
-      font-weight: bold;
       font-family: $roboto;
-      color: #3b3b3b;
+      color: white;
       display: flex;
       align-items: center;
 
@@ -98,8 +96,8 @@
 
       .USrating {
         p {
-        color: lighten(#3b3b3b, 25%);
-        border: 3px solid lighten(#3b3b3b, 25%);
+        color: lighten(white, 25%);
+        border: 2px solid lighten(white, 25%);
         border-radius: 5px;
         padding: .2em;
         background-color: black;
