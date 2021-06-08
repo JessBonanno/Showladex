@@ -49,6 +49,7 @@ module.exports = {
     'jsx-a11y/no-static-element-interactions': 'off',
     'no-lone-blocks': 'off',
     '@typescript-eslint/no-explicit-any': 'off',
+    '@typescript-eslint/no-var-requires': 'off',
     camelcase: 'off',
     'react-hooks/exhaustive-deps': 'off',
     'react/no-unescaped-entities': 'off',

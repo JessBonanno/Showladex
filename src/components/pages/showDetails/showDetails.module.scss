@@ -2,7 +2,12 @@
 
 .showDetails {
   padding-top: 80px;
-  color: white;
+  color: #575757;
+  font-weight: bold;
+  font-family: $roboto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 
   .backdrop {
     width: 100%;
@@ -20,5 +25,65 @@
       aspect-ratio: 2/3;
       margin: 1em;
     }
+
   }
+  h2 {
+    font-size: 1.5rem;
+    padding: .5em;
+
+    span {
+      font-size: 1.2rem;
+    }
+  }
+
+  .scoreAndTrailer {
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: .5em 0;
+
+    .score {
+      font-size: 1rem;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+
+      .rating {
+        p:first-child {
+          margin-right: .5em;
+          border: 3px solid rgb(5, 158, 5);
+          border-radius: 100%;
+          padding: .3em;
+        }
+      }
+    }
+
+
+
+
+    .divider {
+      width: 1px;
+      background: lighten($black, 30%);
+      align-self: stretch;
+    }
+
+    button {
+      background: none;
+      outline: none;
+      border: none;
+      font-size: 1rem;
+      font-weight: bold;
+      font-family: $roboto;
+      color: #575757;
+      display: flex;
+      align-items: center;
+
+      .playIcon {
+        padding-right: .2em;
+      }
+    }
+  }
+
+
 }
