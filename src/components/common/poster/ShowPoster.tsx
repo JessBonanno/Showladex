@@ -1,9 +1,7 @@
-import React, {
-  FC, useContext, useEffect, useState,
-} from 'react';
+import React, { FC } from 'react';
+import { Link } from 'react-router-dom';
 import styles from './showPoster.module.scss';
-import { IShow as Show, IShowDetails as ShowDetails } from '../../../context/ShowsContext';
-import { APIContext } from '../../../context/APIContext';
+import { IShow as Show } from '../../../context/ShowsContext';
 
 interface IProps {
   media: Show;
@@ -11,9 +9,20 @@ interface IProps {
 
 export const ShowCard:FC<IProps> = ({ media }) => {
   // console.log(media.poster_path);
+
   return (
     <div className={styles.card}>
-      {media.poster_path !== null && <img src={`https://image.tmdb.org/t/p/original${media.poster_path}`} alt="show poster" />}
+      {media.poster_path !== null
+      && (
+        <>
+          <Link to={`/${media.id}`}>
+            <img
+              src={`https://image.tmdb.org/t/p/original${media.poster_path}`}
+              alt={`${media.name}`}
+            />
+          </Link>
+        </>
+      )}
 
     </div>
   );

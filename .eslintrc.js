@@ -26,6 +26,10 @@ module.exports = {
     'react-hooks',
   ],
   rules: {
+    '@typescript-eslint/indent': [
+      'error',
+      2,
+    ],
     'no-use-before-define': 'off',
     '@typescript-eslint/no-use-before-define': ['error'],
     'react/jsx-filename-extension': ['warn', { extensions: ['.tsx'] }],

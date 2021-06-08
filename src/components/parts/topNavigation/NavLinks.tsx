@@ -40,6 +40,14 @@ export const NavLinks:FC<IProps> = ({ isMobile }) => {
   return (
     <ul>
       <li>
+        <Link
+          to="/"
+          className={styles.navLink}
+        >
+          Home
+        </Link>
+      </li>
+      <li>
         {authorized
           ? (
             <Link

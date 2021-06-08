@@ -56,7 +56,8 @@ Show api calls
 
   const getShowDetails = async (id: number) => {
     try {
-      const details = await axios.get(`https://api.themoviedb.org/3/tv/95839?api_key=${process.env.REACT_APP_API_KEY}&language=en-US`);
+      const details = await axios.get(`https://api.themoviedb.org/3/tv/${id}?api_key=${process.env.REACT_APP_API_KEY}&language=en-US`);
+      console.log(details.data);
       return details.data;
     } catch (err) {
       console.error(err);
