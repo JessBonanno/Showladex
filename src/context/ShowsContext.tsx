@@ -19,7 +19,6 @@ export interface IShow {
   media_type: string;
 }
 interface IShowsResults {
-  page: number;
   results: [IShow]
 }
 

@@ -44,9 +44,9 @@ Auth api calls
 Show api calls
 */
 
-  const getTrendingShows = async () => {
+  const getTrendingShows = async (page:number) => {
     try {
-      const shows = await axios.get(`https://api.themoviedb.org/3/trending/tv/day?api_key=${process.env.REACT_APP_API_KEY}`);
+      const shows = await axios.get(`https://api.themoviedb.org/3/trending/tv/day?page=${page}&api_key=${process.env.REACT_APP_API_KEY}`);
       return shows.data;
     } catch (err) {
       console.error(err);
