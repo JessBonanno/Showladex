@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import InfiniteScroll from 'react-infinite-scroll-component';
+import { v4 as uuidv4 } from 'uuid';
 import { APIContext } from '../../../context/APIContext';
 import { ShowsContext, IShow as Show } from '../../../context/ShowsContext';
 import ShowCard from '../../common/poster/ShowPoster';
@@ -39,15 +40,15 @@ export const Trending = () => {
           dataLength={(trending && trending.length) || []}
           next={getShows}
           hasMore={hasMore}
-          loader={dummyArray.map((number, idx) => {
+          loader={dummyArray.map((number) => {
             return (
-              <div className={styles.skeleton}></div>
+              <div key={uuidv4()} className={styles.skeleton}></div>
             );
           })}
         >
           {trending && trending.length > 0 && trending.map((result: Show) => {
             return (
-              <ShowCard media={result} key={result.id} />
+              <ShowCard media={result} key={uuidv4()} />
             );
           })}
 

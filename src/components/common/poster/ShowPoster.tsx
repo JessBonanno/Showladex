@@ -10,9 +10,11 @@ interface IProps {
 }
 
 export const ShowCard:FC<IProps> = ({ media }) => {
+  // console.log(media.poster_path);
   return (
     <div className={styles.card}>
-      <img src={`https://image.tmdb.org/t/p/original${media.poster_path}`} alt="show poster" />
+      {media.poster_path !== null && <img src={`https://image.tmdb.org/t/p/original${media.poster_path}`} alt="show poster" />}
+
     </div>
   );
 };
