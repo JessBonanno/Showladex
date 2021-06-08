@@ -1,0 +1,82 @@
+@import '../../../variables.scss';
+
+.navBar {
+  background: #181818;
+  width: 100%;
+  height: 80px;
+  position: fixed;
+  z-index: 999;
+  opacity: 0.9;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .hamburger {
+    color: $yellow;
+    position: absolute;
+    right: 5%;
+    cursor: pointer;
+    border-radius: 100%;
+    padding: .3em;
+
+
+    &:active {
+      background-color: lighten(#181818, 5%);
+        transform: scale(0.98);
+        /* Scaling button to 0.98 to its original size */
+        box-shadow: 3px 2px 22px 1px rgba(0, 0, 0, 0.24);
+        /* Lowering the shadow */
+    }
+  }
+
+  nav ul {
+    @media (max-width: 900px) {
+      display: flex;
+      flex-direction: column;
+      position: absolute;
+      top: 80px;
+      right: 0;
+      padding: 1em;
+      background-color: #181818;
+      opacity: 0.9;
+    }
+  }
+
+  nav ul li {
+    display: inline-block;
+    margin: 20px;
+  }
+
+  .navLink {
+    color: $yellow;
+    text-decoration: none;
+    font-family: $openSans;
+    font-size: 1.3rem;
+    font-weight: bold;
+
+    &:hover {
+      text-decoration: underline;
+      text-decoration-color: $lightGreen;
+      text-decoration-thickness: 4px;
+      text-underline-position: under;
+    }
+  }
+
+  .mobileNavigation {
+    display: none;
+    @media (max-width: 990px) {
+      display: flex;
+      align-items: center;
+    }
+  }
+
+  .navigation {
+    @media (max-width: 990px) {
+      display: none;
+    }
+  }
+}
+
+
+
+

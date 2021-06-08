@@ -1,0 +1,13 @@
+@import "../../../variables.scss";
+
+.button {
+  background-color: $black;
+  outline: none;
+  border: none;
+  font-size: 1.3rem;
+  font-family: $openSans;
+  text-decoration: underline;
+  color: $orange;
+  cursor: pointer;
+}
+
