@@ -4,22 +4,28 @@ import { IShowDetails as Show } from '../../../context/ShowsContext';
 
 interface IProps {
   show: Show | undefined;
-  rating: string;
+  rating: string | undefined;
 }
 
 export const Classification:FC<IProps> = ({ rating, show }) => {
   return (
     <div className={styles.classification}>
       <div className={styles.ratingAndLength}>
-        <div className={styles.USrating}>
-          <p>{rating}</p>
-        </div>
-        <div className={styles.dotDivider}>
-          •
-        </div>
+        {rating
+        && (
+          <>
+            <div className={styles.USrating}>
+              <p>{rating}</p>
+            </div>
+            <div className={styles.dotDivider}>
+              •
+            </div>
+          </>
+        )}
         <div>
           <p>
             {show && show.episode_run_time}
+            m
           </p>
         </div>
       </div>

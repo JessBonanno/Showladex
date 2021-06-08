@@ -13,13 +13,18 @@ type ShowParams = {
   id: string
 }
 
+type Rating = {
+  iso_3166_1: string,
+  rating: string
+}
+
 export const ShowDetails = () => {
   const { id } = useParams<ShowParams>();
   const { getShowDetails, getShowTrailer, getShowRating } = useContext(APIContext);
   const [show, setShow] = useState<Show | undefined>();
   const [openVideoModal, setOpenVideoModal] = useState(false);
   const [trailer, setTrailer] = useState<string>('');
-  const [rating, setRating] = useState<string>('');
+  const [rating, setRating] = useState<Rating>();
 
   const getShow = async () => {
     try {
@@ -28,7 +33,9 @@ export const ShowDetails = () => {
       const videos = await getShowTrailer(id);
       setTrailer(videos.results[0].key);
       const showRating = await getShowRating(id);
-      setRating(showRating[0].rating);
+      setRating(showRating.find((r: Rating) => {
+        return r.iso_3166_1 === 'US';
+      }));
     } catch (err) {
       console.error(err);
     }
@@ -47,7 +54,7 @@ export const ShowDetails = () => {
     >
       <Header show={show} />
       <ScoreAndTrailer show={show} trailer={trailer} />
-      <Classification show={show} rating={rating} />
+      <Classification show={show} rating={rating && rating.rating} />
       <Overview show={show} />
     </div>
   );

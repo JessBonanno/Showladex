@@ -11,8 +11,13 @@ const Overview:FC<IProps> = ({ show }) => {
     <div className={styles.overview}>
       <p>Overview</p>
       <p>{show && show.overview}</p>
-      <p className={styles.creator}>{show && show.created_by[0].name}</p>
-      <p>Creator</p>
+      {show && show.created_by.length > 0
+      && (
+        <>
+          <p className={styles.creator}>{show && show.created_by[0].name}</p>
+          <p>Creator</p>
+        </>
+      )}
     </div>
   );
 };
