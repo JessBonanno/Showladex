@@ -57,8 +57,26 @@ Show api calls
   const getShowDetails = async (id: number) => {
     try {
       const details = await axios.get(`https://api.themoviedb.org/3/tv/${id}?api_key=${process.env.REACT_APP_API_KEY}&language=en-US`);
-      console.log(details.data);
       return details.data;
+    } catch (err) {
+      console.error(err);
+    }
+    return null;
+  };
+
+  const getShowTrailer = async (id: number) => {
+    try {
+      const videos = await axios.get(`http://api.themoviedb.org/3/tv/${id}/videos?api_key=${process.env.REACT_APP_API_KEY}`);
+      return videos.data;
+    } catch (err) {
+      console.error(err);
+    }
+    return null;
+  };
+  const getShowRating = async (id: number) => {
+    try {
+      const ratings = await axios.get(`http://api.themoviedb.org/3/tv/${id}/content_ratings?api_key=${process.env.REACT_APP_API_KEY}`);
+      return ratings.data.results;
     } catch (err) {
       console.error(err);
     }
@@ -73,6 +91,8 @@ Show api calls
         getSession,
         getTrendingShows,
         getShowDetails,
+        getShowTrailer,
+        getShowRating,
       }}
     >
       {children}

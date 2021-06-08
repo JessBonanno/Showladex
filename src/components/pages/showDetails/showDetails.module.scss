@@ -2,7 +2,7 @@
 
 .showDetails {
   padding-top: 80px;
-  color: #575757;
+  color: #3b3b3b;
   font-weight: bold;
   font-family: $roboto;
   display: flex;
@@ -64,7 +64,7 @@
 
     .divider {
       width: 1px;
-      background: lighten($black, 30%);
+      background: lighten(#3b3b3b, 5%);
       align-self: stretch;
     }
 
@@ -75,12 +75,51 @@
       font-size: 1rem;
       font-weight: bold;
       font-family: $roboto;
-      color: #575757;
+      color: #3b3b3b;
       display: flex;
       align-items: center;
 
       .playIcon {
         padding-right: .2em;
+      }
+    }
+
+  }
+  .classification {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+
+    .ratingAndLength {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      .USrating {
+        p {
+        color: lighten(#3b3b3b, 25%);
+        border: 3px solid lighten(#3b3b3b, 25%);
+        border-radius: 5px;
+        padding: .2em;
+        background-color: black;
+        }
+      }
+
+      .dotDivider {
+        font-size: 1.5rem;
+        margin: 0 .5em;
+      }
+    }
+
+    .genres {
+      display: flex;
+      justify-content: center;
+      padding: .3em 0 .5em 0;
+      flex-wrap: wrap;
+
+      p {
+        margin-right: .3em;
       }
     }
   }
