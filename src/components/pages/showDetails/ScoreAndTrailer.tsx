@@ -7,9 +7,10 @@ import styles from './showDetails.module.scss';
 interface IProps {
   show: Show | undefined;
   trailer: string;
+  buttonColor: string;
 }
 
-export const ScoreAndTrailer:FC<IProps> = ({ show, trailer }) => {
+export const ScoreAndTrailer:FC<IProps> = ({ show, trailer, buttonColor }) => {
   return (
     <div className={styles.scoreAndTrailer}>
       <div className={styles.score}>
@@ -23,7 +24,7 @@ export const ScoreAndTrailer:FC<IProps> = ({ show, trailer }) => {
       <div className={styles.divider}></div>
 
       <YoutubeModal videoId={trailer}>
-        <button type="button">
+        <button type="button" style={{ color: buttonColor }}>
           {' '}
           <BsPlayFill className={styles.playIcon} />
           {' '}
