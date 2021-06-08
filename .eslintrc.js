@@ -47,6 +47,7 @@ module.exports = {
     '@typescript-eslint/no-explicit-any': 'off',
     camelcase: 'off',
     'react-hooks/exhaustive-deps': 'off',
+    'react/no-unescaped-entities': 'off',
     'import/extensions': [
       'error',
       'ignorePackages',

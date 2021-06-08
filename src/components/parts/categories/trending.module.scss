@@ -1,0 +1,18 @@
+@import '../../../variables.scss';
+
+.trending {
+  width: 100%;
+
+  h2 {
+    color: $orange;
+    font-size: 1.2rem;
+    font-family: $lato;
+    padding: 0 .5em;
+  }
+
+  .cardContainer {
+    display: flex;
+    width: 100%;
+    flex-wrap: wrap;
+  }
+}

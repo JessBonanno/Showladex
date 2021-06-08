@@ -37,7 +37,6 @@ export const NavLinks:FC<IProps> = ({ isMobile }) => {
     createSession();
   }, []);
 
-  console.log(authorized);
   return (
     <ul>
       <li>
@@ -59,6 +58,15 @@ export const NavLinks:FC<IProps> = ({ isMobile }) => {
         </Link>
       </li>
       <li>
+        <Link
+          to="/"
+          className={styles.navLink}
+          onClick={() => setOpen(false)}
+        >
+          People
+        </Link>
+      </li>
+      <li>
         {authorized
           ? (
             <Link
@@ -69,7 +77,7 @@ export const NavLinks:FC<IProps> = ({ isMobile }) => {
                 deleteSession();
               }}
             >
-              Deauthorize App
+              Logout
             </Link>
           )
           : (
@@ -81,7 +89,7 @@ export const NavLinks:FC<IProps> = ({ isMobile }) => {
                 saveSession();
               }}
             >
-              Authorize App
+              Login
             </Link>
           )}
       </li>

@@ -1,0 +1,11 @@
+@import '../../../variables.scss';
+
+.card {
+  width: 28%;
+  border: 1px solid $lightGreen;
+  margin: .5em;
+
+  img {
+    width: 100%;
+  }
+}

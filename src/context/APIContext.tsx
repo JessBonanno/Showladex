@@ -8,6 +8,9 @@ export const APIContext: Context<any> = createContext({});
 export const APIProvider: FC = ({ children }) => {
   const APP_URL = 'http://localhost:3000';
 
+  /*
+Auth api calls
+*/
   const getUserToken = async () => {
     try {
       const tokenData = await axios.get(`https://api.themoviedb.org/3/authentication/token/new?api_key=${process.env.REACT_APP_API_KEY}`);
@@ -37,12 +40,38 @@ export const APIProvider: FC = ({ children }) => {
     return false;
   };
 
+  /*
+Show api calls
+*/
+
+  const getTrendingShows = async () => {
+    try {
+      const shows = await axios.get(`https://api.themoviedb.org/3/trending/tv/day?api_key=${process.env.REACT_APP_API_KEY}`);
+      return shows.data;
+    } catch (err) {
+      console.error(err);
+    }
+    return null;
+  };
+
+  const getShowDetails = async (id: number) => {
+    try {
+      const details = await axios.get(`https://api.themoviedb.org/3/tv/95839?api_key=${process.env.REACT_APP_API_KEY}&language=en-US`);
+      return details.data;
+    } catch (err) {
+      console.error(err);
+    }
+    return null;
+  };
+
   return (
     <APIContext.Provider
       value={{
         getUserToken,
         APP_URL,
         getSession,
+        getTrendingShows,
+        getShowDetails,
       }}
     >
       {children}

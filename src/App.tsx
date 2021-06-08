@@ -2,7 +2,7 @@ import React from 'react';
 import './App.scss';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Landing from './components/pages/landing/Landing';
-import NavBar from './components/parts/navigation/NavBar';
+import NavBar from './components/parts/topNavigation/NavBar';
 
 function App() {
   return (
@@ -10,7 +10,7 @@ function App() {
       <Router>
         <NavBar />
         <Switch>
-          {/* <Route exact path="/" component={Landing} /> */}
+          <Route exact path="/" component={Landing} />
         </Switch>
       </Router>
     </div>
