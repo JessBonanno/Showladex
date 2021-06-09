@@ -82,17 +82,6 @@ export const NavLinks:FC<IProps> = ({ isMobile }) => {
                   setOpen(false);
                 }}
               >
-                WatchList
-              </Link>
-            </li>
-            <li>
-              <Link
-                to="/"
-                className={styles.navLink}
-                onClick={() => {
-                  setOpen(false);
-                }}
-              >
                 Favorites
               </Link>
             </li>
