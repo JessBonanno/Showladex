@@ -12,6 +12,7 @@
   .daysShows {
     display: flex;
     flex-direction: column;
+    justify-content: center;
     padding: .5em 1em;
 
     .showDetails {
@@ -32,15 +33,21 @@
 
       .details {
         width: 100%;
-        padding: .5em;
+        padding: .5em 0 0 .5em;
         display: flex;
         flex-direction: column;
+        justify-content: center;
         color: white;
         font-family: $lato;
 
         .nameAndNetwork {
           display: flex;
           justify-content: space-between;
+
+          .network {
+            font-size: 1rem;
+            color: $lightGreen;
+          }
         }
 
         .episodeNumber {

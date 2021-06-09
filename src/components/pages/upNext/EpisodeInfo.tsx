@@ -41,7 +41,7 @@ const EpisodeInfo:FC<Props> = ({ show }) => {
       <div className={styles.details}>
         <div className={styles.nameAndNetwork}>
           <h4>{show.name}</h4>
-          <p>{show.networks[0].name}</p>
+          <p className={styles.network}>{show.networks[0].name}</p>
         </div>
         <p className={styles.episodeNumber}>
           S
@@ -50,7 +50,9 @@ const EpisodeInfo:FC<Props> = ({ show }) => {
           | E
           {show.next_episode_to_air.episode_number}
         </p>
-        <p className={styles.episodeName}>{show.next_episode_to_air.name}</p>
+        <p className={styles.episodeName}>
+          {show.next_episode_to_air.name !== '' ? show.next_episode_to_air.name : `Episode ${show.next_episode_to_air.episode_number}`}
+        </p>
       </div>
     </div>
   );
