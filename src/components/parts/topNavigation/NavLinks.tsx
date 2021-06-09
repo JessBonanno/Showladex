@@ -13,8 +13,27 @@ interface IProps {
 
 export const NavLinks:FC<IProps> = ({ isMobile }) => {
   const { setOpen } = useContext(NavigationContext);
-  const { getUserToken, getSession } = useContext(APIContext);
-  const { authorized, setAuthorized } = useContext(UsersContext);
+  const { getUserToken, getSession, getAccountDetails } = useContext(APIContext);
+  const {
+    authorized, setAuthorized, accountDetails, setAccountDetails,
+  } = useContext(UsersContext);
+
+  const createSession = async () => {
+    console.log('creating session');
+    const token = localStorage.getItem('movieToken');
+    const success = await getSession(token);
+    if (success) {
+      setAuthorized(true);
+    }
+  };
+
+  const getUserInfo = async () => {
+    const userInfo = await getAccountDetails();
+    if (userInfo) {
+      setAccountDetails(userInfo);
+      setAuthorized(true);
+    }
+  };
 
   const saveSession = async () => {
     await getUserToken();
@@ -25,16 +44,9 @@ export const NavLinks:FC<IProps> = ({ isMobile }) => {
     setAuthorized(false);
   };
 
-  const createSession = async () => {
-    const token = localStorage.getItem('movieToken');
-    const success = await getSession(token);
-    if (success) {
-      setAuthorized(true);
-    }
-  };
-
   useEffect(() => {
     createSession();
+    getUserInfo();
   }, []);
 
   return (
@@ -50,21 +62,36 @@ export const NavLinks:FC<IProps> = ({ isMobile }) => {
           Home
         </Link>
       </li>
-      <li>
-        {authorized
-          ? (
-            <Link
-              to="/"
-              className={styles.navLink}
-              onClick={() => {
-                setOpen(false);
-                deleteSession();
-              }}
-            >
-              Logout
-            </Link>
-          )
-          : (
+      {authorized
+        ? (
+          <>
+            <li>
+              <Link
+                to="/"
+                className={styles.navLink}
+                onClick={() => {
+                  setOpen(false);
+                }}
+              >
+                WatchList
+              </Link>
+            </li>
+            <li>
+              <Link
+                to="/"
+                className={styles.navLink}
+                onClick={() => {
+                  setOpen(false);
+                  deleteSession();
+                }}
+              >
+                Logout
+              </Link>
+            </li>
+          </>
+        )
+        : (
+          <li>
             <Link
               to="/"
               className={styles.navLink}
@@ -75,8 +102,8 @@ export const NavLinks:FC<IProps> = ({ isMobile }) => {
             >
               Login
             </Link>
-          )}
-      </li>
+          </li>
+        )}
     </ul>
   );
 };

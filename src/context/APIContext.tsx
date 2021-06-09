@@ -6,8 +6,6 @@ import axios from 'axios';
 export const APIContext: Context<any> = createContext({});
 
 export const APIProvider: FC = ({ children }) => {
-  const APP_URL = 'http://localhost:3000';
-
   /*
 Auth api calls
 */
@@ -16,7 +14,7 @@ Auth api calls
       const tokenData = await axios.get(`https://api.themoviedb.org/3/authentication/token/new?api_key=${process.env.REACT_APP_API_KEY}`);
       localStorage.setItem('movieToken', tokenData.data.request_token);
 
-      window.location.replace(`https://www.themoviedb.org/authenticate/${tokenData.data.request_token}?redirect_to=${APP_URL}`);
+      window.location.replace(`https://www.themoviedb.org/authenticate/${tokenData.data.request_token}?redirect_to=${process.env.REACT_APP_URL}`);
       return null;
     } catch (err) {
       console.error(err);
@@ -32,6 +30,19 @@ Auth api calls
         localStorage.setItem('session', session.data.session_id);
         localStorage.removeItem('movieToken');
         return true;
+      }
+      return false;
+    } catch (err) {
+      console.error(err);
+    }
+    return false;
+  };
+
+  const getAccountDetails = async () => {
+    try {
+      const details = await axios.get(`https://api.themoviedb.org/3/account?api_key=${process.env.REACT_APP_API_KEY}&session_id=${localStorage.getItem('session')}`);
+      if (details) {
+        return details.data;
       }
       return false;
     } catch (err) {
@@ -87,12 +98,12 @@ Show api calls
     <APIContext.Provider
       value={{
         getUserToken,
-        APP_URL,
         getSession,
         getTrendingShows,
         getShowDetails,
         getShowTrailer,
         getShowRating,
+        getAccountDetails,
       }}
     >
       {children}
