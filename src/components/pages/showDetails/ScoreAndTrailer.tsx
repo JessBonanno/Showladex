@@ -1,6 +1,5 @@
 import React, { FC, useState } from 'react';
 import { BsPlayFill } from 'react-icons/bs';
-import YoutubeModal from 'react-youtube-modal';
 import ModalVideo from 'react-modal-video';
 import { IShowDetails as Show } from '../../../context/ShowsContext';
 import styles from './showDetails.module.scss';
@@ -25,7 +24,7 @@ export const ScoreAndTrailer:FC<IProps> = ({ show, trailer, buttonColor }) => {
         <p>User Score</p>
       </div>
       <div className={styles.divider}></div>
-      {/* <ModalVideo
+      <ModalVideo
         channel="youtube"
         isOpen={isOpen}
         videoId={trailer}
@@ -36,15 +35,7 @@ export const ScoreAndTrailer:FC<IProps> = ({ show, trailer, buttonColor }) => {
         <BsPlayFill className={styles.playIcon} />
         {' '}
         Play Trailer
-      </button> */}
-      <YoutubeModal videoId={trailer}>
-        <button type="button" style={{ color: buttonColor }}>
-          {' '}
-          <BsPlayFill className={styles.playIcon} />
-          {' '}
-          Play Trailer
-        </button>
-      </YoutubeModal>
+      </button>
     </div>
   );
 };
