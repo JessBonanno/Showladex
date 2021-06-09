@@ -12,8 +12,6 @@ interface IProps {
 }
 
 export const NavLinks:FC<IProps> = ({ isMobile }) => {
-  console.log(process.env.REACT_APP_URL);
-
   const { setOpen } = useContext(NavigationContext);
   const {
     getUserToken, getSession, endSession, getAccountDetails,
@@ -60,7 +58,6 @@ export const NavLinks:FC<IProps> = ({ isMobile }) => {
     createSession();
     getUserInfo();
   }, []);
-  console.log(accountDetails);
   return (
     <ul>
       <li>

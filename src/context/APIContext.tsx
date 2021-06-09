@@ -1,11 +1,13 @@
 import React, {
-  FC, Context, createContext, useState,
+  FC, Context, createContext, useState, useContext,
 } from 'react';
 import axios from 'axios';
+import { UsersContext } from './UsersContext';
 
 export const APIContext: Context<any> = createContext({});
 
 export const APIProvider: FC = ({ children }) => {
+  const { accountDetails } = useContext(UsersContext);
   /*
 Auth api calls
 */
@@ -99,10 +101,40 @@ Show api calls
     }
     return null;
   };
+
   const getShowRating = async (id: number) => {
     try {
       const ratings = await axios.get(`https://api.themoviedb.org/3/tv/${id}/content_ratings?api_key=${process.env.REACT_APP_API_KEY}`);
       return ratings.data.results;
+    } catch (err) {
+      console.error(err);
+    }
+    return null;
+  };
+    /*
+User Actions API calls
+*/
+
+  const markFavorite = async (id: number, favorite: boolean) => {
+    try {
+      const response = await axios.post(`https://api.themoviedb.org/3/account/${accountDetails.id}/favorite?api_key=${process.env.REACT_APP_API_KEY}&session_id=${localStorage.getItem('session')}`, {
+        media_type: 'tv',
+        media_id: id,
+        favorite,
+      });
+      console.log(response);
+      return response;
+    } catch (err) {
+      console.error(err);
+    }
+    return null;
+  };
+
+  const getFavorites = async () => {
+    try {
+      const response = await axios.get(`https://api.themoviedb.org/3/account/${accountDetails.id} /favorite/tv?api_key=${process.env.REACT_APP_API_KEY}&language=en-US&session_id=${localStorage.getItem('session')}&sort_by=created_at.asc&page=1`);
+      console.log(response);
+      return response.data;
     } catch (err) {
       console.error(err);
     }
@@ -120,6 +152,8 @@ Show api calls
         getShowRating,
         getAccountDetails,
         endSession,
+        markFavorite,
+        getFavorites,
       }}
     >
       {children}
