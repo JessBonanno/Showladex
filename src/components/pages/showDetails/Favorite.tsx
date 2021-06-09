@@ -17,7 +17,7 @@ interface IFavResults {
   total_results: number;
 }
 
-const SaveOrFavorite:FC<IProps> = ({ show }) => {
+const Favorite:FC<IProps> = ({ show }) => {
   const { markFavorite, getFavorites } = useContext(APIContext);
   const [isFavorite, setIsFavorite] = useState(false);
   const [favorites, setFavorites] = useState<IShow[]>();
@@ -60,8 +60,8 @@ const SaveOrFavorite:FC<IProps> = ({ show }) => {
   }, [favorites]);
 
   return (
-    <div className={styles.saveOrFavorite}>
-      <div className={styles.favorite}>
+    <div className={styles.Favorite}>
+      <div>
         {isFavorite
           ? (
             <MdFavorite
@@ -81,13 +81,9 @@ const SaveOrFavorite:FC<IProps> = ({ show }) => {
               className={styles.heart}
             />
           )}
-
-      </div>
-      <div className={styles.watchlist}>
-        <button className={styles.watchlistButton}>Add To List</button>
       </div>
     </div>
   );
 };
 
-export default SaveOrFavorite;
+export default Favorite;

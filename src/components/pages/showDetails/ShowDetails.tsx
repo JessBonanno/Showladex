@@ -8,7 +8,7 @@ import Header from './Header';
 import ScoreAndTrailer from './ScoreAndTrailer';
 import Classification from './Classification';
 import Overview from './Overview';
-import SaveOrFavorite from './SaveOrFavorite';
+import SaveOrFavorite from './Favorite';
 
 type ShowParams = {
   id: string
