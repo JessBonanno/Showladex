@@ -60,7 +60,7 @@ export const NavLinks:FC<IProps> = ({ isMobile }) => {
     createSession();
     getUserInfo();
   }, []);
-
+  console.log(accountDetails);
   return (
     <ul>
       <li>
@@ -86,6 +86,28 @@ export const NavLinks:FC<IProps> = ({ isMobile }) => {
                 }}
               >
                 WatchList
+              </Link>
+            </li>
+            <li>
+              <Link
+                to="/"
+                className={styles.navLink}
+                onClick={() => {
+                  setOpen(false);
+                }}
+              >
+                Favorites
+              </Link>
+            </li>
+            <li>
+              <Link
+                to="/"
+                className={styles.navLink}
+                onClick={() => {
+                  setOpen(false);
+                }}
+              >
+                Rated
               </Link>
             </li>
             <li>

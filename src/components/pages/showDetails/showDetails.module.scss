@@ -36,7 +36,7 @@
     }
   }
 
-  .scoreAndTrailer {
+  .scoreAndTrailer, .saveOrFavorite {
     width: 100%;
     display: flex;
     justify-content: space-around;
@@ -74,9 +74,11 @@
       outline: none;
       border: none;
       font-size: 1rem;
-      font-family: $roboto;
+      font-family: $openSans;
       display: flex;
       align-items: center;
+      cursor: pointer;
+      font-weight: bold;
 
       .playIcon {
         padding-right: .2em;
@@ -138,6 +140,10 @@
       font-size: 1.1rem;
       margin: 1em 0 .2em;
     }
+  }
+
+  .favorite {
+      font-size: 1.3rem;
   }
 
 

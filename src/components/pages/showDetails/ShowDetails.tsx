@@ -8,6 +8,7 @@ import Header from './Header';
 import ScoreAndTrailer from './ScoreAndTrailer';
 import Classification from './Classification';
 import Overview from './Overview';
+import SaveOrFavorite from './SaveOrFavorite';
 
 type ShowParams = {
   id: string
@@ -80,6 +81,7 @@ export const ShowDetails = () => {
       />
       <Classification show={show} rating={rating && rating.rating} />
       <Overview show={show} />
+      <SaveOrFavorite show={show} />
     </div>
   );
 };
