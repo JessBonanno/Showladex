@@ -4,7 +4,7 @@ import { v4 as uuidv4 } from 'uuid';
 import { APIContext } from '../../../context/APIContext';
 import { ShowsContext } from '../../../context/ShowsContext';
 import { Show } from '../../../ts/showInterfaces';
-import ShowPoster from '../../common/poster/ShowPoster';
+import ShowPoster from './ShowPoster';
 import styles from './trending.module.scss';
 
 const dummyArray = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 25];
@@ -12,6 +12,7 @@ const dummyArray = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 25];
 export const Trending = () => {
   const { trending, setTrending } = useContext(ShowsContext);
   const { getTrendingShows } = useContext(APIContext);
+  const [showAll, setShowAll] = useState(false);
   /**
    * Infinite scroll state
    */
@@ -34,7 +35,13 @@ export const Trending = () => {
 
   return (
     <div className={styles.trending}>
-      <h2>What's Trending</h2>
+      <div className={styles.heading}>
+        <h2>Discover What's Trending</h2>
+        <button onClick={() => setShowAll(!showAll)}>
+          Show
+          {showAll ? 'Less' : 'All'}
+        </button>
+      </div>
       <div>
         <InfiniteScroll
           className={styles.cardContainer}
@@ -47,11 +54,18 @@ export const Trending = () => {
             );
           })}
         >
-          {trending && trending.length > 0 && trending.map((result: Show) => {
-            return (
-              <ShowPoster media={result} key={uuidv4()} />
-            );
-          })}
+          {showAll ? trending && trending.length > 0 && trending
+            .map((result: Show) => {
+              return (
+                <ShowPoster media={result} key={uuidv4()} />
+              );
+            }) : trending && trending.length > 0 && trending
+            .slice(0, 6)
+            .map((result: Show) => {
+              return (
+                <ShowPoster media={result} key={uuidv4()} />
+              );
+            })}
 
         </InfiniteScroll>
       </div>

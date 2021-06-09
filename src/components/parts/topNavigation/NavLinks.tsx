@@ -76,7 +76,7 @@ export const NavLinks:FC<Props> = ({ isMobile }) => {
           <>
             <li>
               <Link
-                to="/"
+                to="/favorites"
                 className={styles.navLink}
                 onClick={() => {
                   setOpen(false);
@@ -87,13 +87,13 @@ export const NavLinks:FC<Props> = ({ isMobile }) => {
             </li>
             <li>
               <Link
-                to="/"
+                to="/up-next"
                 className={styles.navLink}
                 onClick={() => {
                   setOpen(false);
                 }}
               >
-                Rated
+                What's On
               </Link>
             </li>
             <li>

@@ -1,0 +1,59 @@
+@import '../../../variables.scss';
+
+.trending {
+  width: 100%;
+  margin: 0 auto;
+
+  .heading {
+    display: flex;
+    justify-content: space-between;
+    padding: .5em 1em;
+    align-items: center;
+
+    h2 {
+      color: $orange;
+      font-size: 1.3rem;
+      font-family: $lato;
+    }
+
+    button {
+      background: none;
+      outline: none;
+      border: none;
+      color: $lightGreen;
+      font-size: 1.2rem;
+      text-decoration: underline;
+      cursor: pointer;
+      padding: 0;
+      margin-top: .5em;
+      font-family: $openSans;
+    }
+  }
+
+
+  .cardContainer {
+    display: flex;
+    width: 100%;
+    flex-wrap: wrap;
+
+    .card {
+      width: 31%;
+      margin: .4em auto;
+
+      img {
+        width: 100%;
+        background-color: lighten($black, 2%);
+        aspect-ratio: 2/3;
+      }
+
+    }
+  }
+
+  .skeleton {
+    width: 29%;
+    background-color: lighten($black, 2%);
+    margin: .5em;
+    aspect-ratio: 2/3;
+    filter: blur(2px)
+  }
+}
