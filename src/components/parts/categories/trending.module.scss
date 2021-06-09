@@ -2,6 +2,7 @@
 
 .trending {
   width: 100%;
+  margin: 0 auto;
 
   h2 {
     color: $orange;
@@ -17,7 +18,7 @@
   }
 
   .skeleton {
-    width: 28%;
+    width: 29%;
     background-color: lighten($black, 2%);
     margin: .5em;
     aspect-ratio: 2/3;

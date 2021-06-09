@@ -3,7 +3,7 @@ import InfiniteScroll from 'react-infinite-scroll-component';
 import { v4 as uuidv4 } from 'uuid';
 import { APIContext } from '../../../context/APIContext';
 import { ShowsContext, IShow as Show } from '../../../context/ShowsContext';
-import ShowCard from '../../common/poster/ShowPoster';
+import ShowPoster from '../../common/poster/ShowPoster';
 import styles from './trending.module.scss';
 
 const dummyArray = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 25];
@@ -48,7 +48,7 @@ export const Trending = () => {
         >
           {trending && trending.length > 0 && trending.map((result: Show) => {
             return (
-              <ShowCard media={result} key={uuidv4()} />
+              <ShowPoster media={result} key={uuidv4()} />
             );
           })}
 
