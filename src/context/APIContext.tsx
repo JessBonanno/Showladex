@@ -10,6 +10,7 @@ export const APIProvider: FC = ({ children }) => {
 Auth api calls
 */
   const getUserToken = async () => {
+    console.log(process.env.REACT_APP_URL);
     try {
       const tokenData = await axios.get(`https://api.themoviedb.org/3/authentication/token/new?api_key=${process.env.REACT_APP_API_KEY}`);
       localStorage.setItem('movieToken', tokenData.data.request_token);
@@ -26,9 +27,23 @@ Auth api calls
     try {
       const session = await axios.post(`https://api.themoviedb.org/3/authentication/session/new?api_key=${process.env.REACT_APP_API_KEY}`, { request_token: token });
       if (session.data.success) {
-        console.log(session.data.success);
         localStorage.setItem('session', session.data.session_id);
         localStorage.removeItem('movieToken');
+        return true;
+      }
+      return false;
+    } catch (err) {
+      console.error(err);
+    }
+    return false;
+  };
+
+  const endSession = async (token: string) => {
+    try {
+      const session = await axios.delete(`https://api.themoviedb.org/3/authentication/session?api_key=${process.env.REACT_APP_API_KEY}`, { data: { session_id: token } });
+      if (session.data.success) {
+        localStorage.removeItem('movieToken');
+        localStorage.removeItem('session');
         return true;
       }
       return false;
@@ -104,6 +119,7 @@ Show api calls
         getShowTrailer,
         getShowRating,
         getAccountDetails,
+        endSession,
       }}
     >
       {children}

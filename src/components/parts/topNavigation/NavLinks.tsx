@@ -12,14 +12,17 @@ interface IProps {
 }
 
 export const NavLinks:FC<IProps> = ({ isMobile }) => {
+  console.log(process.env.REACT_APP_URL);
+
   const { setOpen } = useContext(NavigationContext);
-  const { getUserToken, getSession, getAccountDetails } = useContext(APIContext);
+  const {
+    getUserToken, getSession, endSession, getAccountDetails,
+  } = useContext(APIContext);
   const {
     authorized, setAuthorized, accountDetails, setAccountDetails,
   } = useContext(UsersContext);
 
   const createSession = async () => {
-    console.log('creating session');
     const token = localStorage.getItem('movieToken');
     const success = await getSession(token);
     if (success) {
@@ -39,9 +42,18 @@ export const NavLinks:FC<IProps> = ({ isMobile }) => {
     await getUserToken();
   };
 
-  const deleteSession = () => {
-    localStorage.removeItem('session');
-    setAuthorized(false);
+  const deleteSession = async () => {
+    const token = localStorage.getItem('session');
+    try {
+      const success = await endSession(token);
+      if (success) {
+        setAuthorized(true);
+      }
+      localStorage.removeItem('session');
+      setAuthorized(false);
+    } catch (err) {
+      console.error(err);
+    }
   };
 
   useEffect(() => {
