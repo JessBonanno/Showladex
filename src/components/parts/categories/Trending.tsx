@@ -2,7 +2,8 @@ import React, { useContext, useEffect, useState } from 'react';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import { v4 as uuidv4 } from 'uuid';
 import { APIContext } from '../../../context/APIContext';
-import { ShowsContext, IShow as Show } from '../../../context/ShowsContext';
+import { ShowsContext } from '../../../context/ShowsContext';
+import { Show } from '../../../ts/showInterfaces';
 import ShowPoster from '../../common/poster/ShowPoster';
 import styles from './trending.module.scss';
 

@@ -1,12 +1,12 @@
 import React, { FC } from 'react';
-import styles from './showDetails.module.scss';
-import { IShowDetails as Show } from '../../../context/ShowsContext';
+import styles from './showInfo.module.scss';
+import { ShowDetails } from '../../../ts/showInterfaces';
 
-interface IProps {
-  show: Show | undefined;
+interface Props {
+  show: ShowDetails | undefined;
 }
 
-const Overview:FC<IProps> = ({ show }) => {
+const Overview:FC<Props> = ({ show }) => {
   return (
     <div className={styles.overview}>
       <p>Overview</p>

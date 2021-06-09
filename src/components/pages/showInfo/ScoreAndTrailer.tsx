@@ -1,17 +1,17 @@
 import React, { FC, useState } from 'react';
 import { BsPlayFill } from 'react-icons/bs';
 import ModalVideo from 'react-modal-video';
-import { IShowDetails as Show } from '../../../context/ShowsContext';
-import styles from './showDetails.module.scss';
+import { ShowDetails } from '../../../ts/showInterfaces';
+import styles from './showInfo.module.scss';
 import 'react-modal-video/scss/modal-video.scss';
 
-interface IProps {
-  show: Show | undefined;
+interface Props {
+  show: ShowDetails | undefined;
   trailer: string;
   buttonColor: string;
 }
 
-export const ScoreAndTrailer:FC<IProps> = ({ show, trailer, buttonColor }) => {
+export const ScoreAndTrailer:FC<Props> = ({ show, trailer, buttonColor }) => {
   const [isOpen, setIsOpen] = useState(false);
   return (
     <div className={styles.scoreAndTrailer}>

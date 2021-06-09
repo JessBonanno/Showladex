@@ -1,13 +1,13 @@
 import React, { FC } from 'react';
 import { Link } from 'react-router-dom';
 import styles from './showPoster.module.scss';
-import { IShow as Show } from '../../../context/ShowsContext';
+import { Show } from '../../../ts/showInterfaces';
 
-interface IProps {
+interface Props {
   media: Show;
 }
 
-export const ShowCard:FC<IProps> = ({ media }) => {
+export const ShowCard:FC<Props> = ({ media }) => {
   // console.log(media.poster_path);
 
   return (

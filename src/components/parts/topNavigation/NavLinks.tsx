@@ -7,11 +7,11 @@ import { NavigationContext } from '../../../context/NavigationContext';
 import { UsersContext } from '../../../context/UsersContext';
 import styles from './navBar.module.scss';
 
-interface IProps {
+interface Props {
   isMobile: boolean;
 }
 
-export const NavLinks:FC<IProps> = ({ isMobile }) => {
+export const NavLinks:FC<Props> = ({ isMobile }) => {
   const { setOpen } = useContext(NavigationContext);
   const {
     getUserToken, getSession, endSession, getAccountDetails,

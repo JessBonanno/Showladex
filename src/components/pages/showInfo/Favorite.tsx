@@ -3,24 +3,24 @@ import React, {
 } from 'react';
 import { GrFavorite } from 'react-icons/gr';
 import { MdFavorite } from 'react-icons/md';
-import styles from './showDetails.module.scss';
-import { IShowDetails as Show, IShow, IShowsResults } from '../../../context/ShowsContext';
+import styles from './showInfo.module.scss';
+import { ShowDetails, Show } from '../../../ts/showInterfaces';
 import { APIContext } from '../../../context/APIContext';
 
-interface IProps {
-  show: Show | undefined;
+interface Props {
+  show: ShowDetails | undefined;
 }
 
 interface IFavResults {
-  results: [IShow];
+  results: [Show];
   total_pages: number;
   total_results: number;
 }
 
-const Favorite:FC<IProps> = ({ show }) => {
+const Favorite:FC<Props> = ({ show }) => {
   const { markFavorite, getFavorites } = useContext(APIContext);
   const [isFavorite, setIsFavorite] = useState(false);
-  const [favorites, setFavorites] = useState<IShow[]>();
+  const [favorites, setFavorites] = useState<Show[]>();
   const [page, setPage] = useState(1);
 
   const getUsersFavorites = async () => {

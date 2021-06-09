@@ -1,14 +1,14 @@
 import React, { FC } from 'react';
 import { v4 as uuidv4 } from 'uuid';
-import styles from './showDetails.module.scss';
-import { IShowDetails as Show } from '../../../context/ShowsContext';
+import styles from './showInfo.module.scss';
+import { ShowDetails } from '../../../ts/showInterfaces';
 
-interface IProps {
-  show: Show | undefined;
+interface Props {
+  show: ShowDetails| undefined;
   rating: string | undefined;
 }
 
-export const Classification:FC<IProps> = ({ rating, show }) => {
+export const Classification:FC<Props> = ({ rating, show }) => {
   return (
     <div className={styles.classification}>
       <div className={styles.ratingAndLength}>

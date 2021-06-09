@@ -1,9 +1,9 @@
 import React, { useContext, useState, useEffect } from 'react';
 import { useParams } from 'react-router';
 import { usePalette } from 'react-palette';
-import styles from './showDetails.module.scss';
+import styles from './showInfo.module.scss';
 import { APIContext } from '../../../context/APIContext';
-import { IShowDetails as Show } from '../../../context/ShowsContext';
+import { ShowDetails } from '../../../ts/showInterfaces';
 import Header from './Header';
 import ScoreAndTrailer from './ScoreAndTrailer';
 import Classification from './Classification';
@@ -19,10 +19,10 @@ type Rating = {
   rating: string
 }
 
-export const ShowDetails = () => {
+export const ShowInfo = () => {
   const { id } = useParams<ShowParams>();
   const { getShowDetails, getShowTrailer, getShowRating } = useContext(APIContext);
-  const [show, setShow] = useState<Show | undefined>();
+  const [show, setShow] = useState<ShowDetails>();
   const [trailer, setTrailer] = useState<string>('');
   const [rating, setRating] = useState<Rating>();
 
@@ -86,4 +86,4 @@ export const ShowDetails = () => {
   );
 };
 
-export default ShowDetails;
+export default ShowInfo;
