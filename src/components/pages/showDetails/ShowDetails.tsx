@@ -22,7 +22,6 @@ export const ShowDetails = () => {
   const { id } = useParams<ShowParams>();
   const { getShowDetails, getShowTrailer, getShowRating } = useContext(APIContext);
   const [show, setShow] = useState<Show | undefined>();
-  const [openVideoModal, setOpenVideoModal] = useState(false);
   const [trailer, setTrailer] = useState<string>('');
   const [rating, setRating] = useState<Rating>();
 

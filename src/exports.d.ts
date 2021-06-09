@@ -1,2 +1,2 @@
 declare module 'react-youtube-modal'
-declare module 'react-overlay-component'
+declare module 'react-modal-video'
