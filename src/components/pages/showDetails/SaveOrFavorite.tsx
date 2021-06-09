@@ -26,7 +26,7 @@ const SaveOrFavorite:FC<IProps> = ({ show }) => {
   const getUsersFavorites = async () => {
     try {
       const favs:IFavResults = await getFavorites();
-      if (favorites && favorites.length > 0) {
+      if (favorites && favorites.length > 0 && favs.results) {
         setFavorites([...favorites, ...favs.results]);
       } else {
         setFavorites([...favs.results]);
@@ -58,8 +58,6 @@ const SaveOrFavorite:FC<IProps> = ({ show }) => {
       setIsFavorite(false);
     }
   }, [favorites]);
-
-  console.log(isFavorite);
 
   return (
     <div className={styles.saveOrFavorite}>
