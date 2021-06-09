@@ -51,17 +51,17 @@
 
       .rating {
         p:first-child {
+          text-align: center;
           margin-right: .5em;
           border: 3px solid rgb(14, 201, 14);
           border-radius: 100%;
-          padding: .5em .4em .4em;
+          width: 2.5em;
+          height: 1.5em;
+          padding-top: .6em;
         }
       }
 
     }
-
-
-
 
     .divider {
       width: 1px;
@@ -70,14 +70,10 @@
     }
 
     button {
-      background: none;
-      outline: none;
-      border: none;
       font-size: 1rem;
       font-family: $openSans;
       display: flex;
       align-items: center;
-      cursor: pointer;
       font-weight: bold;
 
       .playIcon {

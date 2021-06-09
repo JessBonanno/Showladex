@@ -16,7 +16,9 @@ export const ScoreAndTrailer:FC<Props> = ({ show, trailer, buttonColor }) => {
   return (
     <div className={styles.scoreAndTrailer}>
       <div className={styles.score}>
-        <div className={styles.rating}>
+        <div
+          className={styles.rating}
+        >
           <p>
             {show && show.vote_average}
           </p>
