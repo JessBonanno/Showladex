@@ -25,7 +25,7 @@ export const ScoreAndTrailer:FC<IProps> = ({ show, trailer, buttonColor }) => {
         <p>User Score</p>
       </div>
       <div className={styles.divider}></div>
-      <ModalVideo
+      {/* <ModalVideo
         channel="youtube"
         isOpen={isOpen}
         videoId={trailer}
@@ -36,15 +36,15 @@ export const ScoreAndTrailer:FC<IProps> = ({ show, trailer, buttonColor }) => {
         <BsPlayFill className={styles.playIcon} />
         {' '}
         Play Trailer
-      </button>
-      {/* <YoutubeModal videoId={trailer}>
+      </button> */}
+      <YoutubeModal videoId={trailer}>
         <button type="button" style={{ color: buttonColor }}>
           {' '}
           <BsPlayFill className={styles.playIcon} />
           {' '}
           Play Trailer
         </button>
-      </YoutubeModal> */}
+      </YoutubeModal>
     </div>
   );
 };
