@@ -49,7 +49,6 @@
       flex-direction: row;
       align-items: center;
 
-      .rating {
         p:first-child {
           text-align: center;
           margin-right: .5em;
@@ -59,7 +58,9 @@
           height: 1.5em;
           padding-top: .6em;
         }
-      }
+        p:last-child {
+          margin-top: 1em;
+        }
 
     }
 
