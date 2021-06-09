@@ -1,4 +1,5 @@
 import React, { FC } from 'react';
+import { v4 as uuidv4 } from 'uuid';
 import styles from './showDetails.module.scss';
 import { IShowDetails as Show } from '../../../context/ShowsContext';
 
@@ -33,13 +34,13 @@ export const Classification:FC<IProps> = ({ rating, show }) => {
         {show && show.genres.map((genre, idx) => {
           if (idx !== show.genres.length - 1) {
             return (
-              <p>
+              <p key={uuidv4()}>
                 {genre.name}
                 ,
               </p>
             );
           }
-          return <p>{genre.name}</p>;
+          return <p key={uuidv4()}>{genre.name}</p>;
         })}
       </div>
     </div>
