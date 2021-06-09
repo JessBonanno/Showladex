@@ -8,5 +8,54 @@
   h2 {
     padding: .5em 1em;
   }
+
+  .daysShows {
+    display: flex;
+    flex-direction: column;
+    padding: .5em 1em;
+
+    .showDetails {
+      margin-top: 1em;
+      display: flex;
+      height: 100%;
+      height: auto;
+
+      .imageWrapper {
+        width: 25%;
+
+      .showImage {
+        width: 100%;
+        aspect-ratio: 2/3;
+      }
+
+    }
+
+      .details {
+        width: 100%;
+        padding: .5em;
+        display: flex;
+        flex-direction: column;
+        color: white;
+        font-family: $lato;
+
+        .nameAndNetwork {
+          display: flex;
+          justify-content: space-between;
+        }
+
+        .episodeNumber {
+          margin: 1em 0;
+        }
+      }
+
+    }
+
+    .noInfo {
+      color: white;
+      font-family: $lato;
+      font-size: 1rem;
+      padding: .5em;
+    }
+  }
 }
 
