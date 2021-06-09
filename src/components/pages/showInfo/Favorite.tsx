@@ -4,28 +4,25 @@ import React, {
 import { GrFavorite } from 'react-icons/gr';
 import { MdFavorite } from 'react-icons/md';
 import styles from './showInfo.module.scss';
-import { ShowDetails, Show } from '../../../ts/showInterfaces';
+import { ShowDetails, Show, FavResults } from '../../../ts/showInterfaces';
 import { APIContext } from '../../../context/APIContext';
+import { ShowsContext } from '../../../context/ShowsContext';
 
 interface Props {
   show: ShowDetails | undefined;
+  color: string;
 }
 
-interface IFavResults {
-  results: [Show];
-  total_pages: number;
-  total_results: number;
-}
-
-const Favorite:FC<Props> = ({ show }) => {
+const Favorite:FC<Props> = ({ show, color }) => {
   const { markFavorite, getFavorites } = useContext(APIContext);
+  const {
+    favorites, setFavorites, page, setPage,
+  } = useContext(ShowsContext);
   const [isFavorite, setIsFavorite] = useState(false);
-  const [favorites, setFavorites] = useState<Show[]>();
-  const [page, setPage] = useState(1);
 
   const getUsersFavorites = async () => {
     try {
-      const favs:IFavResults = await getFavorites();
+      const favs:FavResults = await getFavorites();
       if (favorites && favorites.length > 0 && favs.results) {
         setFavorites([...favorites, ...favs.results]);
       } else {
@@ -42,7 +39,7 @@ const Favorite:FC<Props> = ({ show }) => {
 
   const checkFavorites = () => {
     if (show && favorites) {
-      return favorites.find((fav) => fav.id === show.id);
+      return favorites.find((fav: Show) => fav.id === show.id);
     }
     return false;
   };

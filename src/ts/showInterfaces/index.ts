@@ -100,3 +100,9 @@ export interface ShowDetails extends Show {
   tagline: string;
   type: string;
 }
+
+export interface FavResults {
+  results: [Show];
+  total_pages: number;
+  total_results: number;
+}

@@ -8,7 +8,7 @@ import Header from './Header';
 import ScoreAndTrailer from './ScoreAndTrailer';
 import Classification from './Classification';
 import Overview from './Overview';
-import SaveOrFavorite from './Favorite';
+import Favorite from './Favorite';
 
 type ShowParams = {
   id: string
@@ -81,7 +81,7 @@ export const ShowInfo = () => {
       />
       <Classification show={show} rating={rating && rating.rating} />
       <Overview show={show} />
-      <SaveOrFavorite show={show} />
+      <Favorite show={show} color={getContrast(data.vibrant)} />
     </div>
   );
 };
