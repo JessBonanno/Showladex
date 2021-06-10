@@ -81,7 +81,6 @@ export const ShowInfo = () => {
       />
       <Classification show={show} rating={rating && rating.rating} />
       <Overview show={show} />
-      <Favorite show={show} color={getContrast(data.vibrant)} />
     </div>
   );
 };

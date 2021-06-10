@@ -58,6 +58,9 @@ const Favorite:FC<Props> = ({ show, color }) => {
 
   return (
     <div className={styles.Favorite}>
+      <p>
+        Favorite
+      </p>
       <div>
         {isFavorite
           ? (
@@ -70,6 +73,7 @@ const Favorite:FC<Props> = ({ show, color }) => {
             />
           )
           : (
+
             <GrFavorite
               onClick={async () => {
                 await markFavorite(show && show.id, true);

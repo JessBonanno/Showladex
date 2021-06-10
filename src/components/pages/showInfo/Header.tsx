@@ -1,6 +1,7 @@
 import React, { FC } from 'react';
 import styles from './showInfo.module.scss';
 import { ShowDetails } from '../../../ts/showInterfaces';
+import Favorite from './Favorite';
 
 interface Props {
   show: ShowDetails | undefined;
@@ -20,16 +21,19 @@ export const Header:FC<Props> = ({ show, color }) => {
           alt={`${show && show.name}`}
         />
       </div>
-      <h2 style={{ color }}>
-        {show && show.name}
-        {' '}
+      <div className={styles.titleAndFavorite}>
+        <h2 style={{ color }}>
+          {show && show.name}
+          {' '}
 
-        <span>
-          (
-          {show && show.first_air_date.slice(0, 4)}
-          )
-        </span>
-      </h2>
+          <span>
+            (
+            {show && show.first_air_date.slice(0, 4)}
+            )
+          </span>
+        </h2>
+        <Favorite show={show} color={color} />
+      </div>
     </>
   );
 };
