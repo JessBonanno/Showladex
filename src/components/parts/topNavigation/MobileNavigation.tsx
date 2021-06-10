@@ -11,7 +11,7 @@ export const MobileNavigation = () => {
   const openIcon = (
     <RiMenu3Line
       className={styles.hamburger}
-      size="40px"
+      size="25px"
       onClick={() => setOpen(!open)}
     />
 
@@ -21,7 +21,7 @@ export const MobileNavigation = () => {
     <>
       <CgClose
         className={styles.hamburger}
-        size="40px"
+        size="25px"
         onClick={() => setOpen(!open)}
       />
       <NavLinks isMobile />
