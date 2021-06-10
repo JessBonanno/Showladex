@@ -4,6 +4,7 @@ import React, {
 import { Link } from 'react-router-dom';
 import { APIContext } from '../../../context/APIContext';
 import { NavigationContext } from '../../../context/NavigationContext';
+import { ShowsContext } from '../../../context/ShowsContext';
 import { UsersContext } from '../../../context/UsersContext';
 import styles from './navBar.module.scss';
 
@@ -19,6 +20,7 @@ export const NavLinks:FC<Props> = ({ isMobile }) => {
   const {
     authorized, setAuthorized, accountDetails, setAccountDetails,
   } = useContext(UsersContext);
+  const { setFavorites } = useContext(ShowsContext);
 
   const createSession = async () => {
     const token = localStorage.getItem('movieToken');
@@ -96,6 +98,7 @@ export const NavLinks:FC<Props> = ({ isMobile }) => {
                 className={styles.navLink}
                 onClick={() => {
                   setOpen(false);
+                  setFavorites(null);
                 }}
               >
                 What's On

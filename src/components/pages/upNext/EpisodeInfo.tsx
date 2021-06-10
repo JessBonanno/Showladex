@@ -1,6 +1,7 @@
-import React, { FC } from 'react';
+import React, { FC, useContext } from 'react';
 import { usePalette } from 'react-palette';
 import { Link } from 'react-router-dom';
+import { ShowsContext } from '../../../context/ShowsContext';
 import { ShowDetails } from '../../../ts/showInterfaces';
 import styles from './upNext.module.scss';
 
@@ -10,6 +11,7 @@ interface Props {
 
 const EpisodeInfo:FC<Props> = ({ show }) => {
   const { data, loading, error } = usePalette(`https://image.tmdb.org/t/p/original${show && show.poster_path}`);
+  const { setFavorites } = useContext(ShowsContext);
 
   return (
     <Link

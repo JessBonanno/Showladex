@@ -52,6 +52,7 @@ module.exports = {
     '@typescript-eslint/no-var-requires': 'off',
     'no-param-reassign': 'off',
     'no-plusplus': 'off',
+    'no-return-assign': 'off',
     camelcase: 'off',
     'react-hooks/exhaustive-deps': 'off',
     'react/no-unescaped-entities': 'off',
