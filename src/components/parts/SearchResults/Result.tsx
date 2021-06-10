@@ -1,5 +1,6 @@
 import React, { FC } from 'react';
 import moment from 'moment';
+import { Link } from 'react-router-dom';
 import styles from './searchResults.module.scss';
 import { Show } from '../../../ts/showInterfaces';
 
@@ -8,7 +9,8 @@ interface Props {
 }
 const Result:FC<Props> = ({ show }) => {
   return (
-    <div
+    <Link
+      to={`/show/${show.id}`}
       className={styles.showDetails}
     >
       <div className={styles.imageWrapper}>
@@ -27,7 +29,7 @@ const Result:FC<Props> = ({ show }) => {
           ...
         </p>
       </div>
-    </div>
+    </Link>
   );
 };
 

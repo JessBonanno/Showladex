@@ -55,7 +55,7 @@
           border: 3px solid rgb(14, 201, 14);
           border-radius: 100%;
           width: 2.5em;
-          height: 1.5em;
+          height: 2.5em;
           padding-top: .6em;
         }
 
@@ -142,10 +142,9 @@
       width: 100%;
       display:flex;
       justify-content: flex-end;
-      padding-bottom: 1em;
+      padding: 1em;
 
       .heart {
-        padding-right: 1em;
       }
   }
 

@@ -13,7 +13,10 @@ const Search = () => {
     e.preventDefault();
     try {
       if (searchTerm) {
-        const results = await searchShows(searchTerm);
+        const shows = await searchShows(searchTerm);
+        if (shows.results.length) {
+          setSearchResults(shows.results);
+        }
       } else {
         return;
       }
