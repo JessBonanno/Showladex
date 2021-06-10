@@ -59,7 +59,7 @@ export const NavLinks:FC<Props> = ({ isMobile }) => {
     getUserInfo();
   }, []);
   return (
-    <ul className={styles.slideInRight}>
+    <ul className="w3-animate-right">
       <li>
         <Link
           to="/"
