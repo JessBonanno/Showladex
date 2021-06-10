@@ -48,7 +48,7 @@ const UpNext = () => {
 
   return (
     <div className={styles.upNext}>
-      <h2>See What's on This Week</h2>
+      <h2>What's on This Week</h2>
       {thisWeek.map((day: WeekDay) => {
         return (
           <DaysShows key={day.day} shows={favorites} date={day.date} day={day.day} />
