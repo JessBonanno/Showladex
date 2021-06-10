@@ -42,7 +42,7 @@ const Search = () => {
       </h1>
       <form action="" onSubmit={handleSearch}>
         <input type="text" name="searchTerm" value={searchTerm} placeholder="Search Shows" onChange={(e) => setSearchTerm(e.target.value)} />
-        <BsSearch type="submit" onClick={handleSearch} className={styles.icon} />
+        <BsSearch onClick={handleSearch} className={styles.icon} />
       </form>
     </div>
   );
