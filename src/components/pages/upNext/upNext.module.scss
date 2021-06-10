@@ -23,9 +23,12 @@
 
     .showDetails {
       margin-top: 1em;
+      padding: 0 .5em 0 0;
       display: flex;
       height: 100%;
       height: auto;
+      box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.10);
+
 
       .imageWrapper {
         width: 25%;

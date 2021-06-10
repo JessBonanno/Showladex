@@ -1,5 +1,6 @@
 import React, { FC } from 'react';
 import { usePalette } from 'react-palette';
+import { Link } from 'react-router-dom';
 import { ShowDetails } from '../../../ts/showInterfaces';
 import styles from './upNext.module.scss';
 
@@ -11,7 +12,8 @@ const EpisodeInfo:FC<Props> = ({ show }) => {
   const { data, loading, error } = usePalette(`https://image.tmdb.org/t/p/original${show && show.poster_path}`);
 
   return (
-    <div
+    <Link
+      to={`/show/${show.id}`}
       className={styles.showDetails}
     >
       <div className={styles.imageWrapper}>
@@ -33,7 +35,7 @@ const EpisodeInfo:FC<Props> = ({ show }) => {
           {show.next_episode_to_air.name !== '' ? show.next_episode_to_air.name : `Episode ${show.next_episode_to_air.episode_number}`}
         </p>
       </div>
-    </div>
+    </Link>
   );
 };
 
