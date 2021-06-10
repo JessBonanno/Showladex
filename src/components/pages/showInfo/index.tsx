@@ -73,7 +73,7 @@ export const ShowInfo = () => {
       className={styles.showDetails}
       style={{ backgroundColor: data.vibrant, color: getContrast(data.vibrant) }}
     >
-      <Header show={show} />
+      <Header show={show} color={getContrast(data.vibrant)} />
       <ScoreAndTrailer
         show={show}
         trailer={trailer}

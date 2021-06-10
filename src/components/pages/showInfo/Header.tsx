@@ -4,9 +4,10 @@ import { ShowDetails } from '../../../ts/showInterfaces';
 
 interface Props {
   show: ShowDetails | undefined;
+  color: string;
 }
 
-export const Header:FC<Props> = ({ show }) => {
+export const Header:FC<Props> = ({ show, color }) => {
   return (
     <>
       <div
@@ -19,7 +20,7 @@ export const Header:FC<Props> = ({ show }) => {
           alt={`${show && show.name}`}
         />
       </div>
-      <h2>
+      <h2 style={{ color }}>
         {show && show.name}
         {' '}
 
