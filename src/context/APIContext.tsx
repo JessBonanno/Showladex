@@ -141,11 +141,14 @@ User Actions API calls
   };
 
   const getFavorites = async () => {
-    try {
-      const response = await axios.get(`https://api.themoviedb.org/3/account/${accountDetails.id} /favorite/tv?api_key=${process.env.REACT_APP_API_KEY}&language=en-US&session_id=${localStorage.getItem('session')}&sort_by=created_at.asc&page=1`);
-      return response.data;
-    } catch (err) {
-      console.error(err);
+    if (localStorage.getItem('accountId')) {
+      const id = localStorage.getItem('accountId');
+      try {
+        const response = await axios.get(`https://api.themoviedb.org/3/account/${id} /favorite/tv?api_key=${process.env.REACT_APP_API_KEY}&language=en-US&session_id=${localStorage.getItem('session')}&sort_by=created_at.asc&page=1`);
+        return response.data;
+      } catch (err) {
+        console.error(err);
+      }
     }
     return null;
   };

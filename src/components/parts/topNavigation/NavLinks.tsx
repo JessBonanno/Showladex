@@ -33,11 +33,14 @@ export const NavLinks:FC<Props> = ({ isMobile }) => {
     if (userInfo) {
       setAccountDetails(userInfo);
       setAuthorized(true);
+      localStorage.setItem('accountId', userInfo.id);
     }
   };
 
   const saveSession = async () => {
     await getUserToken();
+    await getUserInfo();
+    localStorage.setItem('accountId', accountDetails.id);
   };
 
   const deleteSession = async () => {
@@ -48,6 +51,8 @@ export const NavLinks:FC<Props> = ({ isMobile }) => {
         setAuthorized(true);
       }
       localStorage.removeItem('session');
+      localStorage.removeItem('accountId');
+
       setAuthorized(false);
     } catch (err) {
       console.error(err);
