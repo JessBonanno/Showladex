@@ -50,7 +50,6 @@ export const Trending = () => {
             );
           })}
         >
-          <div className={styles.fade} />
           {trending && trending.length > 0 && trending
             .map((result: Show) => {
               return (
