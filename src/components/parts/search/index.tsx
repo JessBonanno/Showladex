@@ -9,7 +9,15 @@ const Search = () => {
       <h1>
         <b>Explore</b>
         {' '}
-        tons of shows, add favorites to track when to watch!
+        tons of shows,
+        {' '}
+        <b>add</b>
+        {' '}
+        favorites,
+        {' '}
+        <b>track</b>
+        {' '}
+        when to watch!
       </h1>
       <form action="">
         <input type="search" name="searchTerm" value={searchTerm} placeholder="Search Shows" />
