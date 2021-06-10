@@ -72,6 +72,17 @@ Auth api calls
 Show api calls
 */
 
+  const searchShows = async (searchTerm: string) => {
+    try {
+      const shows = await axios.get(`https://api.themoviedb.org/3/search/tv?api_key=${process.env.REACT_APP_API_KEY}&language=en-US&page=1&query=${searchTerm}&include_adult=false`);
+      console.log(shows);
+      return shows.data;
+    } catch (err) {
+      console.error(err);
+    }
+    return null;
+  };
+
   const getTrendingShows = async (page:number) => {
     try {
       const shows = await axios.get(`https://api.themoviedb.org/3/trending/tv/day?page=${page}&api_key=${process.env.REACT_APP_API_KEY}`);
@@ -152,6 +163,7 @@ User Actions API calls
         endSession,
         markFavorite,
         getFavorites,
+        searchShows,
       }}
     >
       {children}
