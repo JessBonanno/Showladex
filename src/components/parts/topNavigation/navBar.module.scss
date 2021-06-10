@@ -77,88 +77,33 @@
   }
 }
 
-.lightSpeedIn {
-  -webkit-animation-name: lightSpeedIn;
-  animation-name: lightSpeedIn;
-  -webkit-animation-timing-function: ease-out;
-  animation-timing-function: ease-out;
+.slideInDown {
+  -webkit-animation-name: slideInDown;
+  animation-name: slideInDown;
   -webkit-animation-duration: 1s;
   animation-duration: 1s;
   -webkit-animation-fill-mode: both;
   animation-fill-mode: both;
   }
-  @-webkit-keyframes lightSpeedIn {
+  @-webkit-keyframes slideInDown {
   0% {
-  -webkit-transform: translate3d(100%, 0, 0) skewX(-30deg);
-  transform: translate3d(100%, 0, 0) skewX(-30deg);
-  opacity: 0.95;
-}
-  60% {
-  -webkit-transform: skewX(20deg);
-  transform: skewX(20deg);
-  opacity: 0.95;
-}
-  80% {
-  -webkit-transform: skewX(-5deg);
-  transform: skewX(-5deg);
-  opacity: 0.95;
-}
-  100% {
-  -webkit-transform: none;
-  transform: none;
-  opacity: 0.95;
-}
+  -webkit-transform: translateY(-100%);
+  transform: translateY(-100%);
+  visibility: visible;
   }
-  @keyframes lightSpeedIn {
+  100% {
+  -webkit-transform: translateY(0);
+  transform: translateY(0);
+  }
+  }
+  @keyframes slideInDown {
   0% {
-  -webkit-transform: translate3d(100%, 0, 0) skewX(-30deg);
-  transform: translate3d(100%, 0, 0) skewX(-30deg);
-  opacity: 0.95;
-}
-  60% {
-  -webkit-transform: skewX(20deg);
-  transform: skewX(20deg);
-  opacity: 0.95;
-}
-  80% {
-  -webkit-transform: skewX(-5deg);
-  transform: skewX(-5deg);
-  opacity: 0.95;
-}
+  -webkit-transform: translateY(-100%);
+  transform: translateY(-100%);
+  visibility: visible;
+  }
   100% {
-  -webkit-transform: none;
-  transform: none;
-  opacity: 0.95;
-}
+  -webkit-transform: translateY(0);
+  transform: translateY(0);
   }
-
-  .lightSpeedOut {
-    -webkit-animation-name: lightSpeedOut;
-    animation-name: lightSpeedOut;
-    -webkit-animation-timing-function: ease-in;
-    animation-timing-function: ease-in;
-    -webkit-animation-duration: 1s;
-    animation-duration: 1s;
-    -webkit-animation-fill-mode: both;
-    animation-fill-mode: both;
-    }
-    @-webkit-keyframes lightSpeedOut {
-    0% {
-    opacity: 1;
-    }
-    100% {
-    -webkit-transform: translate3d(100%, 0, 0) skewX(30deg);
-    transform: translate3d(100%, 0, 0) skewX(30deg);
-    opacity: 0;
-    }
-    }
-    @keyframes lightSpeedOut {
-    0% {
-    opacity: 1;
-    }
-    100% {
-    -webkit-transform: translate3d(100%, 0, 0) skewX(30deg);
-    transform: translate3d(100%, 0, 0) skewX(30deg);
-    opacity: 0.95;
-  }
-    }
+  } 

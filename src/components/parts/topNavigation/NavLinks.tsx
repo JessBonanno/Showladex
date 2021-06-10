@@ -59,7 +59,7 @@ export const NavLinks:FC<Props> = ({ isMobile }) => {
     getUserInfo();
   }, []);
   return (
-    <ul className={styles.lightSpeedIn}>
+    <ul className={styles.slideInDown}>
       <li>
         <Link
           to="/"
