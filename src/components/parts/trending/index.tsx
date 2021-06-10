@@ -12,7 +12,6 @@ const dummyArray = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 25];
 export const Trending = () => {
   const { trending, setTrending } = useContext(ShowsContext);
   const { getTrendingShows } = useContext(APIContext);
-  const [showAll, setShowAll] = useState(false);
   /**
    * Infinite scroll state
    */
@@ -35,15 +34,13 @@ export const Trending = () => {
 
   return (
     <div className={styles.trending}>
+      <div className={styles.fade} />
       <div className={styles.heading}>
         <h2>Discover What's Trending</h2>
-        <button onClick={() => setShowAll(!showAll)}>
-          Show
-          {showAll ? 'Less' : 'All'}
-        </button>
       </div>
       <div>
         <InfiniteScroll
+          height="50vh"
           className={styles.cardContainer}
           dataLength={(trending && trending.length) || []}
           next={getShows}
@@ -54,18 +51,12 @@ export const Trending = () => {
             );
           })}
         >
-          {showAll ? trending && trending.length > 0 && trending
+          {trending && trending.length > 0 && trending
             .map((result: Show) => {
               return (
                 <ShowPoster media={result} key={uuidv4()} />
               );
-            }) : trending && trending.length > 0 && trending
-            .slice(0, 6)
-            .map((result: Show) => {
-              return (
-                <ShowPoster media={result} key={uuidv4()} />
-              );
-            })}
+            }) }
 
         </InfiniteScroll>
       </div>
