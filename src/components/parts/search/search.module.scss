@@ -28,7 +28,7 @@
   form{
     margin-top: 3em;
     position: relative;
-    transform: translate(-50%,-50%);
+    transform: translate(-25%,-50%);
     transition: all 1s;
     margin-left: auto;
     width: 50px;
@@ -71,7 +71,7 @@ input{
 }
 
 form:hover{
-    width: 200px;
+    width: 250px;
     cursor: pointer;
 }
 
