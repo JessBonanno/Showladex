@@ -20,7 +20,7 @@ export const NavLinks:FC<Props> = ({ isMobile }) => {
   const {
     authorized, setAuthorized, accountDetails, setAccountDetails,
   } = useContext(UsersContext);
-  const { setFavorites } = useContext(ShowsContext);
+  const { setFavorites, setSearchResults } = useContext(ShowsContext);
 
   const createSession = async () => {
     const token = localStorage.getItem('movieToken');
@@ -73,6 +73,7 @@ export const NavLinks:FC<Props> = ({ isMobile }) => {
           className={styles.navLink}
           onClick={() => {
             setOpen(false);
+            setSearchResults(null);
           }}
         >
           Home
@@ -87,6 +88,7 @@ export const NavLinks:FC<Props> = ({ isMobile }) => {
                 className={styles.navLink}
                 onClick={() => {
                   setOpen(false);
+                  setSearchResults(null);
                 }}
               >
                 Favorites
@@ -99,6 +101,7 @@ export const NavLinks:FC<Props> = ({ isMobile }) => {
                 onClick={() => {
                   setOpen(false);
                   setFavorites(null);
+                  setSearchResults(null);
                 }}
               >
                 What's On
@@ -111,6 +114,7 @@ export const NavLinks:FC<Props> = ({ isMobile }) => {
                 onClick={() => {
                   setOpen(false);
                   deleteSession();
+                  setSearchResults(null);
                 }}
               >
                 Logout
@@ -126,6 +130,7 @@ export const NavLinks:FC<Props> = ({ isMobile }) => {
               onClick={() => {
                 setOpen(false);
                 saveSession();
+                setSearchResults(null);
               }}
             >
               Login

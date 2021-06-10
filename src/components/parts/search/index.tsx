@@ -23,6 +23,7 @@ const Search = () => {
     } catch (err) {
       console.error(err);
     }
+    setSearchTerm('');
   };
 
   return (
