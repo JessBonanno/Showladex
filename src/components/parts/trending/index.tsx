@@ -34,13 +34,12 @@ export const Trending = () => {
 
   return (
     <div className={styles.trending}>
-      <div className={styles.fade} />
       <div className={styles.heading}>
         <h2>Discover What's Trending</h2>
       </div>
       <div>
         <InfiniteScroll
-          height="30vh"
+          height="35vh"
           className={styles.cardContainer}
           dataLength={(trending && trending.length) || []}
           next={getShows}
@@ -51,6 +50,7 @@ export const Trending = () => {
             );
           })}
         >
+          <div className={styles.fade} />
           {trending && trending.length > 0 && trending
             .map((result: Show) => {
               return (
