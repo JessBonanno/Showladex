@@ -40,7 +40,7 @@ export const Trending = () => {
       </div>
       <div>
         <InfiniteScroll
-          height="50vh"
+          height="30vh"
           className={styles.cardContainer}
           dataLength={(trending && trending.length) || []}
           next={getShows}
