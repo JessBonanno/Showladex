@@ -15,9 +15,26 @@
   padding: 1em 0 0;
   margin-bottom: 1.5em;
 
+  @media (min-width: 760px) {
+    flex-direction: row;
+    justify-content: space-between;
+    padding-right: 2em;
+  }
+
   h1 {
     font-size: 2rem;
     padding: 0 2.5em 0 1.5em;
+
+    @media (min-width: 425px) {
+      margin-top: 1em;
+    }
+
+    @media (min-width: 760px) {
+      width: 60%;
+      font-size: 2.4rem;
+      margin: 0;
+    }
+
 
     b {
       font-weight: bold;

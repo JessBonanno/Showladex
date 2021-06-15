@@ -34,6 +34,10 @@ footer, header, hgroup, menu, nav, section {
 body {
 	line-height: 1;
 	background-color: $black;
+
+	@media (min-width: 760px) {
+    background-color:white;
+  }
 }
 ol, ul {
 	list-style: none;
