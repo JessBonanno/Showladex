@@ -3,7 +3,7 @@
 .trending {
   position: relative;
   width: 100%;
-  margin: 0 auto;
+  background-color: white;
 
   &::after {
     content  : "";
@@ -12,11 +12,12 @@
     bottom   : 0;
     left     : 0;
     pointer-events   : none;
-    background-image : linear-gradient(to bottom,
-                      rgba(255,255,255, 0),
-                      rgba(255,255,255, .9) 90%);
+    // background-image : linear-gradient(to bottom,
+    //                   rgba(255,255,255, 0),
+    //                   rgba(255,255,255, .9) 90%);
+    background: linear-gradient(90deg, rgba(2,0,36,0) 95%, rgba(255,255,255,1) 100%);
     width    : 100%;
-    height   : 4em;
+    height   : 260px;
 }
 
 
@@ -29,6 +30,7 @@
 
     h2 {
       color: $lightGreen;
+      font-weight: bold;
       font-size: 1.3rem;
       font-family: $lato;
       margin-top: 1em;
@@ -41,14 +43,25 @@
 
 
   .cardContainer {
-    display: flex;
-    width: 100%;
-    flex-wrap: wrap;
+    align-self: center;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    height: 80px;
+    white-space:nowrap;
+    background-color: white;
+    height: 300px;
+    // display: flex;
+    // width: 100%;
+    // flex-wrap: wrap;
 
 
     .card {
-      width: 31%;
-      margin: .4em auto;
+      width: 160px;
+      margin: .5em 1em 0;
+      display:inline-block;
+      *display:inline;/* For IE7*/
+      *zoom:1;/* For IE7*/
+      vertical-align:top;
 
       img {
         width: 100%;
@@ -60,9 +73,13 @@
   }
 
   .skeleton {
-    width: 29%;
-    background-color: lighten($black, 2%);
+    width: 160px;
     margin: .5em;
+    display:inline-block;
+    *display:inline;/* For IE7*/
+    *zoom:1;/* For IE7*/
+    vertical-align:top;
+    background-color: lighten($black, 20%);
     aspect-ratio: 2/3;
     filter: blur(2px)
   }
