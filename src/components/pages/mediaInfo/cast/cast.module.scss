@@ -28,7 +28,7 @@
     .actor {
       text-align: start;
       padding: .5em;
-      height: 30px;
+      height: 40px;
       display: flex;
       flex-direction: column;
       justify-content: flex-end;
@@ -38,12 +38,11 @@
         margin: 0;
       }
     }
-    
+
     .actor:last-of-type {
       font-weight: bold;
       margin-top: 1.5em;
     }
-
 
     .link {
       border-radius: 3%;
