@@ -12,7 +12,7 @@ const CastInfo:FC<Props> = ({ cast, color }) => {
   return (
     <div className={styles.cast} style={{ color }}>
       <div className={styles.heading}>
-        <h3 style={{ color }}>Cast</h3>
+        <p style={{ color }}>Cast</p>
       </div>
       <div>
         <div className={styles.castCards} style={{ color }}>

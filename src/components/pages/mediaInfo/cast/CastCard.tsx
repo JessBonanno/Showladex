@@ -29,27 +29,42 @@ const CastCard:FC<Props> = ({ actor, character }) => {
     getActor();
   }, []);
 
+  const actorName = actorDetails && actorDetails.name.split(' ');
+
   return (
-    <>
+    <div className={styles.card}>
+
       {actorDetails && actorDetails.profile_path !== null && (
-        <div className={styles.card}>
+        <>
           <Link
             className={styles.link}
             to={actorDetails && `/actorDetails/${actorDetails.id}`}
             onClick={() => console.log('click')}
           >
+            <p>
+              {character}
+            </p>
+
             <img
               src={`https://image.tmdb.org/t/p/original${actorDetails && actorDetails.profile_path}`}
               alt={`${actorDetails && actorDetails.name}`}
             />
-            <p>
-              {character}
-            </p>
+            <div className={styles.actor}>
+              {actorName && actorName.map((word) => {
+                return (
+                  <p
+                    key={word}
+                  >
+                    {word}
+                  </p>
+                );
+              })}
+            </div>
           </Link>
-
-        </div>
+        </>
       )}
-    </>
+
+    </div>
   );
 };
 

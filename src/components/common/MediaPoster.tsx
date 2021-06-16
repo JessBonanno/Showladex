@@ -1,9 +1,9 @@
 import React, { FC, useContext } from 'react';
 import { Link } from 'react-router-dom';
-import styles from './trending.module.scss';
-import { Show } from '../../../ts/showInterfaces';
-import { Movie } from '../../../ts/movieInterfaces';
-import { ShowsContext } from '../../../context/ShowsContext';
+import styles from './mediaPoster.module.scss';
+import { Show } from '../../ts/showInterfaces';
+import { Movie } from '../../ts/movieInterfaces';
+import { ShowsContext } from '../../context/ShowsContext';
 
 interface Props {
   show: Show | null;

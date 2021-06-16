@@ -5,6 +5,7 @@ import Landing from './components/pages/landing';
 import NavBar from './components/parts/topNavigation';
 import UpNext from './components/pages/upNext';
 import MediaInfo from './components/pages/mediaInfo';
+import ActorInfo from './components/pages/actorInfo';
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
           <Route exact path="/show/:id" component={MediaInfo} />
           <Route exact path="/movie/:id" component={MediaInfo} />
           <Route exact path="/up-next" component={UpNext} />
+          <Route exact path="/actor/:id" component={ActorInfo} />
         </Switch>
       </Router>
     </div>

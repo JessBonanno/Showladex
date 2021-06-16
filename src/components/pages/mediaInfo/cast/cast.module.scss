@@ -5,7 +5,7 @@
   width: 100%;
   padding: 1em;
 
-  h3 {
+  p {
     font-size: 1.2rem;
     color: black;
   }
@@ -17,19 +17,34 @@
     white-space:nowrap;
   }
 
-  .link {
-    border-radius: 3%;
-    cursor: pointer;
-  }
 
   .card {
-      width: 140px;
-      margin: 1em ;
-      display:inline-block;
-      *display:inline;/* For IE7*/
-      *zoom:1;/* For IE7*/
-      vertical-align:top;
+    max-width: 140px;
+    margin: 1em ;
+    display:inline-block;
+    *display:inline;/* For IE7*/
+    *zoom:1;/* For IE7*/
+    vertical-align:top;
 
+    .actor {
+      text-align: start;
+      padding: .5em;
+
+      p {
+        padding: 0;
+        margin: 0;
+      }
+
+      p:last-child {
+        text-decoration: underline;
+      }
+    }
+
+    .link {
+      border-radius: 3%;
+      cursor: pointer;
+      text-decoration: none;
+    }
 
       p {
         font-size: 1rem;

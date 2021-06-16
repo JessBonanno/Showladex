@@ -6,7 +6,7 @@ import { MoviesContext } from '../../../context/MoviesContext';
 import { ShowsContext } from '../../../context/ShowsContext';
 import { Movie } from '../../../ts/movieInterfaces';
 import { Show } from '../../../ts/showInterfaces';
-import MediaPoster from './MediaPoster';
+import MediaPoster from '../../common/MediaPoster';
 import styles from './trending.module.scss';
 
 const dummyArray = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 25];
