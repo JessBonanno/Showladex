@@ -49,7 +49,7 @@ export const Trending = () => {
   return (
     <div className={styles.trending}>
       <div className={styles.heading}>
-        <h2>Discover What's Trending in TV</h2>
+        <h2>Trending in TV</h2>
       </div>
       <div>
         <InfiniteScroll
@@ -74,7 +74,7 @@ export const Trending = () => {
         </InfiniteScroll>
       </div>
       <div className={styles.heading}>
-        <h2>Discover What's Trending in Movies</h2>
+        <h2>Trending in Movies</h2>
       </div>
       <div>
         <InfiniteScroll
