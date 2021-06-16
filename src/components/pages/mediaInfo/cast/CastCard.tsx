@@ -32,6 +32,7 @@ const CastCard:FC<Props> = ({ actor, character }) => {
   const actorName = actorDetails && actorDetails.name.split(' ');
   const characterName = actor && actor.character && actor.character.split(' ');
 
+  console.log(characterName);
   return (
     <div className={styles.card}>
 
@@ -46,9 +47,12 @@ const CastCard:FC<Props> = ({ actor, character }) => {
           >
             <div className={styles.actor}>
               {characterName && characterName.map((word) => {
-                return (
-                  <p key={uuidv4()}>{word.slice(0)}</p>
-                );
+                if (word !== '/') {
+                  return (
+                    <p key={uuidv4()}>{word}</p>
+                  );
+                }
+                return null;
               })}
             </div>
             <img
