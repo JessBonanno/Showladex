@@ -7,7 +7,7 @@
   width: 100%;
   background-size: cover;
   background-position: center;
-  background-color: darken($lightGreen, 5%);
+  background-color: $lightGreen;
   background-blend-mode: darken;
   display: flex;
   flex-direction: column;

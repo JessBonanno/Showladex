@@ -153,6 +153,20 @@ User Actions API calls
     return null;
   };
 
+  const getRandomPopularImg = async () => {
+    const randomNumber = Math.floor((Math.random() * 19) + 1);
+    try {
+      const response = await axios.get(`https://api.themoviedb.org/3/tv/popular?api_key=${process.env.REACT_APP_API_KEY}&language=en-US&page=1`);
+      if (response.data) {
+        return response.data.results[randomNumber].backdrop_path;
+      }
+      return null;
+    } catch (err) {
+      console.error(err);
+    }
+    return null;
+  };
+
   return (
     <APIContext.Provider
       value={{
@@ -167,6 +181,7 @@ User Actions API calls
         markFavorite,
         getFavorites,
         searchShows,
+        getRandomPopularImg,
       }}
     >
       {children}
