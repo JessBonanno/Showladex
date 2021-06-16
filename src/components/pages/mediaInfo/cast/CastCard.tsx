@@ -2,6 +2,7 @@ import React, {
   FC, useContext, useState, useEffect,
 } from 'react';
 import { Link } from 'react-router-dom';
+import { v4 as uuidv4 } from 'uuid';
 import { APIContext } from '../../../../context/APIContext';
 import { ActorDetails, Cast } from '../../../../ts/showInterfaces';
 import styles from './cast.module.scss';
@@ -46,7 +47,7 @@ const CastCard:FC<Props> = ({ actor, character }) => {
             <div className={styles.actor}>
               {characterName && characterName.map((word) => {
                 return (
-                  <p key={word}>{word}</p>
+                  <p key={uuidv4()}>{word}</p>
                 );
               })}
             </div>
@@ -58,7 +59,7 @@ const CastCard:FC<Props> = ({ actor, character }) => {
               {actorName && actorName.map((word) => {
                 return (
                   <p
-                    key={word}
+                    key={uuidv4()}
                   >
                     {word}
                   </p>

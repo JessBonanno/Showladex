@@ -191,6 +191,20 @@ Show & movie api calls
     }
     return null;
   };
+
+  const getSimilarShows = async (id:number) => {
+    try {
+      const shows = await axios.get(`https://api.themoviedb.org/3/tv/${id}/similar?api_key=${process.env.REACT_APP_API_KEY}&language=en-US&page=1`);
+      if (shows) {
+        return shows.data.results;
+      }
+      return null;
+    } catch (err) {
+      console.error(err);
+    }
+    return null;
+  };
+
   const getRandomPopularImg = async () => {
     const randomImgNumber = Math.floor((Math.random() * 19) + 1);
     const randomPageNumber = Math.floor((Math.random() * 6) + 1);
@@ -257,6 +271,7 @@ User Actions API calls
         getShowCast,
         getActorDetails,
         getMovieCast,
+        getSimilarShows,
       }}
     >
       {children}

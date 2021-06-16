@@ -11,6 +11,7 @@ import Overview from './Overview';
 import Favorite from './Favorite';
 import { MovieDetails } from '../../../ts/movieInterfaces';
 import CastInfo from './cast';
+import SimilarShows from './similarShows';
 
 interface ShowParams {
   id: string
@@ -112,25 +113,29 @@ export const MediaInfo = () => {
       style={{ backgroundColor: data.vibrant, color: getContrast(data.vibrant) }}
     >
       <Header
-        show={location.pathname.indexOf('show') ? show : undefined}
-        movie={location.pathname.indexOf('movie') ? movie : undefined}
+        show={location.pathname.includes('show') ? show : undefined}
+        movie={location.pathname.includes('movie') ? movie : undefined}
         color={getContrast(data.vibrant)}
       />
       <ScoreAndTrailer
-        show={location.pathname.indexOf('show') ? show : undefined}
-        movie={location.pathname.indexOf('movie') ? movie : undefined}
+        show={location.pathname.includes('show') ? show : undefined}
+        movie={location.pathname.includes('movie') ? movie : undefined}
         trailer={trailer}
         buttonColor={getContrast(data.vibrant)}
       />
       <Classification
-        show={location.pathname.indexOf('show') ? show : undefined}
-        movie={location.pathname.indexOf('movie') ? movie : undefined}
+        show={location.pathname.includes('show') ? show : undefined}
+        movie={location.pathname.includes('movie') ? movie : undefined}
         rating={rating && rating.rating ? rating.rating : rating && rating.certification}
       />
       <Overview
-        show={location.pathname.indexOf('show') ? show : undefined}
-        movie={location.pathname.indexOf('movie') ? movie : undefined}
+        show={location.pathname.includes('show') ? show : undefined}
+        movie={location.pathname.includes('movie') ? movie : undefined}
       />
+      {location.pathname.includes('show')
+      && (
+        <SimilarShows show={location.pathname.includes('show') ? show : undefined} />
+      )}
       <CastInfo cast={cast} color={getContrast(data.vibrant)} />
     </div>
   );
