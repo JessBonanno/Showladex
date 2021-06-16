@@ -82,7 +82,7 @@ export const NavLinks:FC<Props> = ({ isMobile }) => {
       {authorized
         ? (
           <>
-            <li>
+            {/* <li>
               <Link
                 to="/favorites"
                 className={styles.navLink}
@@ -93,7 +93,7 @@ export const NavLinks:FC<Props> = ({ isMobile }) => {
               >
                 Favorites
               </Link>
-            </li>
+            </li> */}
             <li>
               <Link
                 to="/up-next"

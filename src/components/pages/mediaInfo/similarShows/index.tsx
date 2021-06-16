@@ -26,23 +26,33 @@ const SimilarShows:FC<Props> = ({ show }) => {
 
   useEffect(() => {
     getShows();
+    window.scrollTo(0, 0);
   }, [show]);
 
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
-    <div className={styles.similarShows}>
-      <div className={styles.heading}>
-        <p>More Like This</p>
-      </div>
-      <div>
-        <div className={styles.cardContainer}>
-          {shows && shows.length > 0 && shows.map((result: Show) => {
-            return (
-              <MediaPoster show={result} movie={null} key={uuidv4()} setShows={setShows} />
-            );
-          }) }
+    <>
+      {shows && shows.length > 0
+      && (
+        <div className={styles.similarShows}>
+          <div className={styles.heading}>
+            <p>More Like This</p>
+          </div>
+          <div>
+            <div className={styles.cardContainer}>
+              {shows && shows.length > 0 && shows.map((result: Show) => {
+                return (
+                  <MediaPoster show={result} movie={null} key={uuidv4()} setShows={setShows} />
+                );
+              }) }
+            </div>
+          </div>
         </div>
-      </div>
-    </div>
+      )}
+    </>
   );
 };
 
