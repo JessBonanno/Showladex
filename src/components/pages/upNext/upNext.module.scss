@@ -19,11 +19,15 @@
 
     h3 {
       padding: .5em 1em;
-      color: lightblue;
+      color: white;
       background-color: lighten($black, 10%);
       text-align: center;
       border-radius: 20px;
       font-size: 1rem;
+
+      @media (min-width: 760px) {
+        color: $darkGreen;
+      }
     }
 
     .showDetails {
@@ -55,9 +59,26 @@
         color: white;
         font-family: $lato;
 
+        @media (min-width: 760px) {
+          color: $darkGreen;
+          height: 100%;
+          padding: 3em 1em;
+        }
+
+        h4 {
+          @media (min-width: 760px) {
+            color: $darkGreen;
+            font-weight: bold;
+          }
+        }
+
         .nameAndNetwork {
           display: flex;
           justify-content: space-between;
+
+          @media (min-width: 760px) {
+            padding-bottom: 2em;
+          }
 
 
           .network {
@@ -78,6 +99,9 @@
       font-family: $lato;
       font-size: 1rem;
       padding: 1em .5em;
+    }
+    @media (min-width: 760px) {
+      color: $darkGreen;
     }
   }
 }
