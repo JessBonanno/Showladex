@@ -32,7 +32,6 @@ const CastCard:FC<Props> = ({ actor, character }) => {
   const actorName = actorDetails && actorDetails.name.split(' ');
   const characterName = actor && actor.character && actor.character.split(' ');
 
-  console.log(characterName);
   return (
     <div className={styles.card}>
 
