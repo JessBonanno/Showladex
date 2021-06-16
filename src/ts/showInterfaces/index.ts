@@ -15,7 +15,7 @@ export interface Show {
   media_type?: string;
 }
 export interface ShowsResults {
-  results: [Show]
+  results: Show[]
 }
 
 export interface Creator {

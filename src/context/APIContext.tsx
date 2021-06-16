@@ -12,7 +12,6 @@ export const APIProvider: FC = ({ children }) => {
 Auth api calls
 */
   const getUserToken = async () => {
-    console.log(process.env.REACT_APP_URL);
     try {
       const tokenData = await axios.get(`https://api.themoviedb.org/3/authentication/token/new?api_key=${process.env.REACT_APP_API_KEY}`);
       localStorage.setItem('movieToken', tokenData.data.request_token);
@@ -75,7 +74,6 @@ Show api calls
   const searchShows = async (searchTerm: string) => {
     try {
       const shows = await axios.get(`https://api.themoviedb.org/3/search/tv?api_key=${process.env.REACT_APP_API_KEY}&language=en-US&page=1&query=${searchTerm}&include_adult=false`);
-      console.log(shows);
       return shows.data;
     } catch (err) {
       console.error(err);
@@ -93,9 +91,29 @@ Show api calls
     return null;
   };
 
+  const getTrendingMovies = async (page:number) => {
+    try {
+      const movies = await axios.get(`https://api.themoviedb.org/3/trending/movie/day?api_key=${process.env.REACT_APP_API_KEY}`);
+      return movies.data;
+    } catch (err) {
+      console.error(err);
+    }
+    return null;
+  };
+
   const getShowDetails = async (id: number) => {
     try {
       const details = await axios.get(`https://api.themoviedb.org/3/tv/${id}?api_key=${process.env.REACT_APP_API_KEY}&language=en-US`);
+      return details.data;
+    } catch (err) {
+      console.error(err);
+    }
+    return null;
+  };
+
+  const getMovieDetails = async (id: number) => {
+    try {
+      const details = await axios.get(`https://api.themoviedb.org/3/movie/${id}?api_key=${process.env.REACT_APP_API_KEY}&language=en-US&append_to_response=releases`);
       return details.data;
     } catch (err) {
       console.error(err);
@@ -113,10 +131,34 @@ Show api calls
     return null;
   };
 
+  const getMovieTrailer = async (id: number) => {
+    try {
+      const videos = await axios.get(`https://api.themoviedb.org/3/movie/${id}/videos?api_key=${process.env.REACT_APP_API_KEY}`);
+      return videos.data;
+    } catch (err) {
+      console.error(err);
+    }
+    return null;
+  };
+
   const getShowRating = async (id: number) => {
     try {
       const ratings = await axios.get(`https://api.themoviedb.org/3/tv/${id}/content_ratings?api_key=${process.env.REACT_APP_API_KEY}`);
       return ratings.data.results;
+    } catch (err) {
+      console.error(err);
+    }
+    return null;
+  };
+
+  const getRandomPopularImg = async () => {
+    const randomNumber = Math.floor((Math.random() * 19) + 1);
+    try {
+      const response = await axios.get(`https://api.themoviedb.org/3/tv/popular?api_key=${process.env.REACT_APP_API_KEY}&language=en-US&page=1`);
+      if (response.data) {
+        return response.data.results[randomNumber].backdrop_path;
+      }
+      return null;
     } catch (err) {
       console.error(err);
     }
@@ -153,20 +195,6 @@ User Actions API calls
     return null;
   };
 
-  const getRandomPopularImg = async () => {
-    const randomNumber = Math.floor((Math.random() * 19) + 1);
-    try {
-      const response = await axios.get(`https://api.themoviedb.org/3/tv/popular?api_key=${process.env.REACT_APP_API_KEY}&language=en-US&page=1`);
-      if (response.data) {
-        return response.data.results[randomNumber].backdrop_path;
-      }
-      return null;
-    } catch (err) {
-      console.error(err);
-    }
-    return null;
-  };
-
   return (
     <APIContext.Provider
       value={{
@@ -182,6 +210,9 @@ User Actions API calls
         getFavorites,
         searchShows,
         getRandomPopularImg,
+        getTrendingMovies,
+        getMovieDetails,
+        getMovieTrailer,
       }}
     >
       {children}
