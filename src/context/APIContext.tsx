@@ -165,11 +165,12 @@ Show & movie api calls
   };
 
   const getRandomPopularImg = async () => {
-    const randomNumber = Math.floor((Math.random() * 19) + 1);
+    const randomImgNumber = Math.floor((Math.random() * 19) + 1);
+    const randomPageNumber = Math.floor((Math.random() * 6) + 1);
     try {
-      const response = await axios.get(`https://api.themoviedb.org/3/tv/popular?api_key=${process.env.REACT_APP_API_KEY}&language=en-US&page=1`);
+      const response = await axios.get(`https://api.themoviedb.org/3/tv/popular?api_key=${process.env.REACT_APP_API_KEY}&language=en-US&page=${randomPageNumber}`);
       if (response.data) {
-        return response.data.results[randomNumber].backdrop_path;
+        return response.data.results[randomImgNumber].backdrop_path;
       }
       return null;
     } catch (err) {

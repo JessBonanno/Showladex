@@ -12,11 +12,11 @@ import Favorite from './Favorite';
 import { MovieDetails } from '../../../ts/movieInterfaces';
 import CastInfo from './cast';
 
-type ShowParams = {
+interface ShowParams {
   id: string
 }
 
-type Rating = {
+interface Rating {
   iso_3166_1: string,
   rating?: string;
   primary?: string;
@@ -65,8 +65,6 @@ export const MediaInfo = () => {
       console.error(err);
     }
   };
-
-  console.log(cast);
 
   useEffect(() => {
     if (location.pathname.includes('show')) {
