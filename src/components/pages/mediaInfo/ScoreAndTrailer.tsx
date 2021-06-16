@@ -4,14 +4,18 @@ import ModalVideo from 'react-modal-video';
 import { ShowDetails } from '../../../ts/showInterfaces';
 import styles from './showInfo.module.scss';
 import 'react-modal-video/scss/modal-video.scss';
+import { MovieDetails } from '../../../ts/movieInterfaces';
 
 interface Props {
   show: ShowDetails | undefined;
+  movie: MovieDetails | undefined;
   trailer: string;
   buttonColor: string;
 }
 
-export const ScoreAndTrailer:FC<Props> = ({ show, trailer, buttonColor }) => {
+export const ScoreAndTrailer:FC<Props> = ({
+  show, movie, trailer, buttonColor,
+}) => {
   const [isOpen, setIsOpen] = useState(false);
   return (
     <div className={styles.scoreAndTrailer}>
@@ -20,7 +24,7 @@ export const ScoreAndTrailer:FC<Props> = ({ show, trailer, buttonColor }) => {
           className={styles.rating}
         >
           <p>
-            {show && show.vote_average}
+            {show ? show.vote_average : movie && movie.vote_average}
           </p>
         </div>
         <p>User Score</p>
