@@ -12,7 +12,6 @@ interface Props {
 }
 
 const SimilarShows:FC<Props> = ({ show }) => {
-  console.log(show);
   const { getSimilarShows } = useContext(APIContext);
   const [shows, setShows] = useState<Show[]>();
 
@@ -28,8 +27,6 @@ const SimilarShows:FC<Props> = ({ show }) => {
   useEffect(() => {
     getShows();
   }, [show]);
-
-  console.log(shows);
 
   return (
     <div className={styles.similarShows}>
