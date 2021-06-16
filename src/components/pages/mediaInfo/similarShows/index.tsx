@@ -13,7 +13,7 @@ interface Props {
 
 const SimilarShows:FC<Props> = ({ show }) => {
   const { getSimilarShows } = useContext(APIContext);
-  const [shows, setShows] = useState<Show[]>();
+  const [shows, setShows] = useState<Show[]>([]);
 
   const getShows = async () => {
     try {
@@ -37,7 +37,7 @@ const SimilarShows:FC<Props> = ({ show }) => {
         <div className={styles.cardContainer}>
           {shows && shows.length > 0 && shows.map((result: Show) => {
             return (
-              <MediaPoster show={result} movie={null} key={uuidv4()} />
+              <MediaPoster show={result} movie={null} key={uuidv4()} setShows={setShows} />
             );
           }) }
         </div>

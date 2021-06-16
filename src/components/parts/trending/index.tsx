@@ -67,7 +67,7 @@ export const Trending = () => {
           {trending && trending.length > 0 && trending
             .map((result: Show) => {
               return (
-                <MediaPoster show={result} movie={null} key={uuidv4()} />
+                <MediaPoster show={result} movie={null} key={uuidv4()} setShows={undefined} />
               );
             }) }
 
@@ -92,7 +92,7 @@ export const Trending = () => {
           {trendingMovies && trendingMovies.length > 0 && trendingMovies
             .map((result: Movie) => {
               return (
-                <MediaPoster show={null} movie={result} key={uuidv4()} />
+                <MediaPoster show={null} movie={result} key={uuidv4()} setShows={undefined} />
               );
             }) }
 
