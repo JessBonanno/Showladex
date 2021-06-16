@@ -137,6 +137,7 @@ export interface ActorDetails extends Cast{
   profile_path: string | null;
   homepage: string | null;
   images: Images;
+  imdb_id: string;
 }
 
 export interface FavResults {

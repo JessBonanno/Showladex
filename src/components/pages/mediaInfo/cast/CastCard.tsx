@@ -18,7 +18,6 @@ const CastCard:FC<Props> = ({ actor, character }) => {
   const getActor = async () => {
     try {
       const details = await getActorDetails(actor.id);
-      console.log(details);
       setActorDetails(details);
     } catch (err) {
       console.error(err);
@@ -32,23 +31,22 @@ const CastCard:FC<Props> = ({ actor, character }) => {
   const actorName = actorDetails && actorDetails.name.split(' ');
   const characterName = actor && actor.character && actor.character.split(' ');
 
-  console.log(actorDetails);
-  console.log(characterName);
-
   return (
     <div className={styles.card}>
 
       {actorDetails && actorDetails.profile_path !== null && (
         <>
-          <Link
+          <a
             className={styles.link}
-            to={actorDetails && `/actorDetails/${actorDetails.id}`}
+            href={actorDetails && `https://www.imdb.com/name/${actorDetails.imdb_id}/?ref_=tt_cl_t_6`}
+            target="_blank"
             onClick={() => console.log('click')}
+            rel="noreferrer"
           >
             <div className={styles.actor}>
               {characterName && characterName.map((word) => {
                 return (
-                  <p>{word}</p>
+                  <p key={word}>{word}</p>
                 );
               })}
             </div>
@@ -67,7 +65,7 @@ const CastCard:FC<Props> = ({ actor, character }) => {
                 );
               })}
             </div>
-          </Link>
+          </a>
         </>
       )}
 
