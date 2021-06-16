@@ -30,6 +30,10 @@ const CastCard:FC<Props> = ({ actor, character }) => {
   }, []);
 
   const actorName = actorDetails && actorDetails.name.split(' ');
+  const characterName = actor && actor.character && actor.character.split(' ');
+
+  console.log(actorDetails);
+  console.log(characterName);
 
   return (
     <div className={styles.card}>
@@ -41,10 +45,13 @@ const CastCard:FC<Props> = ({ actor, character }) => {
             to={actorDetails && `/actorDetails/${actorDetails.id}`}
             onClick={() => console.log('click')}
           >
-            <p>
-              {character}
-            </p>
-
+            <div className={styles.actor}>
+              {characterName && characterName.map((word) => {
+                return (
+                  <p>{word}</p>
+                );
+              })}
+            </div>
             <img
               src={`https://image.tmdb.org/t/p/original${actorDetails && actorDetails.profile_path}`}
               alt={`${actorDetails && actorDetails.name}`}

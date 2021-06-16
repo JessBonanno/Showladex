@@ -7,7 +7,6 @@
 
   p {
     font-size: 1.2rem;
-    color: black;
   }
 
   .castCards {
@@ -29,16 +28,22 @@
     .actor {
       text-align: start;
       padding: .5em;
+      height: 30px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
 
       p {
         padding: 0;
         margin: 0;
       }
-
-      p:last-child {
-        text-decoration: underline;
-      }
     }
+    
+    .actor:last-of-type {
+      font-weight: bold;
+      margin-top: 1.5em;
+    }
+
 
     .link {
       border-radius: 3%;
