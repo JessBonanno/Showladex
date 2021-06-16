@@ -1,0 +1,20 @@
+.cast {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100%;
+  padding: 1em;
+
+  h3 {
+    font-size: 1.2rem;
+  }
+
+  .castCards {
+    align-self: center;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    white-space:nowrap;
+    height: 150px;
+  }
+
+}

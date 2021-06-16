@@ -101,6 +101,18 @@ export interface ShowDetails extends Show {
   type: string;
 }
 
+export interface Cast {
+  adult: boolean;
+  gender: number | null;
+  id: number;
+  known_for_department: string;
+  name: string;
+  original_name: string;
+  popularity: number;
+  character: string;
+  credit_id: string;
+  order: number;
+}
 export interface FavResults {
   results: [Show];
   total_pages: number;

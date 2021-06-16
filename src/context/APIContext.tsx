@@ -2,6 +2,7 @@ import React, {
   FC, Context, createContext, useState, useContext,
 } from 'react';
 import axios from 'axios';
+import { copyFileSync } from 'fs';
 import { UsersContext } from './UsersContext';
 
 export const APIContext: Context<any> = createContext({});
@@ -68,7 +69,7 @@ Auth api calls
   };
 
   /*
-Show api calls
+Show & movie api calls
 */
 
   const searchShows = async (searchTerm: string) => {
@@ -151,6 +152,18 @@ Show api calls
     return null;
   };
 
+  const getShowCast = async (id: number) => {
+    try {
+      const credits = await axios.get(`https://api.themoviedb.org/3/tv/${id}/credits?api_key=${process.env.REACT_APP_API_KEY}&language=en-US`);
+      if (credits.data.cast) {
+        return credits.data.cast;
+      }
+    } catch (err) {
+      console.error(err);
+    }
+    return null;
+  };
+
   const getRandomPopularImg = async () => {
     const randomNumber = Math.floor((Math.random() * 19) + 1);
     try {
@@ -213,6 +226,7 @@ User Actions API calls
         getTrendingMovies,
         getMovieDetails,
         getMovieTrailer,
+        getShowCast,
       }}
     >
       {children}

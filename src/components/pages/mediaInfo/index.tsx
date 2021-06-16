@@ -3,13 +3,14 @@ import { useParams, useLocation } from 'react-router';
 import { usePalette } from 'react-palette';
 import styles from './showInfo.module.scss';
 import { APIContext } from '../../../context/APIContext';
-import { ShowDetails } from '../../../ts/showInterfaces';
+import { ShowDetails, Cast } from '../../../ts/showInterfaces';
 import Header from './Header';
 import ScoreAndTrailer from './ScoreAndTrailer';
 import Classification from './Classification';
 import Overview from './Overview';
 import Favorite from './Favorite';
 import { MovieDetails } from '../../../ts/movieInterfaces';
+import CastInfo from './cast';
 
 type ShowParams = {
   id: string
@@ -27,12 +28,13 @@ export const MediaInfo = () => {
   const location = useLocation();
   const { id } = useParams<ShowParams>();
   const {
-    getShowDetails, getShowTrailer, getShowRating, getMovieDetails, getMovieTrailer,
+    getShowDetails, getShowTrailer, getShowRating, getShowCast, getMovieDetails, getMovieTrailer,
   } = useContext(APIContext);
   const [show, setShow] = useState<ShowDetails>();
   const [movie, setMovie] = useState<MovieDetails>();
   const [trailer, setTrailer] = useState<string>('');
   const [rating, setRating] = useState<Rating>();
+  const [cast, setCast] = useState<Cast[]>();
 
   const getShow = async () => {
     try {
@@ -44,6 +46,8 @@ export const MediaInfo = () => {
       setRating(showRating.find((r: Rating) => {
         return r.iso_3166_1 === 'US';
       }));
+      const credits = await getShowCast(id);
+      setCast(credits);
     } catch (err) {
       console.error(err);
     }
@@ -61,6 +65,8 @@ export const MediaInfo = () => {
       console.error(err);
     }
   };
+
+  console.log(cast);
 
   useEffect(() => {
     if (location.pathname.includes('show')) {
@@ -124,6 +130,7 @@ export const MediaInfo = () => {
         show={location.pathname.indexOf('show') ? show : undefined}
         movie={location.pathname.indexOf('movie') ? movie : undefined}
       />
+      {/* <CastInfo cast={cast} color={getContrast(data.vibrant)} /> */}
     </div>
   );
 };
