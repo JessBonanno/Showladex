@@ -109,10 +109,36 @@ export interface Cast {
   name: string;
   original_name: string;
   popularity: number;
+  profile_path: string | null;
   character: string;
   credit_id: string;
   order: number;
 }
+
+export interface Profile {
+  aspect_ratio: number;
+  file_path: string;
+  height: number;
+  iso_639_1: null;
+  vote_average: number;
+  vote_count: number;
+  width: number;
+}
+
+export interface Images {
+  profiles: Profile[];
+}
+export interface ActorDetails extends Cast{
+  birthday: string | null;
+  deathday: string | null;
+  also_known_as: string[];
+  biography: string;
+  place_of_birth: string | null;
+  profile_path: string | null;
+  homepage: string | null;
+  images: Images;
+}
+
 export interface FavResults {
   results: [Show];
   total_pages: number;

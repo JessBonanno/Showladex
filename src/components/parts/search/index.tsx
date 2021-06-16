@@ -63,7 +63,6 @@ const Search = () => {
 
   return (
     <>
-      && (
       <div className={styles.search} style={{ backgroundImage: backgroundImage && `url(https://image.tmdb.org/t/p/original${backgroundImage})`, backgroundColor: data.muted }}>
         <h1>
           <b>Explore</b>
@@ -83,7 +82,6 @@ const Search = () => {
           <BsSearch onClick={handleSearch} className={styles.icon} />
         </form>
       </div>
-      )
     </>
   );
 };

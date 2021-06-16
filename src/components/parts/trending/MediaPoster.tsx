@@ -28,8 +28,8 @@ export const MediaPoster:FC<Props> = ({ show, movie }) => {
             />
           </Link>
         </>
-      )}
 
+      )}
     </div>
   );
 };

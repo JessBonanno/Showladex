@@ -158,12 +158,39 @@ Show & movie api calls
       if (credits.data.cast) {
         return credits.data.cast;
       }
+      return null;
     } catch (err) {
       console.error(err);
     }
     return null;
   };
 
+  const getMovieCast = async (id: number) => {
+    try {
+      const credits = await axios.get(`https://api.themoviedb.org/3/movie/${id}/credits?api_key=${process.env.REACT_APP_API_KEY}&language=en-US`);
+      if (credits.data.cast) {
+        console.log(credits.data);
+        return credits.data.cast;
+      }
+      return null;
+    } catch (err) {
+      console.error(err);
+    }
+    return null;
+  };
+
+  const getActorDetails = async (id: number) => {
+    try {
+      const actor = await axios.get(`https://api.themoviedb.org/3/person/${id}?api_key=${process.env.REACT_APP_API_KEY}&language=en-US&append_to_response=images`);
+      if (actor.data) {
+        return actor.data;
+      }
+      return null;
+    } catch (err) {
+      console.error(err);
+    }
+    return null;
+  };
   const getRandomPopularImg = async () => {
     const randomImgNumber = Math.floor((Math.random() * 19) + 1);
     const randomPageNumber = Math.floor((Math.random() * 6) + 1);
@@ -228,6 +255,8 @@ User Actions API calls
         getMovieDetails,
         getMovieTrailer,
         getShowCast,
+        getActorDetails,
+        getMovieCast,
       }}
     >
       {children}

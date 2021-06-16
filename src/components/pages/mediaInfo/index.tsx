@@ -28,7 +28,8 @@ export const MediaInfo = () => {
   const location = useLocation();
   const { id } = useParams<ShowParams>();
   const {
-    getShowDetails, getShowTrailer, getShowRating, getShowCast, getMovieDetails, getMovieTrailer,
+    getShowDetails, getShowTrailer, getShowRating, getShowCast,
+    getMovieDetails, getMovieTrailer, getMovieCast,
   } = useContext(APIContext);
   const [show, setShow] = useState<ShowDetails>();
   const [movie, setMovie] = useState<MovieDetails>();
@@ -61,6 +62,8 @@ export const MediaInfo = () => {
       setRating(details.releases.countries.find((r: Rating) => {
         return r.iso_3166_1 === 'US';
       }));
+      const credits = await getMovieCast(id);
+      setCast(credits);
     } catch (err) {
       console.error(err);
     }
@@ -128,7 +131,7 @@ export const MediaInfo = () => {
         show={location.pathname.indexOf('show') ? show : undefined}
         movie={location.pathname.indexOf('movie') ? movie : undefined}
       />
-      {/* <CastInfo cast={cast} color={getContrast(data.vibrant)} /> */}
+      <CastInfo cast={cast} color={getContrast(data.vibrant)} />
     </div>
   );
 };
