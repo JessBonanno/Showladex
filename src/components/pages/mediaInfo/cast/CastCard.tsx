@@ -47,7 +47,7 @@ const CastCard:FC<Props> = ({ actor, character }) => {
             <div className={styles.actor}>
               {characterName && characterName.map((word) => {
                 return (
-                  <p key={uuidv4()}>{word}</p>
+                  <p key={uuidv4()}>{word.slice(0)}</p>
                 );
               })}
             </div>
