@@ -67,7 +67,7 @@ const Search = () => {
         <h1>
           <b>Explore</b>
           {' '}
-          tons of shows,
+          shows,
           {' '}
           <b>add</b>
           {' '}
