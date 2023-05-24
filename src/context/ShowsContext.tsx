@@ -1,30 +1,44 @@
-import React, {
-  FC, Context, createContext, useState,
+import {
+  createContext, useState, Dispatch, SetStateAction, ReactElement, useMemo,
 } from 'react';
 import { ShowsResults, ShowDetails, Show } from '../ts/showInterfaces';
 
-export const ShowsContext: Context<any> = createContext({});
+type UseState<T> = [T, Dispatch<SetStateAction<T>>];
 
-export const ShowsProvider: FC = ({ children }) => {
-  const [trending, setTrending] = useState<ShowsResults>();
-  const [favorites, setFavorites] = useState<ShowDetails[]>();
-  const [page, setPage] = useState(1);
-  const [searchResults, setSearchResults] = useState<Show[]>();
+interface ContextVal {
+  trendingState: UseState<ShowsResults | null>;
+  favoritesState: UseState<ShowDetails[] | null>;
+  showPageState: UseState<number | null>;
+  searchResultsState: UseState<Show[] | null>;
+}
+interface Props {
+	children: ReactElement;
+}
 
-  return (
-    <ShowsContext.Provider
-      value={{
-        trending,
-        setTrending,
-        favorites,
-        setFavorites,
-        page,
-        setPage,
-        searchResults,
-        setSearchResults,
-      }}
-    >
-      {children}
-    </ShowsContext.Provider>
-  );
+export const ShowsContext = createContext<ContextVal>(undefined!);
+
+
+export const ShowsProvider = ({ children }: Props) => {
+  const trendingState = useState<ShowsResults | null>(null);
+  const favoritesState = useState<ShowDetails[] | null>(null);
+  const showPageState = useState<number | null>(1);
+  const searchResultsState = useState<Show[] | null>(null);
+
+  const value = useMemo(
+    () => ({
+      trendingState,
+      favoritesState,
+      showPageState,
+      searchResultsState,
+    }),
+    [
+      trendingState,
+      favoritesState,
+      showPageState,
+      searchResultsState,
+    ]
+  )
+
+  return <ShowsContext.Provider value={value}>{children}</ShowsContext.Provider>;
+
 };

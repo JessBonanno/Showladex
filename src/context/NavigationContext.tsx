@@ -1,19 +1,28 @@
-import React, {
-  FC, Context, createContext, useState,
+import {
+  createContext, useState, ReactElement, Dispatch, SetStateAction, useMemo,
 } from 'react';
 
-export const NavigationContext: Context<any> = createContext({});
+type UseState<T> = [T, Dispatch<SetStateAction<T>>];
 
-export const NavigationProvider: FC = ({ children }) => {
-  const [open, setOpen] = useState(false);
-  return (
-    <NavigationContext.Provider
-      value={{
-        open,
-        setOpen,
-      }}
-    >
-      {children}
-    </NavigationContext.Provider>
-  );
+interface ContextVal {
+  openState: UseState<boolean | null>;
+}
+
+interface Props {
+	children: ReactElement;
+}
+
+export const NavigationContext = createContext<ContextVal>(undefined!);
+
+export const NavigationProvider = ({ children }: Props) => {
+  const openState = useState<boolean | null>(false);
+  const value = useMemo(
+    () => ({
+      openState,
+    }),
+    [
+      openState,
+    ]
+  )
+    return <NavigationContext.Provider value={value}>{children}</NavigationContext.Provider>
 };

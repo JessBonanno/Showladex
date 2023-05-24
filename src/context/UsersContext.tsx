@@ -1,25 +1,37 @@
-import React, {
-  FC, Context, createContext, useState,
+import {
+  createContext, useState, Dispatch, SetStateAction, ReactElement, useMemo,
 } from 'react';
 
 import { UserDetails } from '../ts/userInterfaces';
 
-export const UsersContext: Context<any> = createContext({});
 
-export const UsersProvider: FC = ({ children }) => {
-  const [authorized, setAuthorized] = useState(false);
-  const [accountDetails, setAccountDetails] = useState<UserDetails>();
+type UseState<T> = [T, Dispatch<SetStateAction<T>>];
 
-  return (
-    <UsersContext.Provider
-      value={{
-        authorized,
-        setAuthorized,
-        accountDetails,
-        setAccountDetails,
-      }}
-    >
-      {children}
-    </UsersContext.Provider>
-  );
+interface ContextVal {
+  authorizedState: UseState<boolean | null>;
+  accountDetailsState: UseState<UserDetails | null>;
+}
+interface Props {
+	children: ReactElement;
+}
+
+export const UsersContext = createContext<ContextVal>(undefined!);
+
+export const UsersProvider = ({ children }: Props) => {
+  const authorizedState = useState<boolean | null >(false);
+  const accountDetailsState = useState<UserDetails | null>(null);
+
+  const value = useMemo(
+    () => ({
+      authorizedState,
+      accountDetailsState,
+    }),
+    [
+      authorizedState,
+      accountDetailsState,
+    ]
+  )
+
+  return <UsersContext.Provider value={value}>{children}</UsersContext.Provider>;
+
 };
