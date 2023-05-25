@@ -9,7 +9,6 @@ interface Props {
   show: Show
 }
 const Result:FC<Props> = ({ show }) => {
-  console.log(show.overview.slice(0, 70));
 
   return (
     <Link
