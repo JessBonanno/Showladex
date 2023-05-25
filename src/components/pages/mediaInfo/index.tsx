@@ -1,8 +1,7 @@
-import React, { useContext, useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useParams, useLocation } from 'react-router';
 import { usePalette } from 'react-palette';
 import styles from './showInfo.module.scss';
-import { APIContext } from '../../../context/APIContext';
 import { ShowDetails, Cast } from '../../../ts/showInterfaces';
 import Header from './Header';
 import ScoreAndTrailer from './ScoreAndTrailer';
@@ -11,6 +10,7 @@ import Overview from './Overview';
 import { MovieDetails } from '../../../ts/movieInterfaces';
 import CastInfo from './cast';
 import SimilarShows from './similarShows';
+import { getMovieCast, getMovieDetails, getMovieTrailer, getShowCast, getShowDetails, getShowRating, getShowTrailer } from 'src/utils/API';
 
 interface ShowParams {
   id: string
@@ -27,10 +27,6 @@ interface Rating {
 export const MediaInfo = () => {
   const location = useLocation();
   const { id } = useParams<ShowParams>();
-  const {
-    getShowDetails, getShowTrailer, getShowRating, getShowCast,
-    getMovieDetails, getMovieTrailer, getMovieCast,
-  } = useContext(APIContext);
   const [show, setShow] = useState<ShowDetails>();
   const [movie, setMovie] = useState<MovieDetails>();
   const [trailer, setTrailer] = useState<string>('');

@@ -1,23 +1,23 @@
-import React, {
-  FC, useContext, useState, useEffect,
+import {
+  FC, useState, useEffect,
 } from 'react';
 import { v4 as uuidv4 } from 'uuid';
-import { APIContext } from '../../../../context/APIContext';
 import { Show } from '../../../../ts/showInterfaces';
 import styles from './similarShows.module.scss';
 import { MediaPoster } from '../../../common/MediaPoster';
+import { getSimilarShows } from 'src/utils/API';
 
 interface Props {
   show: Show | undefined;
 }
 
 const SimilarShows:FC<Props> = ({ show }) => {
-  const { getSimilarShows } = useContext(APIContext);
   const [shows, setShows] = useState<Show[]>([]);
 
   const getShows = async () => {
     try {
-      const details = await getSimilarShows(show && show.id);
+      let details;
+      if (show) details = await getSimilarShows(show.id.toString());
       setShows(details);
     } catch (err) {
       console.error(err);

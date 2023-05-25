@@ -1,15 +1,11 @@
-import React, { FC, Context, createContext, useContext } from 'react';
 import axios from 'axios';
-import { UsersContext } from './UsersContext';
+import { TrendingMoviesResult, TrendingShowsResult } from 'src/ts/apiInterfaces';
+import { UserDetails } from 'src/ts/userInterfaces';
 
-export const APIContext: Context<any> = createContext({});
-
-export const APIProvider: FC = ({ children }) => {
-	const { accountDetails } = useContext(UsersContext);
-	/*
+/*
 Auth api calls
 */
-	const getUserToken = async () => {
+	export const getUserToken = async () => {
 		try {
 			const tokenData = await axios.get(
 				`https://api.themoviedb.org/3/authentication/token/new?api_key=${process.env.REACT_APP_API_KEY}`
@@ -26,7 +22,7 @@ Auth api calls
 		return null;
 	};
 
-	const getSession = async (token: string) => {
+	export const getSession = async (token: string) => {
 		try {
 			const session = await axios.post(
 				`https://api.themoviedb.org/3/authentication/session/new?api_key=${process.env.REACT_APP_API_KEY}`,
@@ -44,7 +40,7 @@ Auth api calls
 		return false;
 	};
 
-	const endSession = async (token: string) => {
+	export const endSession = async (token: string) => {
 		try {
 			const session = await axios.delete(
 				`https://api.themoviedb.org/3/authentication/session?api_key=${process.env.REACT_APP_API_KEY}`,
@@ -62,7 +58,7 @@ Auth api calls
 		return false;
 	};
 
-	const getAccountDetails = async () => {
+	export const getAccountDetails = async () => {
 		try {
 			const details = await axios.get(
 				`https://api.themoviedb.org/3/account?api_key=${
@@ -83,7 +79,7 @@ Auth api calls
 Show & movie api calls
 */
 
-	const searchShows = async (searchTerm: string) => {
+	export const searchShows = async (searchTerm: string) => {
 		try {
 			const shows = await axios.get(
 				`https://api.themoviedb.org/3/search/tv?api_key=${process.env.REACT_APP_API_KEY}&language=en-US&page=1&query=${searchTerm}&include_adult=false`
@@ -95,7 +91,7 @@ Show & movie api calls
 		return null;
 	};
 
-	const getTrendingShows = async (page: number) => {
+	export const getTrendingShows = async (page: string): Promise<TrendingShowsResult | null> => {
 		try {
 			const shows = await axios.get(
 				`https://api.themoviedb.org/3/trending/tv/day?page=${page}&api_key=${process.env.REACT_APP_API_KEY}`
@@ -107,11 +103,13 @@ Show & movie api calls
 		return null;
 	};
 
-	const getTrendingMovies = async (page: number) => {
+	export const getTrendingMovies = async (page: string): Promise<TrendingMoviesResult | null> => {
 		try {
 			const movies = await axios.get(
 				`https://api.themoviedb.org/3/trending/movie/day?api_key=${process.env.REACT_APP_API_KEY}`
 			);
+			console.log(movies.data);
+
 			return movies.data;
 		} catch (err) {
 			console.error(err);
@@ -119,7 +117,7 @@ Show & movie api calls
 		return null;
 	};
 
-	const getShowDetails = async (id: number) => {
+	export const getShowDetails = async (id: string) => {
 		try {
 			const details = await axios.get(
 				`https://api.themoviedb.org/3/tv/${id}?api_key=${process.env.REACT_APP_API_KEY}&language=en-US`
@@ -131,7 +129,7 @@ Show & movie api calls
 		return null;
 	};
 
-	const getMovieDetails = async (id: number) => {
+	export const getMovieDetails = async (id: string) => {
 		try {
 			const details = await axios.get(
 				`https://api.themoviedb.org/3/movie/${id}?api_key=${process.env.REACT_APP_API_KEY}&language=en-US&append_to_response=releases`
@@ -143,7 +141,7 @@ Show & movie api calls
 		return null;
 	};
 
-	const getShowTrailer = async (id: number) => {
+	export const getShowTrailer = async (id: string) => {
 		try {
 			const videos = await axios.get(
 				`https://api.themoviedb.org/3/tv/${id}/videos?api_key=${process.env.REACT_APP_API_KEY}`
@@ -155,7 +153,7 @@ Show & movie api calls
 		return null;
 	};
 
-	const getMovieTrailer = async (id: number) => {
+	export const getMovieTrailer = async (id: string) => {
 		try {
 			const videos = await axios.get(
 				`https://api.themoviedb.org/3/movie/${id}/videos?api_key=${process.env.REACT_APP_API_KEY}`
@@ -167,7 +165,7 @@ Show & movie api calls
 		return null;
 	};
 
-	const getShowRating = async (id: number) => {
+	export const getShowRating = async (id: string) => {
 		try {
 			const ratings = await axios.get(
 				`https://api.themoviedb.org/3/tv/${id}/content_ratings?api_key=${process.env.REACT_APP_API_KEY}`
@@ -179,7 +177,7 @@ Show & movie api calls
 		return null;
 	};
 
-	const getShowCast = async (id: number) => {
+	export const getShowCast = async (id: string) => {
 		try {
 			const credits = await axios.get(
 				`https://api.themoviedb.org/3/tv/${id}/credits?api_key=${process.env.REACT_APP_API_KEY}&language=en-US`
@@ -194,13 +192,12 @@ Show & movie api calls
 		return null;
 	};
 
-	const getMovieCast = async (id: number) => {
+	export const getMovieCast = async (id: string) => {
 		try {
 			const credits = await axios.get(
 				`https://api.themoviedb.org/3/movie/${id}/credits?api_key=${process.env.REACT_APP_API_KEY}&language=en-US`
 			);
 			if (credits.data.cast) {
-				console.log(credits.data);
 				return credits.data.cast;
 			}
 			return null;
@@ -210,7 +207,7 @@ Show & movie api calls
 		return null;
 	};
 
-	const getActorDetails = async (id: number) => {
+	export const getActorDetails = async (id: string) => {
 		try {
 			const actor = await axios.get(
 				`https://api.themoviedb.org/3/person/${id}?api_key=${process.env.REACT_APP_API_KEY}&language=en-US&append_to_response=images`
@@ -225,7 +222,7 @@ Show & movie api calls
 		return null;
 	};
 
-	const getSimilarShows = async (id: number) => {
+	export const getSimilarShows = async (id: string) => {
 		try {
 			const shows = await axios.get(
 				`https://api.themoviedb.org/3/tv/${id}/similar?api_key=${process.env.REACT_APP_API_KEY}&language=en-US&page=1`
@@ -240,7 +237,7 @@ Show & movie api calls
 		return null;
 	};
 
-	const getRandomPopularImg = async () => {
+	export const getRandomPopularImg = async () => {
 		const randomImgNumber = Math.floor(Math.random() * 19 + 1);
 		const randomPageNumber = Math.floor(Math.random() * 6 + 1);
 		try {
@@ -260,7 +257,7 @@ Show & movie api calls
 User Actions API calls
 */
 
-	const markFavorite = async (id: number, favorite: boolean) => {
+	export const markFavorite = async (id: number, favorite: boolean, accountDetails: UserDetails) => {
 		try {
 			const response = await axios.post(
 				`https://api.themoviedb.org/3/account/${accountDetails.id}/favorite?api_key=${
@@ -279,7 +276,7 @@ User Actions API calls
 		return null;
 	};
 
-	const getFavorites = async () => {
+	export const getFavorites = async () => {
 		if (localStorage.getItem('accountId')) {
 			const id = localStorage.getItem('accountId');
 			try {
@@ -295,32 +292,3 @@ User Actions API calls
 		}
 		return null;
 	};
-
-	return (
-		<APIContext.Provider
-			value={{
-				getUserToken,
-				getSession,
-				getTrendingShows,
-				getShowDetails,
-				getShowTrailer,
-				getShowRating,
-				getAccountDetails,
-				endSession,
-				markFavorite,
-				getFavorites,
-				searchShows,
-				getRandomPopularImg,
-				getTrendingMovies,
-				getMovieDetails,
-				getMovieTrailer,
-				getShowCast,
-				getActorDetails,
-				getMovieCast,
-				getSimilarShows,
-			}}
-		>
-			{children}
-		</APIContext.Provider>
-	);
-};

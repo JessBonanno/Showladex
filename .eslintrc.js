@@ -95,14 +95,15 @@ module.exports = {
 		'@typescript-eslint/prefer-regexp-exec': 'off',
 		'@typescript-eslint/no-array-constructor': 'off',
 		'@typescript-eslint/no-unnecessary-type-assertion': 'off',
+		'@typescript-eslint/no-non-null-assertion': 'off',
 		semi: [2, 'always'],
 		'no-console': [
-			'error',
+			'warn',
 			{
 				/**
 				 * Allow console.error
 				 */
-				allow: ['error'],
+				allow: ['warn'],
 			},
 		],
 		'no-var': 'off',

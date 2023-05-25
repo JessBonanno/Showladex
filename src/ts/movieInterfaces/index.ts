@@ -49,7 +49,3 @@ export interface MovieDetails extends Movie {
   tagline: string;
   releases: Country[];
 }
-
-export interface MoviesResults {
-  results: Movie[]
-}

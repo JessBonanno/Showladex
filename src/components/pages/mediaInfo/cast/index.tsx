@@ -18,7 +18,7 @@ const CastInfo:FC<Props> = ({ cast, color }) => {
         <div className={styles.castCards} style={{ color }}>
           {cast && cast.length > 0 && cast.map((actor) => {
             return (
-              <CastCard actor={actor} character={actor.character} key={actor.id} />
+              <CastCard actor={actor} key={actor.id} />
             );
           })}
         </div>

@@ -1,17 +1,15 @@
-import React, { FC, useContext } from 'react';
+import React, { FC} from 'react';
 import { usePalette } from 'react-palette';
 import { Link } from 'react-router-dom';
-import { ShowsContext } from '../../../context/ShowsContext';
-import { ShowDetails } from '../../../ts/showInterfaces';
+import { Show } from '../../../ts/showInterfaces';
 import styles from './upNext.module.scss';
 
 interface Props {
-  show: ShowDetails
+  show: Show
 }
 
 const EpisodeInfo:FC<Props> = ({ show }) => {
   const { data, loading, error } = usePalette(`https://image.tmdb.org/t/p/original${show && show.poster_path}`);
-  const { setFavorites } = useContext(ShowsContext);
 
   return (
     <Link
@@ -24,17 +22,17 @@ const EpisodeInfo:FC<Props> = ({ show }) => {
       <div className={styles.details}>
         <div className={styles.nameAndNetwork}>
           <h4>{show.name}</h4>
-          <p className={styles.network}>{show.networks[0].name}</p>
+          <p className={styles.network}>{show.networks && show.networks[0].name}</p>
         </div>
         <p className={styles.episodeNumber}>
           S
-          {show.next_episode_to_air.season_number}
+          {show?.next_episode_to_air?.season_number}
           {' '}
           | E
-          {show.next_episode_to_air.episode_number}
+          {show?.next_episode_to_air?.episode_number}
         </p>
         <p className={styles.episodeName}>
-          {show.next_episode_to_air.name !== '' ? show.next_episode_to_air.name : `Episode ${show.next_episode_to_air.episode_number}`}
+          {show?.next_episode_to_air?.name !== '' ? show?.next_episode_to_air?.name : `Episode ${show.next_episode_to_air.episode_number}`}
         </p>
       </div>
     </Link>

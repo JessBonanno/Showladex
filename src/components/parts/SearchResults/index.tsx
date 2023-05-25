@@ -5,10 +5,11 @@ import Result from './Result';
 import styles from './searchResults.module.scss';
 
 const SearchResults = () => {
-  const { searchResults } = useContext(ShowsContext);
+  const { searchResultsState } = useContext(ShowsContext);
+  const [searchResults, setSearchResults] = searchResultsState;
   return (
     <div className={styles.searchResults}>
-      {searchResults.length > 0 && searchResults.map((show: Show) => {
+      {searchResults && searchResults.length > 0 && searchResults.map((show: Show) => {
         return (<Result show={show} />);
       })}
     </div>

@@ -1,12 +1,13 @@
 import React, { useContext } from 'react';
 import styles from './landing.module.scss';
-import Trending from '../../parts/trending';
 import Search from '../../parts/search';
 import SearchResults from '../../parts/SearchResults';
-import { ShowsContext } from '../../../context/ShowsContext';
+import { ShowsContext, ShowsProvider } from '../../../context/ShowsContext';
+import Trending from 'src/components/parts/trending/Trending';
 
 const Landing = () => {
-  const { searchResults } = useContext(ShowsContext);
+	const { searchResultsState } = useContext(ShowsContext);
+	const [searchResults, setSearchResults] = searchResultsState;
   return (
     <div className={styles.landing}>
       <Search />
@@ -15,5 +16,10 @@ const Landing = () => {
     </div>
   );
 };
+const MemoizedLanding = React.memo(Landing);
 
-export default Landing;
+export default ({show, movie, setShows}) => (
+	<ShowsProvider>
+		<MemoizedLanding />
+	</ShowsProvider>
+);

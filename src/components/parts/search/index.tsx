@@ -2,15 +2,15 @@ import React, { useState, useContext, useEffect,
 } from 'react';
 import { BsSearch } from 'react-icons/bs';
 import { usePalette } from 'react-palette';
-import { APIContext } from '../../../context/APIContext';
-import { ShowsContext } from '../../../context/ShowsContext';
+import { ShowsContext, ShowsProvider } from '../../../context/ShowsContext';
 import styles from './search.module.scss';
+import { getRandomPopularImg, searchShows } from 'src/utils/API';
 
 const Search = () => {
   const [searchTerm, setSearchTerm] = useState('');
-  const { searchShows, getRandomPopularImg } = useContext(APIContext);
-  const { setSearchResults } = useContext(ShowsContext);
+  const { searchResultsState } = useContext(ShowsContext);
   const [backgroundImage, setBackgroundImage] = useState('');
+  const [searchResults, setSearchResults] = searchResultsState;
 
   const handleSearch = async (e: React.SyntheticEvent) => {
     e.preventDefault();
@@ -85,4 +85,10 @@ const Search = () => {
   );
 };
 
-export default Search;
+const MemoizedSearch = React.memo(Search);
+
+export default () => (
+  <ShowsProvider>
+    <MemoizedSearch />
+  </ShowsProvider>
+);

@@ -1,11 +1,12 @@
 import { createContext, useState, Dispatch, SetStateAction, ReactElement, useMemo } from 'react';
-import { ShowsResults, ShowDetails, Show } from '../ts/showInterfaces';
+import { Show } from '../ts/showInterfaces';
+import { ShowResult } from 'src/ts/apiInterfaces';
 
 type UseState<T> = [T, Dispatch<SetStateAction<T>>];
 
 interface ContextVal {
-	trendingState: UseState<ShowsResults | null>;
-	favoritesState: UseState<ShowDetails[] | null>;
+	trendingShowsState: UseState<ShowResult[] | null>;
+	favoritesState: UseState<Show[] | null>;
 	showPageState: UseState<number | null>;
 	searchResultsState: UseState<Show[] | null>;
 }
@@ -16,19 +17,19 @@ interface Props {
 export const ShowsContext = createContext<ContextVal>(undefined!);
 
 export const ShowsProvider = ({ children }: Props) => {
-	const trendingState = useState<ShowsResults | null>(null);
-	const favoritesState = useState<ShowDetails[] | null>(null);
+	const trendingShowsState = useState<ShowResult[] | null>(null);
+	const favoritesState = useState<Show[] | null>(null);
 	const showPageState = useState<number | null>(1);
 	const searchResultsState = useState<Show[] | null>(null);
 
 	const value = useMemo(
 		() => ({
-			trendingState,
+			trendingShowsState,
 			favoritesState,
 			showPageState,
 			searchResultsState,
 		}),
-		[trendingState, favoritesState, showPageState, searchResultsState]
+		[trendingShowsState, favoritesState, showPageState, searchResultsState]
 	);
 
 	return <ShowsContext.Provider value={value}>{children}</ShowsContext.Provider>;

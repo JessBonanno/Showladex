@@ -1,10 +1,10 @@
 import { createContext, useState, Dispatch, SetStateAction, useMemo, ReactElement } from 'react';
-import { MoviesResults } from '../ts/movieInterfaces';
+import { MovieResult } from 'src/ts/apiInterfaces';
 
 type UseState<T> = [T, Dispatch<SetStateAction<T>>];
 
 interface ContextVal {
-	trendingMoviesState: UseState<MoviesResults | null>;
+	trendingMoviesState: UseState<MovieResult[] | null>;
 	moviePageState: UseState<number | null>;
 }
 
@@ -15,7 +15,7 @@ interface Props {
 export const MoviesContext = createContext<ContextVal>(undefined!);
 
 export const MoviesProvider = ({ children }: Props) => {
-	const trendingMoviesState = useState<MoviesResults | null>(null);
+	const trendingMoviesState = useState<MovieResult[] | null>(null);
 	const moviePageState = useState<number | null>(1);
 
 	const value = useMemo(

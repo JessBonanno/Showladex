@@ -2,11 +2,11 @@ import React, {
   FC, useState, useEffect, useContext,
 } from 'react';
 import styles from './upNext.module.scss';
-import { FavResults, ShowDetails } from '../../../ts/showInterfaces';
+import { FavResults, Show } from '../../../ts/showInterfaces';
 import EpisodeInfo from './EpisodeInfo';
-import { ShowsContext } from '../../../context/ShowsContext';
+import { ShowsContext, ShowsProvider } from '../../../context/ShowsContext';
 import { datesArray } from '../../../utils/helpers';
-import { APIContext } from '../../../context/APIContext';
+import { getFavorites, getShowDetails } from 'src/utils/API';
 
 interface Props {
   date: string;
@@ -14,18 +14,19 @@ interface Props {
 }
 
 const DaysShows:FC<Props> = ({ date, day }) => {
-  const [todaysShows, setTodaysShows] = useState<ShowDetails[]>();
-  const { getFavorites, getShowDetails } = useContext(APIContext);
+  const [todaysShows, setTodaysShows] = useState<Show[]>();
   const {
-    favorites, setFavorites, page, setPage,
+    favoritesState, showPageState,
   } = useContext(ShowsContext);
+  const [favorites, setFavorites] = favoritesState;
+  const [showPage, setShowPage] = showPageState;
 
   const getUsersFavorites = async () => {
     try {
       const favs:FavResults = await getFavorites();
       // eslint-disable-next-line consistent-return
       const airing = await Promise.all(favs.results.map(async (fav) => {
-        const details = await getShowDetails(fav.id);
+        const details = await getShowDetails(fav.id.toString());
         if (
           details.next_episode_to_air !== null
           && datesArray.includes(details.next_episode_to_air.air_date)
@@ -39,8 +40,8 @@ const DaysShows:FC<Props> = ({ date, day }) => {
       } else {
         setFavorites([...cleanList]);
       }
-      setPage(page + 1);
-      if (favs.total_pages > page + 1) {
+      setShowPage((showPage || 0) + 1);
+      if (favs.total_pages > (showPage || 0) + 1) {
         getUsersFavorites();
       }
     } catch (err) {
@@ -54,8 +55,8 @@ const DaysShows:FC<Props> = ({ date, day }) => {
 
   useEffect(() => {
     if (favorites && favorites.length) {
-      const list: ShowDetails[] = favorites && favorites.filter((show:ShowDetails) => {
-        return show.next_episode_to_air.air_date === date;
+      const list = favorites && favorites.filter((show) => {
+        return show?.next_episode_to_air?.air_date === date;
       });
       setTodaysShows(list);
     }
@@ -78,4 +79,10 @@ const DaysShows:FC<Props> = ({ date, day }) => {
   );
 };
 
-export default DaysShows;
+const MemoizedDaysShows = React.memo(DaysShows);
+
+export default ({date, day}) => (
+  <ShowsProvider>
+    <MemoizedDaysShows date={date} day={day}/>
+  </ShowsProvider>
+);

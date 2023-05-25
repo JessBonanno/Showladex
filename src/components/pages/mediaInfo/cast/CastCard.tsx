@@ -1,21 +1,19 @@
-import { FC, useContext, useState, useEffect } from 'react';
+import { FC, useState, useEffect } from 'react';
 import { v4 as uuidv4 } from 'uuid';
-import { APIContext } from '../../../../context/APIContext';
 import { ActorDetails, Cast } from '../../../../ts/showInterfaces';
 import styles from './cast.module.scss';
+import { getActorDetails } from 'src/utils/API';
 
 interface Props {
 	actor: Cast;
-	character: string;
 }
 
-const CastCard: FC<Props> = ({ actor, character }) => {
-	const { getActorDetails } = useContext(APIContext);
-	const [actorDetails, setActorDetails] = useState<ActorDetails>();
+const CastCard: FC<Props> = ({ actor }) => {
+	const [actorDetails, setActorDetails] = useState<ActorDetails | null>(null);
 
 	const getActor = async () => {
 		try {
-			const details = await getActorDetails(actor.id);
+			const details = await getActorDetails(actor.id.toString());
 			setActorDetails(details);
 		} catch (err) {
 			console.error(err);
