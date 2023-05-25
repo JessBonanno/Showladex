@@ -24,7 +24,7 @@ export const ScoreAndTrailer:FC<Props> = ({
           className={styles.rating}
         >
           <p>
-            {show ? show.vote_average : movie && movie.vote_average}
+            {show ? Math.round(show.vote_average * 10) / 10 : movie && Math.round(movie.vote_average * 10) / 10}
           </p>
         </div>
         <p>User Score</p>
