@@ -1,5 +1,4 @@
-import React, {
-  FC, useState, useContext, useEffect,
+import React, { useState, useContext, useEffect,
 } from 'react';
 import { BsSearch } from 'react-icons/bs';
 import { usePalette } from 'react-palette';

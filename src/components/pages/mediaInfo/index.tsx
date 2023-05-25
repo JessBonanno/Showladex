@@ -8,7 +8,6 @@ import Header from './Header';
 import ScoreAndTrailer from './ScoreAndTrailer';
 import Classification from './Classification';
 import Overview from './Overview';
-import Favorite from './Favorite';
 import { MovieDetails } from '../../../ts/movieInterfaces';
 import CastInfo from './cast';
 import SimilarShows from './similarShows';

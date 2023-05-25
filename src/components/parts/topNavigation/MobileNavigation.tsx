@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useContext } from 'react';
 import { RiMenu3Line } from 'react-icons/ri';
 import { CgClose } from 'react-icons/cg';
 import styles from './navBar.module.scss';

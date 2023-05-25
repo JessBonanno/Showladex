@@ -1,75 +1,119 @@
 module.exports = {
-  env: {
-    browser: true,
-    es6: true,
-  },
-  extends: [
-    'plugin:react/recommended',
-    'airbnb',
-    'plugin:@typescript-eslint/recommended',
-  ],
-  globals: {
-    Atomics: 'readonly',
-    SharedArrayBuffer: 'readonly',
-  },
-  parser: '@typescript-eslint/parser',
-  parserOptions: {
-    ecmaFeatures: {
-      jsx: true,
-    },
-    ecmaVersion: 2018,
-    sourceType: 'module',
-  },
-  plugins: [
-    'react',
-    '@typescript-eslint',
-    'react-hooks',
-  ],
-  rules: {
-    '@typescript-eslint/indent': [
-      'error',
-      2,
-    ],
-    'no-use-before-define': 'off',
-    '@typescript-eslint/no-use-before-define': ['error'],
-    'react/jsx-filename-extension': ['warn', { extensions: ['.tsx'] }],
-    'no-shadow': 'off',
-    '@typescript-eslint/no-shadow': ['error'],
-    'react-hooks/rules-of-hooks': 'error',
-    'import/prefer-default-export': 'off',
-    'react/prop-types': 'off',
-    '@typescript-eslint/explicit-module-boundary-types': 'off',
-    '@typescript-eslint/no-unused-vars': 'off',
-    'arrow-body-style': 'off',
-    'react/self-closing-comp': 'off',
-    'react/no-unused-prop-types': 'off',
-    'no-console': 'off',
-    'react/button-has-type': 'off',
-    'jsx-a11y/click-events-have-key-events': 'off',
-    'jsx-a11y/no-static-element-interactions': 'off',
-    'no-lone-blocks': 'off',
-    '@typescript-eslint/no-explicit-any': 'off',
-    '@typescript-eslint/no-var-requires': 'off',
-    'no-param-reassign': 'off',
-    'no-plusplus': 'off',
-    'no-return-assign': 'off',
-    camelcase: 'off',
-    'react-hooks/exhaustive-deps': 'off',
-    'react/no-unescaped-entities': 'off',
-    'import/extensions': [
-      'error',
-      'ignorePackages',
-      {
-        ts: 'never',
-        tsx: 'never',
-      },
-    ],
-  },
-  settings: {
-    'import/resolver': {
-      node: {
-        extensions: ['.js', '.jsx', '.ts', '.tsx'],
-      },
-    },
-  },
+	env: {
+		browser: true,
+		es6: true,
+		node: true,
+	},
+	extends: [
+		'plugin:@typescript-eslint/recommended',
+		'plugin:@typescript-eslint/recommended-requiring-type-checking',
+		'prettier',
+	],
+	parser: '@typescript-eslint/parser',
+	parserOptions: {
+		ecmaVersion: 2018,
+		project: 'tsconfig.json',
+		tsconfigRootDir: __dirname,
+		sourceType: 'module',
+	},
+	plugins: [
+		'eslint-plugin-import',
+		'@typescript-eslint',
+		'react-hooks',
+		'unused-imports',
+		'prettier',
+	],
+	ignorePatterns: ['public/**/*', 'storybook-static/**/*'],
+	rules: {
+		'unused-imports/no-unused-imports': 'error',
+		'no-restricted-imports': [
+			'error',
+			{
+				paths: ['lodash'],
+				patterns: [
+					{
+						group: [
+							'lodash/*',
+							'!lodash/sortBy',
+							'!lodash/orderBy',
+							'!lodash/groupBy',
+							'!lodash/unionWith',
+						],
+						message:
+							'usage of individual lodash modules is not allowed except for modules sortBy, orderBy, groupBy and unionWith.',
+					},
+				],
+			},
+		],
+		'@typescript-eslint/no-empty-interface': 'off',
+		'@typescript-eslint/no-inferrable-types': 'off',
+		'@typescript-eslint/naming-convention': [
+			'off',
+			{
+				selector: 'class',
+				format: ['PascalCase'],
+			},
+			{
+				selector: 'enum',
+				format: ['PascalCase', 'UPPER_CASE'],
+			},
+			{
+				selector: 'interface',
+				format: ['PascalCase'],
+				custom: {
+					regex: '^I[A-Z]',
+					match: false,
+				},
+			},
+			{
+				selector: 'typeAlias',
+				format: ['PascalCase'],
+			},
+			{
+				selector: 'typeParameter',
+				format: ['PascalCase'],
+			},
+		],
+		'@typescript-eslint/no-explicit-any': 'off',
+		'@typescript-eslint/restrict-plus-operands': 'off',
+		'@typescript-eslint/restrict-template-expressions': 'off',
+		'@typescript-eslint/no-unused-vars': 'off',
+		'@typescript-eslint/no-var-requires': 'off',
+		'@typescript-eslint/no-unsafe-assignment': 'off',
+		'@typescript-eslint/explicit-module-boundary-types': 'off',
+		'@typescript-eslint/no-floating-promises': 'off',
+		'@typescript-eslint/no-misused-promises': 'off',
+		'@typescript-eslint/ban-types': 'off',
+		'@typescript-eslint/unbound-method': 'off',
+		'@typescript-eslint/no-empty-function': 'off',
+		'@typescript-eslint/restrict-template-expressions': 'off',
+		'@typescript-eslint/no-unsafe-member-access': 'off',
+		'@typescript-eslint/ban-ts-comment': 'off',
+		'@typescript-eslint/restrict-template-expressions': 'off',
+		'@typescript-eslint/no-unsafe-return': 'off',
+		'@typescript-eslint/no-unsafe-call': 'off',
+		'@typescript-eslint/prefer-regexp-exec': 'off',
+		'@typescript-eslint/no-array-constructor': 'off',
+		'@typescript-eslint/no-unnecessary-type-assertion': 'off',
+		semi: [2, 'always'],
+		'no-console': [
+			'error',
+			{
+				/**
+				 * Allow console.error
+				 */
+				allow: ['error'],
+			},
+		],
+		'no-var': 'off',
+		'max-classes-per-file': 'off',
+		'prefer-spread': 'off',
+		'max-line-length': 'off',
+		'no-empty-interface': 'off',
+		'no-inferrable-types': 'off',
+		'no-submodule-imports': 'off',
+		'no-implicit-dependencies': 'off',
+		'object-literal-sort-keys': 'off',
+		'variable-name': 'off',
+	},
 };

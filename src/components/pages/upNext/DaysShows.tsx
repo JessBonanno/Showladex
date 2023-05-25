@@ -1,7 +1,6 @@
 import React, {
   FC, useState, useEffect, useContext,
 } from 'react';
-import { usePalette } from 'react-palette';
 import styles from './upNext.module.scss';
 import { FavResults, ShowDetails } from '../../../ts/showInterfaces';
 import EpisodeInfo from './EpisodeInfo';

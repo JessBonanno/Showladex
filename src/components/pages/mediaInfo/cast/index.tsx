@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import styles from './cast.module.scss';
-import { Cast, ShowDetails } from '../../../../ts/showInterfaces';
+import { Cast } from '../../../../ts/showInterfaces';
 import CastCard from './CastCard';
 
 interface Props {

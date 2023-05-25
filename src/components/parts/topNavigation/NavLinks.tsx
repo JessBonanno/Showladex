@@ -1,5 +1,5 @@
 import React, {
-  FC, useContext, useState, useEffect,
+  FC, useContext, useEffect,
 } from 'react';
 import { Link } from 'react-router-dom';
 import { APIContext } from '../../../context/APIContext';

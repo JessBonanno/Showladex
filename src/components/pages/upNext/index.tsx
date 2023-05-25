@@ -1,11 +1,6 @@
-import React, {
-  FC, useContext, useState, useEffect,
-} from 'react';
+import React from 'react';
 import styles from './upNext.module.scss';
-import { APIContext } from '../../../context/APIContext';
-import { FavResults } from '../../../ts/showInterfaces';
-import { ShowsContext } from '../../../context/ShowsContext';
-import { datesArray, thisWeek, WeekDay } from '../../../utils/helpers';
+import { thisWeek, WeekDay } from '../../../utils/helpers';
 import DaysShows from './DaysShows';
 
 const UpNext = () => {
