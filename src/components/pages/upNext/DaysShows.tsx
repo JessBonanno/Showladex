@@ -5,8 +5,7 @@ import styles from './upNext.module.scss';
 import { FavResults, Show } from '../../../ts/showInterfaces';
 import EpisodeInfo from './EpisodeInfo';
 import { ShowsContext, ShowsProvider } from '../../../context/ShowsContext';
-import { datesArray } from '../../../utils/helpers';
-import { getFavorites, getShowDetails } from 'src/utils/API';
+import { getFavorites } from 'src/utils/API';
 
 interface Props {
   date: string;
@@ -26,19 +25,19 @@ const DaysShows:FC<Props> = ({ date, day }) => {
       const favs:FavResults = await getFavorites();
       // eslint-disable-next-line consistent-return
       const airing = await Promise.all(favs.results.map(async (fav) => {
-        const details = await getShowDetails(fav.id.toString());
-        if (
-          details.next_episode_to_air !== null
-          && datesArray.includes(details.next_episode_to_air.air_date)
-        ) {
-          return details;
-        }
+        // const details = await getShowDetails(fav.id.toString());
+        // if (
+        //   details.next_episode_to_air !== null
+        //   && datesArray.includes(details.next_episode_to_air.air_date)
+        // ) {
+        //   return details;
+        // }
       }));
       const cleanList = airing.filter((fav) => fav !== undefined);
       if (favorites && favorites.length > 0 && cleanList) {
-        setFavorites([...favorites, ...cleanList.filter((fav) => !favorites.includes(fav))]);
+        // setFavorites([...favorites, ...cleanList.filter((fav) => !favorites.includes(fav))]);
       } else {
-        setFavorites([...cleanList]);
+        // setFavorites([...cleanList]);
       }
       setShowPage((showPage || 0) + 1);
       if (favs.total_pages > (showPage || 0) + 1) {

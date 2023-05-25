@@ -1,22 +1,23 @@
 import React, { FC} from 'react';
-import { usePalette } from 'react-palette';
 import { Link } from 'react-router-dom';
 import { Show } from '../../../ts/showInterfaces';
 import styles from './upNext.module.scss';
+import { usePalette } from 'react-palette';
+import { getContrast } from 'src/utils/helpers';
 
 interface Props {
   show: Show
 }
 
 const EpisodeInfo:FC<Props> = ({ show }) => {
-  const { data, loading, error } = usePalette(`https://image.tmdb.org/t/p/original${show && show.poster_path}`);
+  const { data, loading, error } = usePalette(`https://image.tmdb.org/t/p/w500${show && show.poster_path}`);
 
   return (
     <Link
       to={`/show/${show.id}`}
       className={styles.showDetails}
     >
-      <div className={styles.imageWrapper}>
+      <div className={styles.imageWrapper} style={{ backgroundColor: data.darkMuted, color: getContrast(data.darkMuted) }}>
         <img className={styles.showImage} src={`https://image.tmdb.org/t/p/original${show && show.poster_path}`} alt="show preview" />
       </div>
       <div className={styles.details}>

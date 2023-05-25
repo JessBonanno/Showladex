@@ -2,11 +2,11 @@ import React, { FC } from 'react';
 import styles from './showInfo.module.scss';
 import { ShowDetails } from '../../../ts/showInterfaces';
 import Favorite from './Favorite';
-import { MovieDetails } from '../../../ts/movieInterfaces';
+import { MovieDetailsResponse } from 'src/ts/apiInterfaces';
 
 interface Props {
   show: ShowDetails | undefined;
-  movie: MovieDetails | undefined;
+  movie: MovieDetailsResponse | undefined;
   color: string;
 }
 

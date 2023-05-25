@@ -1,11 +1,11 @@
 import React, { FC } from 'react';
 import styles from './showInfo.module.scss';
 import { ShowDetails } from '../../../ts/showInterfaces';
-import { MovieDetails } from '../../../ts/movieInterfaces/index';
+import { MovieDetailsResponse } from 'src/ts/apiInterfaces';
 
 interface Props {
   show: ShowDetails | undefined;
-  movie: MovieDetails | undefined;
+  movie: MovieDetailsResponse | undefined;
 }
 
 const Overview:FC<Props> = ({ show, movie }) => {

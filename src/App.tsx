@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Landing from './components/pages/landing/LandingPage';
 import NavBar from './components/parts/topNavigation';
 import UpNext from './components/pages/upNext';
-import MediaInfo from './components/pages/mediaInfo';
+import MediaInfo from './components/pages/mediaInfo/MediaInfo';
 
 function App() {
   return (

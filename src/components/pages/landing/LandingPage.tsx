@@ -1,10 +1,11 @@
 import React, { useContext, useState } from 'react';
 import styles from './landing.module.scss';
-import Search from '../../parts/search/Search';
-import SearchResults from '../../parts/SearchResults/SearchResults';
 import { ShowsContext, ShowsProvider } from '../../../context/ShowsContext';
-import Trending from 'src/components/parts/trending/Trending';
+import Trending from 'src/components/pages/landing/Trending';
 import { searchShows } from 'src/utils/API';
+import Search from './Search';
+import SearchResults from './SearchResults';
+import { ShowResult } from 'src/ts/apiInterfaces';
 
 const Landing = () => {
 	const { searchResultsState } = useContext(ShowsContext);
@@ -18,7 +19,7 @@ const Landing = () => {
       if (searchTerm) {
         const shows = await searchShows(searchTerm);
         if (shows?.results.length) {
-          setSearchResults(shows.results);
+          setSearchResults(shows.results as ShowResult[]);
         }
       } else {
         return;

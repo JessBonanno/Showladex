@@ -8,6 +8,7 @@ import { Show } from '../../../ts/showInterfaces';
 import MediaPoster from '../../common/MediaPoster';
 import styles from './trending.module.scss';
 import { getTrendingMovies, getTrendingShows } from 'src/utils/API';
+import { MovieResult, ShowResult } from 'src/ts/apiInterfaces';
 
 const dummyArray = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 25];
 
@@ -25,7 +26,7 @@ export const Trending = () => {
 	const getShows = async () => {
 		const shows = await getTrendingShows(pageNumber.toString());
 		if (shows?.results) {
-			setTrendingShows(shows.results);
+			setTrendingShows(shows.results as ShowResult[]);
 			setPageNumber(pageNumber + 1);
 		}
 	};
@@ -33,7 +34,7 @@ export const Trending = () => {
 	const getMovies = async () => {
 		const movies = await getTrendingMovies(pageNumber.toString());
 		if (movies?.results) {
-			setTrendingMovies(movies.results);
+			setTrendingMovies(movies.results as MovieResult[]);
 			setPageNumber(pageNumber + 1);
 		}
 	};

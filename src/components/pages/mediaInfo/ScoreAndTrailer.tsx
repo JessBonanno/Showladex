@@ -4,11 +4,11 @@ import ModalVideo from 'react-modal-video';
 import { ShowDetails } from '../../../ts/showInterfaces';
 import styles from './showInfo.module.scss';
 import 'react-modal-video/scss/modal-video.scss';
-import { MovieDetails } from '../../../ts/movieInterfaces';
+import { MovieDetailsResponse } from 'src/ts/apiInterfaces';
 
 interface Props {
   show: ShowDetails | undefined;
-  movie: MovieDetails | undefined;
+  movie: MovieDetailsResponse | undefined;
   trailer: string;
   buttonColor: string;
 }
