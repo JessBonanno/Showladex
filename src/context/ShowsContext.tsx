@@ -8,7 +8,7 @@ interface ContextVal {
 	trendingShowsState: UseState<ShowResult[] | null>;
 	favoritesState: UseState<Show[] | null>;
 	showPageState: UseState<number | null>;
-	searchResultsState: UseState<Show[] | null>;
+	searchResultsState: UseState<ShowResult[] | null>;
 }
 interface Props {
 	children: ReactElement;
@@ -20,8 +20,7 @@ export const ShowsProvider = ({ children }: Props) => {
 	const trendingShowsState = useState<ShowResult[] | null>(null);
 	const favoritesState = useState<Show[] | null>(null);
 	const showPageState = useState<number | null>(1);
-	const searchResultsState = useState<Show[] | null>(null);
-
+	const searchResultsState = useState<ShowResult[] | null>(null);
 	const value = useMemo(
 		() => ({
 			trendingShowsState,

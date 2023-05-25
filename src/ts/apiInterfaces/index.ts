@@ -4,7 +4,7 @@ export interface ShowResult {
 	first_air_date: string;
 	genre_ids: number[];
 	id: number;
-	media_type: 'tv' | 'movie';
+	media_type?: 'tv' | 'movie';
 	name: string;
 	origin_country: string[];
 	original_language: string;
@@ -16,7 +16,7 @@ export interface ShowResult {
 	vote_count: number;
 }
 
-export interface TrendingShowsResult {
+export interface MediaResult {
 	page: number;
 	total_results: number;
 	total_pages: number;
@@ -41,9 +41,3 @@ export interface MovieResult {
 	vote_count: number;
 }
 
-export interface TrendingMoviesResult {
-	page: number;
-	total_results: number;
-	total_pages: number;
-	results: MovieResult[];
-}

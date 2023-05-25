@@ -1,5 +1,6 @@
 import React, { FC } from 'react';
 import moment from 'moment';
+import { isMobile, isDesktop } from 'react-device-detect';
 import { Link } from 'react-router-dom';
 import styles from './searchResults.module.scss';
 import { Show } from '../../../ts/showInterfaces';
@@ -8,6 +9,8 @@ interface Props {
   show: Show
 }
 const Result:FC<Props> = ({ show }) => {
+  console.log(show.overview.slice(0, 70));
+
   return (
     <Link
       to={`/show/${show.id}`}
@@ -24,9 +27,9 @@ const Result:FC<Props> = ({ show }) => {
             <p>{moment(show.first_air_date).format('YYYY')}</p>
           </div>
         </div>
-        <p>
-          {show.overview && show.overview.slice(0, 70)}
-          ...
+        <p >
+          {isDesktop ? show.overview : show.overview.slice(0, 70)}
+          {isMobile && show.overview.length > 70 && '...'}
         </p>
       </div>
     </Link>

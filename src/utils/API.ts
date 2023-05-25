@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { TrendingMoviesResult, TrendingShowsResult } from 'src/ts/apiInterfaces';
+import { MediaResult } from 'src/ts/apiInterfaces';
 import { UserDetails } from 'src/ts/userInterfaces';
 
 /*
@@ -79,7 +79,7 @@ Auth api calls
 Show & movie api calls
 */
 
-	export const searchShows = async (searchTerm: string) => {
+	export const searchShows = async (searchTerm: string): Promise<MediaResult | null> => {
 		try {
 			const shows = await axios.get(
 				`https://api.themoviedb.org/3/search/tv?api_key=${process.env.REACT_APP_API_KEY}&language=en-US&page=1&query=${searchTerm}&include_adult=false`
@@ -91,7 +91,7 @@ Show & movie api calls
 		return null;
 	};
 
-	export const getTrendingShows = async (page: string): Promise<TrendingShowsResult | null> => {
+	export const getTrendingShows = async (page: string): Promise<MediaResult | null> => {
 		try {
 			const shows = await axios.get(
 				`https://api.themoviedb.org/3/trending/tv/day?page=${page}&api_key=${process.env.REACT_APP_API_KEY}`
@@ -103,13 +103,11 @@ Show & movie api calls
 		return null;
 	};
 
-	export const getTrendingMovies = async (page: string): Promise<TrendingMoviesResult | null> => {
+	export const getTrendingMovies = async (page: string): Promise<MediaResult | null> => {
 		try {
 			const movies = await axios.get(
 				`https://api.themoviedb.org/3/trending/movie/day?api_key=${process.env.REACT_APP_API_KEY}`
 			);
-			console.log(movies.data);
-
 			return movies.data;
 		} catch (err) {
 			console.error(err);

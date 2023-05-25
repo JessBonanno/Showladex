@@ -19,6 +19,7 @@
     "moment": "^2.29.1",
     "react": "^18.2.0",
     "react-bidirectional-infinite-scroll": "^2.0.1",
+    "react-device-detect": "^2.2.3",
     "react-dom": "^17.0.2",
     "react-icons": "^4.2.0",
     "react-infinite-scroll-component": "^6.1.0",
