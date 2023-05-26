@@ -6,11 +6,13 @@ import MediaPoster from '../../common/MediaPoster';
 import styles from './favorites.module.scss';
 import { getFavorites } from 'src/utils/API';
 import { ShowResult } from 'src/ts/apiInterfaces';
+import MediaInfo from '../mediaInfo/MediaInfo';
 
 const dummyArray = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 25];
 
 export const Favorites = () => {
 	const [userFavorites, setUserFavorites] = useState<ShowResult[] | ShowDetails[] | null>();
+	const [showId, setShowId] = useState<number | null>(null);
 
 	/**
 	 * Infinite scroll state
@@ -26,8 +28,8 @@ export const Favorites = () => {
 		if (currentFavs && favorites) {
 			setUserFavorites([...currentFavs, ...favorites]);
 		} else {
-            setUserFavorites([...favorites]);
-        }
+			setUserFavorites([...favorites]);
+		}
 
 		if (pageNumber && totalPages && totalPages > pageNumber) {
 			setHasMore(true);
@@ -41,8 +43,14 @@ export const Favorites = () => {
 	useEffect(() => {
 		getUsersFavorites();
 	}, []);
+	useEffect(() => {
+		if (userFavorites && userFavorites?.length) {
+			const id = userFavorites[0].id;
+			setShowId(id);
+		}
+	}, [userFavorites]);
 
-    return (
+	return (
 		<div className={styles.trending}>
 			<div className={styles.heading}>
 				<h2>Favorite shows</h2>
@@ -61,9 +69,10 @@ export const Favorites = () => {
 					{userFavorites &&
 						userFavorites.length > 0 &&
 						userFavorites.map((result: Show) => {
-							return <MediaPoster show={result} movie={null} key={uuidv4()} setShows={undefined} />;
+							return <MediaPoster show={result} movie={null} key={uuidv4()} setShows={undefined} setShowId={setShowId}/>;
 						})}
 				</InfiniteScroll>
+				{showId && <MediaInfo id={showId.toString()}/>}
 			</div>
 		</div>
 	);

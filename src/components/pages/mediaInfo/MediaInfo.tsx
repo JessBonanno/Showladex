@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useParams, useLocation } from 'react-router';
+import { useLocation } from 'react-router';
 import { usePalette } from 'react-palette';
 import styles from './showInfo.module.scss';
 import { ShowDetails, Cast } from '../../../ts/showInterfaces';
@@ -21,8 +21,9 @@ import {
 import { MovieDetailsResponse } from 'src/ts/apiInterfaces';
 import { getContrast } from 'src/utils/helpers';
 
-interface ShowParams {
+interface Props {
 	id: string;
+	isMovie?: boolean;
 }
 
 interface Rating {
@@ -33,14 +34,15 @@ interface Rating {
 	release_date?: string;
 }
 
-export const MediaInfo = () => {
+export const MediaInfo = ({ id, isMovie = false }: Props) => {
 	const location = useLocation();
-	const { id } = useParams<ShowParams>();
+	if (location.pathname.includes('movie')) isMovie = true;
 	const [show, setShow] = useState<ShowDetails>();
 	const [movie, setMovie] = useState<MovieDetailsResponse>();
 	const [trailer, setTrailer] = useState<string>('');
 	const [rating, setRating] = useState<Rating>();
 	const [cast, setCast] = useState<Cast[]>();
+
 	const getShow = async () => {
 		try {
 			const details = await getShowDetails(id);
@@ -79,44 +81,30 @@ export const MediaInfo = () => {
 	};
 
 	useEffect(() => {
-		if (location.pathname.includes('show')) {
-			getShow();
-		} else if (location.pathname.includes('movie')) {
+		if (isMovie) {
 			getMovie();
+		} else {
+			getShow();
 		}
-	}, [location]);
+	}, [id]);
 
 	let bgPath = '';
-	if (location.pathname.includes('show')) {
-		bgPath = `https://image.tmdb.org/t/p/w500${show && show.poster_path}`;
-	} else if (location.pathname.includes('movie')) {
+	if (isMovie) {
 		bgPath = `https://image.tmdb.org/t/p/w500${movie && movie.poster_path}`;
+	} else {
+		bgPath = `https://image.tmdb.org/t/p/w500${show && show.poster_path}`;
 	}
 
 	const { data, loading, error } = usePalette(bgPath);
-	
 	return (
-		<div className={styles.showDetails} style={{ backgroundColor: data.darkMuted, color: getContrast(data.darkMuted) }}>
-			<Header
-				show={show}
-				movie={movie}
-				color={getContrast(data.darkMuted)}
-			/>
-			<ScoreAndTrailer
-				show={show}
-				movie={movie}
-				trailer={trailer}
-				buttonColor={getContrast(data.darkMuted)}
-			/>
-			<Classification
-				show={show}
-				movie={movie}
-				rating={rating?.rating ? rating.rating : rating?.certification }
-			/>
-			<Overview
-				show={show}
-				movie={movie}
-			/>
+		<div
+			className={styles.showDetails}
+			style={{ backgroundColor: data.darkMuted, color: getContrast(data.darkMuted) }}
+		>
+			<Header show={show} movie={movie} color={getContrast(data.darkMuted)} />
+			<ScoreAndTrailer show={show} movie={movie} trailer={trailer} buttonColor={getContrast(data.darkMuted)} />
+			<Classification show={show} movie={movie} rating={rating?.rating ? rating.rating : rating?.certification} />
+			<Overview show={show} movie={movie} />
 			{location.pathname.includes('show') && (
 				<SimilarShows show={location.pathname.includes('show') ? show : undefined} />
 			)}
@@ -125,8 +113,4 @@ export const MediaInfo = () => {
 	);
 };
 
-const MemoizedMediaInfo = React.memo(MediaInfo);
-
-export default () => (
-	<MemoizedMediaInfo />
-);
+export default MediaInfo;

@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect, useRef, useState } from 'react';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import { v4 as uuidv4 } from 'uuid';
 import { MoviesContext, MoviesProvider } from '../../../context/MoviesContext';
@@ -13,10 +13,15 @@ import { MovieResult, ShowResult } from 'src/ts/apiInterfaces';
 const dummyArray = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 25];
 
 export const Trending = () => {
+	const ref = useRef();
+
 	const { trendingShowsState } = useContext(ShowsContext);
 	const { trendingMoviesState } = useContext(MoviesContext);
 	const [trendingShows, setTrendingShows] = trendingShowsState;
 	const [trendingMovies, setTrendingMovies] = trendingMoviesState;
+	const [id, setId] = useState<number | null>(null);
+	const [isMovie, setIsMovie] = useState<boolean>(false);
+
 	/**
 	 * Infinite scroll state
 	 */
@@ -63,7 +68,14 @@ export const Trending = () => {
 					{trendingShows &&
 						trendingShows.length > 0 &&
 						trendingShows.map((result: Show) => {
-							return <MediaPoster show={result} movie={null} key={uuidv4()} setShows={undefined} />;
+							return (
+								<MediaPoster
+									show={result}
+									movie={null}
+									key={uuidv4()}
+									setShows={undefined}
+								/>
+							);
 						})}
 				</InfiniteScroll>
 			</div>
@@ -84,7 +96,14 @@ export const Trending = () => {
 					{trendingMovies &&
 						trendingMovies?.length > 0 &&
 						trendingMovies?.map((result: Movie) => {
-							return <MediaPoster show={null} movie={result} key={uuidv4()} setShows={undefined} />;
+							return (								
+									<MediaPoster
+										show={null}
+										movie={result}
+										key={uuidv4()}
+										setShows={undefined}
+									/>
+							);
 						})}
 				</InfiniteScroll>
 			</div>
