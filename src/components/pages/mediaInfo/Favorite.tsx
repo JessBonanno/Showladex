@@ -38,30 +38,29 @@ const Favorite: FC<Props> = ({ show, color }) => {
 			console.error(err);
 		}
 	};
-	const checkFavorites = () => {
+	
+	useEffect(() => {
+		getUsersFavorites();
 		if (show && favorites) {
 			favorites.forEach(f => {
 				if (f.id === show.id) {
-					return true;
+					setIsFavorite(true);
 				}
 			});
-			// return favorites.find((fav: ShowResult) => fav.id === show.id);
 		}
-		return false;
-	};
-
-	useEffect(() => {
-		getUsersFavorites();
 	}, []);
 
 	useEffect(() => {
-		if (checkFavorites()) {
-			setIsFavorite(true);
+		if (show && favorites) {
+			favorites.forEach(f => {
+				if (f.id === show.id) {
+					setIsFavorite(true);
+				}
+			});
 		} else {
 			setIsFavorite(false);
 		}
 	}, [favorites]);
-
 	return (
 		<div className={styles.Favorite}>
 			<p>Favorite</p>
@@ -91,7 +90,7 @@ const Favorite: FC<Props> = ({ show, color }) => {
 const MemoizedFavorite = React.memo(Favorite);
 
 export default ({ show, color }) => (
-		<ShowsProvider>
-			<MemoizedFavorite show={show} color={color} />
-		</ShowsProvider>
+	<ShowsProvider>
+		<MemoizedFavorite show={show} color={color} />
+	</ShowsProvider>
 );
