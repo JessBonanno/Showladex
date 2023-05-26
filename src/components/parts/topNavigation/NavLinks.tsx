@@ -1,7 +1,6 @@
 import React, { FC, useContext, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ShowsContext, ShowsProvider } from '../../../context/ShowsContext';
-import { UsersContext, UsersProvider } from '../../../context/UsersContext';
 import styles from './navBar.module.scss';
 import { endSession, getAccountDetails, getSession, getUserToken } from 'src/utils/API';
 import { UserDetails } from 'src/ts/userInterfaces';
@@ -13,31 +12,27 @@ interface Props {
 const NavLinks: FC<Props> = ({ isMobile }) => {
 	const [open, setOpen] = useState<boolean | null>(false);
 	const { favoritesState, searchResultsState } = useContext(ShowsContext);
-	const [authorized, setAuthorized] = useState<boolean>(false);
-	const [accountDetails, setAccountDetails] = useState<UserDetails | null>(null);;
+	const [authorized, setAuthorized] = useState<boolean | null>(false);
+	const [accountDetails, setAccountDetails] = useState<UserDetails | null>(null);
 	const [favorites, setFavorites] = favoritesState;
 	const [searchResults, setSearchResults] = searchResultsState;
 	const createSession = async () => {
 		const token = localStorage.getItem('movieToken');
-		console.log({token});
-		
 		let success;
 		if (token) success = await getSession(token);
 		if (success) {
 			setAuthorized(true);
 		}
 	};
-	
+
 	const getUserInfo = async () => {
 		const userInfo = await getAccountDetails();
-		console.log({userInfo});
 		if (userInfo) {
 			setAccountDetails(userInfo);
 			setAuthorized(true);
 			localStorage.setItem('accountId', userInfo.id);
 		}
 	};
-
 	const saveSession = async () => {
 		await getUserToken();
 		await getUserInfo();
@@ -142,9 +137,7 @@ const NavLinks: FC<Props> = ({ isMobile }) => {
 const MemoizedNavLinks = React.memo(NavLinks);
 
 export default ({ isMobile }) => (
-	<UsersProvider>
 		<ShowsProvider>
 			<MemoizedNavLinks isMobile={isMobile} />
 		</ShowsProvider>
-	</UsersProvider>
 );

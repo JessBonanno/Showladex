@@ -4,7 +4,6 @@ import { MdFavorite } from 'react-icons/md';
 import styles from './showInfo.module.scss';
 import { ShowsContext, ShowsProvider } from '../../../context/ShowsContext';
 import { getFavorites, markFavorite } from 'src/utils/API';
-import { UsersContext, UsersProvider } from 'src/context/UsersContext';
 import { ShowResult } from 'src/ts/apiInterfaces';
 
 interface Props {
@@ -14,11 +13,15 @@ interface Props {
 
 const Favorite: FC<Props> = ({ show, color }) => {
 	const { favoritesState, showPageState } = useContext(ShowsContext);
-	const { accountDetailsState } = useContext(UsersContext);
 	const [isFavorite, setIsFavorite] = useState(false);
+	const [userId, setUserId] = useState<string | null>(null);
 	const [favorites, setFavorites] = favoritesState;
 	const [showPage, setShowPage] = showPageState;
-	const [accountDetails, setAccountDetails] = accountDetailsState;
+
+	useEffect(() => {
+		const id = localStorage.getItem('accountId');
+		setUserId(id);
+	}, []);
 
 	const getUsersFavorites = async (currentPage?: number) => {
 		try {
@@ -66,8 +69,7 @@ const Favorite: FC<Props> = ({ show, color }) => {
 				{isFavorite ? (
 					<MdFavorite
 						onClick={async () => {
-							if (show && accountDetails) await markFavorite(show.id, false, accountDetails);
-							console.log(show.id, false, accountDetails);
+							if (show && userId) await markFavorite(show.id, false, userId);
 							setIsFavorite(false);
 						}}
 						className={styles.heart}
@@ -75,8 +77,7 @@ const Favorite: FC<Props> = ({ show, color }) => {
 				) : (
 					<GrFavorite
 						onClick={async () => {
-							if (show && accountDetails) await markFavorite(show.id, true, accountDetails);
-							console.log(show.id, true, accountDetails);
+							if (show && userId) await markFavorite(show.id, true, userId);
 							setIsFavorite(true);
 						}}
 						className={styles.heart}
@@ -90,9 +91,7 @@ const Favorite: FC<Props> = ({ show, color }) => {
 const MemoizedFavorite = React.memo(Favorite);
 
 export default ({ show, color }) => (
-	<UsersProvider>
 		<ShowsProvider>
 			<MemoizedFavorite show={show} color={color} />
 		</ShowsProvider>
-	</UsersProvider>
 );

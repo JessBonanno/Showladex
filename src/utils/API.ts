@@ -1,7 +1,6 @@
 import axios from 'axios';
 import { MediaResponse, MovieDetailsResponse } from 'src/ts/apiInterfaces';
 import { ShowDetails } from 'src/ts/showInterfaces';
-import { UserDetails } from 'src/ts/userInterfaces';
 
 /*
 Auth api calls
@@ -11,8 +10,6 @@ export const getUserToken = async () => {
 		const tokenData = await axios.get(
 			`https://api.themoviedb.org/3/authentication/token/new?api_key=${process.env.REACT_APP_API_KEY}`
 		);
-		console.log(tokenData);
-
 		localStorage.setItem('movieToken', tokenData.data.request_token);
 
 		window.location.replace(
@@ -258,10 +255,10 @@ export const getRandomPopularImg = async () => {
 User Actions API calls
 */
 
-export const markFavorite = async (id: number, favorite: boolean, accountDetails: UserDetails) => {
+export const markFavorite = async (id: number, favorite: boolean, accountId: string) => {
 	try {
 		const response = await axios.post(
-			`https://api.themoviedb.org/3/account/${accountDetails.id}/favorite?api_key=${
+			`https://api.themoviedb.org/3/account/${accountId}/favorite?api_key=${
 				process.env.REACT_APP_API_KEY
 			}&session_id=${localStorage.getItem('session')}`,
 			{
@@ -270,10 +267,8 @@ export const markFavorite = async (id: number, favorite: boolean, accountDetails
 				favorite: favorite,
 			}
 		);
-		console.log({ response });
 		return response;
 	} catch (err) {
-		console.log({ err });
 		console.error(err);
 	}
 	return null;
