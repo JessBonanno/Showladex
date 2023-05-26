@@ -3,8 +3,9 @@ import './App.scss';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Landing from './components/pages/landing/LandingPage';
 import NavBar from './components/parts/topNavigation';
-import UpNext from './components/pages/upNext';
+import UpNext from './components/pages/upNext/UpNext';
 import MediaInfo from './components/pages/mediaInfo/MediaInfo';
+import { Favorites } from './components/pages/favorites/Favorites';
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
           <Route exact path="/show/:id" component={MediaInfo} />
           <Route exact path="/movie/:id" component={MediaInfo} />
           <Route exact path="/up-next" component={UpNext} />
+          <Route exact path="/favorites" component={Favorites} />
         </Switch>
       </Router>
     </div>

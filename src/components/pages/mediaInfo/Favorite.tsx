@@ -12,11 +12,10 @@ interface Props {
 }
 
 const Favorite: FC<Props> = ({ show, color }) => {
-	const { favoritesState, showPageState } = useContext(ShowsContext);
+	const { favoritesState } = useContext(ShowsContext);
+	const [favorites, setFavorites] = favoritesState;
 	const [isFavorite, setIsFavorite] = useState(false);
 	const [userId, setUserId] = useState<string | null>(null);
-	const [favorites, setFavorites] = favoritesState;
-	const [showPage, setShowPage] = showPageState;
 
 	useEffect(() => {
 		const id = localStorage.getItem('accountId');
@@ -30,7 +29,6 @@ const Favorite: FC<Props> = ({ show, color }) => {
 			currentPage = favsResponse?.page;
 			const totalPages = favsResponse?.total_pages;
 			setFavorites(favorites);
-			setShowPage((showPage || 0) + 1);
 			if (currentPage && totalPages && totalPages > currentPage) {
 				getUsersFavorites(currentPage + 1);
 			}
