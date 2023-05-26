@@ -7,8 +7,8 @@ import 'react-modal-video/scss/modal-video.scss';
 import { MovieDetailsResponse } from 'src/ts/apiInterfaces';
 
 interface Props {
-  show: ShowDetails | undefined;
-  movie: MovieDetailsResponse | undefined;
+  show?: ShowDetails;
+  movie?: MovieDetailsResponse;
   trailer: string;
   buttonColor: string;
 }

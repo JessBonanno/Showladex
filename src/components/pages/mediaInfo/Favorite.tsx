@@ -2,13 +2,13 @@ import React, { FC, useContext, useEffect, useState } from 'react';
 import { GrFavorite } from 'react-icons/gr';
 import { MdFavorite } from 'react-icons/md';
 import styles from './showInfo.module.scss';
-import { ShowDetails, Show, FavResults } from '../../../ts/showInterfaces';
 import { ShowsContext, ShowsProvider } from '../../../context/ShowsContext';
 import { getFavorites, markFavorite } from 'src/utils/API';
 import { UsersContext, UsersProvider } from 'src/context/UsersContext';
+import { ShowResult } from 'src/ts/apiInterfaces';
 
 interface Props {
-	show: ShowDetails | undefined;
+	show: ShowResult;
 	color: string;
 }
 
@@ -20,26 +20,29 @@ const Favorite: FC<Props> = ({ show, color }) => {
 	const [showPage, setShowPage] = showPageState;
 	const [accountDetails, setAccountDetails] = accountDetailsState;
 
-	const getUsersFavorites = async () => {
+	const getUsersFavorites = async (currentPage?: number) => {
 		try {
-			const favs: FavResults = await getFavorites();
-			if (favorites && favorites.length > 0 && favs.results) {
-				setFavorites([...favorites, ...favs.results]);
-			} else {
-				setFavorites([...favs.results]);
-			}
+			const favsResponse = await getFavorites(currentPage && currentPage);
+			const favorites = favsResponse?.results as ShowResult[];
+			currentPage = favsResponse?.page;
+			const totalPages = favsResponse?.total_pages;
+			setFavorites(favorites);
 			setShowPage((showPage || 0) + 1);
-			if (favs.total_pages > (showPage || 0) + 1) {
-				getUsersFavorites();
+			if (currentPage && totalPages && totalPages > currentPage) {
+				getUsersFavorites(currentPage + 1);
 			}
 		} catch (err) {
 			console.error(err);
 		}
 	};
-
 	const checkFavorites = () => {
 		if (show && favorites) {
-			return favorites.find((fav: Show) => fav.id === show.id);
+			favorites.forEach(f => {
+				if (f.id === show.id) {
+					return true;
+				}
+			});
+			// return favorites.find((fav: ShowResult) => fav.id === show.id);
 		}
 		return false;
 	};
@@ -64,6 +67,7 @@ const Favorite: FC<Props> = ({ show, color }) => {
 					<MdFavorite
 						onClick={async () => {
 							if (show && accountDetails) await markFavorite(show.id, false, accountDetails);
+							console.log(show.id, false, accountDetails);
 							setIsFavorite(false);
 						}}
 						className={styles.heart}
@@ -72,6 +76,7 @@ const Favorite: FC<Props> = ({ show, color }) => {
 					<GrFavorite
 						onClick={async () => {
 							if (show && accountDetails) await markFavorite(show.id, true, accountDetails);
+							console.log(show.id, true, accountDetails);
 							setIsFavorite(true);
 						}}
 						className={styles.heart}
@@ -87,7 +92,7 @@ const MemoizedFavorite = React.memo(Favorite);
 export default ({ show, color }) => (
 	<UsersProvider>
 		<ShowsProvider>
-			<Favorite show={show} color={color} />
+			<MemoizedFavorite show={show} color={color} />
 		</ShowsProvider>
 	</UsersProvider>
 );

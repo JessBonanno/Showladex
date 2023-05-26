@@ -11,6 +11,8 @@ export const getUserToken = async () => {
 		const tokenData = await axios.get(
 			`https://api.themoviedb.org/3/authentication/token/new?api_key=${process.env.REACT_APP_API_KEY}`
 		);
+		console.log(tokenData);
+
 		localStorage.setItem('movieToken', tokenData.data.request_token);
 
 		window.location.replace(
@@ -265,24 +267,28 @@ export const markFavorite = async (id: number, favorite: boolean, accountDetails
 			{
 				media_type: 'tv',
 				media_id: id,
-				favorite,
+				favorite: favorite,
 			}
 		);
+		console.log({ response });
 		return response;
 	} catch (err) {
+		console.log({ err });
 		console.error(err);
 	}
 	return null;
 };
 
-export const getFavorites = async () => {
+export const getFavorites = async (page?: number): Promise<MediaResponse | null> => {
 	if (localStorage.getItem('accountId')) {
 		const id = localStorage.getItem('accountId');
 		try {
 			const response = await axios.get(
 				`https://api.themoviedb.org/3/account/${id} /favorite/tv?api_key=${
 					process.env.REACT_APP_API_KEY
-				}&language=en-US&session_id=${localStorage.getItem('session')}&sort_by=created_at.asc&page=1`
+				}&language=en-US&session_id=${localStorage.getItem('session')}&sort_by=created_at.asc${
+					page && `&page=${page.toString()}`
+				}`
 			);
 			return response.data;
 		} catch (err) {

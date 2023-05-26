@@ -4,6 +4,7 @@ import { ShowsContext, ShowsProvider } from '../../../context/ShowsContext';
 import { UsersContext, UsersProvider } from '../../../context/UsersContext';
 import styles from './navBar.module.scss';
 import { endSession, getAccountDetails, getSession, getUserToken } from 'src/utils/API';
+import { UserDetails } from 'src/ts/userInterfaces';
 
 interface Props {
 	isMobile: boolean;
@@ -11,23 +12,25 @@ interface Props {
 
 const NavLinks: FC<Props> = ({ isMobile }) => {
 	const [open, setOpen] = useState<boolean | null>(false);
-	const { authorizedState, accountDetailsState } = useContext(UsersContext);
 	const { favoritesState, searchResultsState } = useContext(ShowsContext);
-	const [authorized, setAuthorized] = authorizedState;
-	const [accountDetails, setAccountDetails] = accountDetailsState;
+	const [authorized, setAuthorized] = useState<boolean>(false);
+	const [accountDetails, setAccountDetails] = useState<UserDetails | null>(null);;
 	const [favorites, setFavorites] = favoritesState;
 	const [searchResults, setSearchResults] = searchResultsState;
 	const createSession = async () => {
 		const token = localStorage.getItem('movieToken');
+		console.log({token});
+		
 		let success;
 		if (token) success = await getSession(token);
 		if (success) {
 			setAuthorized(true);
 		}
 	};
-
+	
 	const getUserInfo = async () => {
 		const userInfo = await getAccountDetails();
+		console.log({userInfo});
 		if (userInfo) {
 			setAccountDetails(userInfo);
 			setAuthorized(true);
@@ -78,18 +81,18 @@ const NavLinks: FC<Props> = ({ isMobile }) => {
 			</li>
 			{authorized ? (
 				<>
-					{/* <li>
-              <Link
-                to="/favorites"
-                className={styles.navLink}
-                onClick={() => {
-                  setOpen(false);
-                  setSearchResults(null);
-                }}
-              >
-                Favorites
-              </Link>
-            </li> */}
+					<li>
+						<Link
+							to="/favorites"
+							className={styles.navLink}
+							onClick={() => {
+								setOpen(false);
+								setSearchResults(null);
+							}}
+						>
+							Favorites
+						</Link>
+					</li>
 					<li>
 						<Link
 							to="/up-next"
@@ -138,10 +141,10 @@ const NavLinks: FC<Props> = ({ isMobile }) => {
 
 const MemoizedNavLinks = React.memo(NavLinks);
 
-export default ({isMobile}) => (
+export default ({ isMobile }) => (
 	<UsersProvider>
 		<ShowsProvider>
-			<MemoizedNavLinks isMobile={isMobile}/>
+			<MemoizedNavLinks isMobile={isMobile} />
 		</ShowsProvider>
 	</UsersProvider>
 );

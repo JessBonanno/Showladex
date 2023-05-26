@@ -157,8 +157,3 @@ export interface ActorDetails extends Cast{
   imdb_id: string;
 }
 
-export interface FavResults {
-  results: [Show];
-  total_pages: number;
-  total_results: number;
-}

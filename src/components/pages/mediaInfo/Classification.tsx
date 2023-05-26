@@ -5,9 +5,9 @@ import { ShowDetails } from '../../../ts/showInterfaces';
 import { MovieDetailsResponse } from 'src/ts/apiInterfaces';
 
 interface Props {
-  show: ShowDetails| undefined;
-  movie: MovieDetailsResponse | undefined;
-  rating: string | undefined;
+  show?: ShowDetails;
+  movie?: MovieDetailsResponse;
+  rating?: string;
 }
 
 export const Classification:FC<Props> = ({ rating, show, movie }) => {

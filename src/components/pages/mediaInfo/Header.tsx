@@ -5,8 +5,8 @@ import Favorite from './Favorite';
 import { MovieDetailsResponse } from 'src/ts/apiInterfaces';
 
 interface Props {
-  show: ShowDetails | undefined;
-  movie: MovieDetailsResponse | undefined;
+  show?: ShowDetails;
+  movie?: MovieDetailsResponse;
   color: string;
 }
 

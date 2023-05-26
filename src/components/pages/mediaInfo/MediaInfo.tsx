@@ -98,24 +98,24 @@ export const MediaInfo = () => {
 	return (
 		<div className={styles.showDetails} style={{ backgroundColor: data.darkMuted, color: getContrast(data.darkMuted) }}>
 			<Header
-				show={location.pathname.includes('show') ? show : undefined}
-				movie={location.pathname.includes('movie') ? movie : undefined}
+				show={show}
+				movie={movie}
 				color={getContrast(data.darkMuted)}
 			/>
 			<ScoreAndTrailer
-				show={location.pathname.includes('show') ? show : undefined}
-				movie={location.pathname.includes('movie') ? movie : undefined}
+				show={show}
+				movie={movie}
 				trailer={trailer}
 				buttonColor={getContrast(data.darkMuted)}
 			/>
 			<Classification
-				show={location.pathname.includes('show') ? show : undefined}
-				movie={location.pathname.includes('movie') ? movie : undefined}
-				rating={rating && rating.rating ? rating.rating : rating && rating.certification}
+				show={show}
+				movie={movie}
+				rating={rating?.rating ? rating.rating : rating?.certification }
 			/>
 			<Overview
-				show={location.pathname.includes('show') ? show : undefined}
-				movie={location.pathname.includes('movie') ? movie : undefined}
+				show={show}
+				movie={movie}
 			/>
 			{location.pathname.includes('show') && (
 				<SimilarShows show={location.pathname.includes('show') ? show : undefined} />

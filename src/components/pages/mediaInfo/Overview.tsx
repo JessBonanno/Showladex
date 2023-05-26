@@ -4,8 +4,8 @@ import { ShowDetails } from '../../../ts/showInterfaces';
 import { MovieDetailsResponse } from 'src/ts/apiInterfaces';
 
 interface Props {
-  show: ShowDetails | undefined;
-  movie: MovieDetailsResponse | undefined;
+  show?: ShowDetails;
+  movie?: MovieDetailsResponse;
 }
 
 const Overview:FC<Props> = ({ show, movie }) => {
