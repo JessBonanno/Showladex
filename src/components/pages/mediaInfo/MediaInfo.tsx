@@ -7,8 +7,8 @@ import Header from './Header';
 import ScoreAndTrailer from './ScoreAndTrailer';
 import Classification from './Classification';
 import Overview from './Overview';
-import CastInfo from './cast';
-import SimilarShows from './similarShows';
+import CastInfo from './cast/CastInfo';
+import SimilarShows from './similarShows/SimilarShows';
 import {
 	getMovieCast,
 	getMovieDetails,
