@@ -9,6 +9,7 @@ import Classification from './Classification';
 import Overview from './Overview';
 import CastInfo from './cast/CastInfo';
 import SimilarShows from './similarShows/SimilarShows';
+import { isMobile } from 'react-device-detect';
 import {
 	getMovieCast,
 	getMovieDetails,
@@ -110,7 +111,7 @@ export const MediaInfo = ({ id, isMovie = false }: Props) => {
 			className={styles.showDetails}
 			style={{ backgroundColor: data.darkMuted, color: getContrast(data.darkMuted) }}
 		>
-			{showBackButton && (
+			{showBackButton && isMobile && (
 				<Link className={styles.backLink} to="/">
 					Back to home
 				</Link>
