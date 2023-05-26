@@ -5,7 +5,7 @@ import MemoizedNavLinks  from './NavLinks';
 export const Navigation = () => {
   return (
     <nav className={styles.navigation}>
-      <MemoizedNavLinks isMobile={false} />
+      <MemoizedNavLinks isMobile={false} setOpen={null}/>
     </nav>
   );
 };

@@ -23,7 +23,7 @@ export const MobileNavigation = () => {
         size="35px"
         onClick={() => setOpen(!open)}
       />
-      <MemoizedNavLinks isMobile />
+      <MemoizedNavLinks isMobile  setOpen={setOpen}/>
     </>
   );
 

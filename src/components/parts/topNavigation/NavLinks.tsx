@@ -7,10 +7,10 @@ import { UserDetails } from 'src/ts/userInterfaces';
 
 interface Props {
 	isMobile: boolean;
+	setOpen?: React.Dispatch<React.SetStateAction<boolean | null>>;
 }
 
-const NavLinks: FC<Props> = ({ isMobile }) => {
-	const [open, setOpen] = useState<boolean | null>(false);
+const NavLinks: FC<Props> = ({ isMobile, setOpen }: Props) => {
 	const { favoritesState, searchResultsState } = useContext(ShowsContext);
 	const [authorized, setAuthorized] = useState<boolean | null>(false);
 	const [accountDetails, setAccountDetails] = useState<UserDetails | null>(null);
@@ -67,7 +67,7 @@ const NavLinks: FC<Props> = ({ isMobile }) => {
 					to="/"
 					className={styles.navLink}
 					onClick={() => {
-						setOpen(false);
+						setOpen && setOpen(false);
 						setSearchResults(null);
 					}}
 				>
@@ -81,7 +81,7 @@ const NavLinks: FC<Props> = ({ isMobile }) => {
 							to="/favorites"
 							className={styles.navLink}
 							onClick={() => {
-								setOpen(false);
+								setOpen && setOpen(false);
 								setSearchResults(null);
 							}}
 						>
@@ -93,7 +93,7 @@ const NavLinks: FC<Props> = ({ isMobile }) => {
 							to="/up-next"
 							className={styles.navLink}
 							onClick={() => {
-								setOpen(false);
+								setOpen && setOpen(false);
 								setFavorites(null);
 								setSearchResults(null);
 							}}
@@ -106,7 +106,7 @@ const NavLinks: FC<Props> = ({ isMobile }) => {
 							to="/"
 							className={styles.navLink}
 							onClick={() => {
-								setOpen(false);
+								setOpen && setOpen(false);
 								deleteSession();
 								setSearchResults(null);
 							}}
@@ -121,7 +121,7 @@ const NavLinks: FC<Props> = ({ isMobile }) => {
 						to="/"
 						className={styles.navLink}
 						onClick={() => {
-							setOpen(false);
+							setOpen && setOpen(false);
 							saveSession();
 							setSearchResults(null);
 						}}
@@ -136,8 +136,8 @@ const NavLinks: FC<Props> = ({ isMobile }) => {
 
 const MemoizedNavLinks = React.memo(NavLinks);
 
-export default ({ isMobile }) => (
+export default ({ isMobile, setOpen }) => (
 		<ShowsProvider>
-			<MemoizedNavLinks isMobile={isMobile} />
+			<MemoizedNavLinks isMobile={isMobile} setOpen={setOpen}/>
 		</ShowsProvider>
 );
