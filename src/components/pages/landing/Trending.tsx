@@ -29,17 +29,41 @@ export const Trending = () => {
 	const [hasMore, setHasMore] = useState(true);
 
 	const getShows = async () => {
-		const shows = await getTrendingShows(pageNumber.toString());
-		if (shows?.results) {
-			setTrendingShows(shows.results as ShowResult[]);
+		const currentShows = trendingShows as ShowResult[];
+		const showsResponse = await getTrendingShows(pageNumber.toString());
+		const totalPages = showsResponse?.total_pages;
+		const shows = showsResponse?.results as ShowResult[];
+		if (currentShows && shows) {
+			setTrendingShows([...currentShows, ...shows]);
+		} else {
+			setTrendingShows([...shows]);
+		}
+
+		if (pageNumber && totalPages && totalPages > pageNumber) {
+			setHasMore(true);
+			setPageNumber(pageNumber + 1);
+		} else {
+			setHasMore(false);
 			setPageNumber(pageNumber + 1);
 		}
 	};
 
 	const getMovies = async () => {
-		const movies = await getTrendingMovies(pageNumber.toString());
-		if (movies?.results) {
-			setTrendingMovies(movies.results as MovieResult[]);
+		const currentMovies = trendingMovies as MovieResult[];
+		const moviesResponse = await getTrendingMovies(pageNumber.toString());
+		const totalPages = moviesResponse?.total_pages;
+		const movies = moviesResponse?.results as MovieResult[];
+		if (currentMovies && movies) {
+			setTrendingMovies([...currentMovies, ...movies]);
+		} else {
+			setTrendingMovies([...movies]);
+		}
+
+		if (pageNumber && totalPages && totalPages > pageNumber) {
+			setHasMore(true);
+			setPageNumber(pageNumber + 1);
+		} else {
+			setHasMore(false);
 			setPageNumber(pageNumber + 1);
 		}
 	};
@@ -68,14 +92,7 @@ export const Trending = () => {
 					{trendingShows &&
 						trendingShows.length > 0 &&
 						trendingShows.map((result: Show) => {
-							return (
-								<MediaPoster
-									show={result}
-									movie={null}
-									key={uuidv4()}
-									setShows={undefined}
-								/>
-							);
+							return <MediaPoster show={result} movie={null} key={uuidv4()} setShows={undefined} />;
 						})}
 				</InfiniteScroll>
 			</div>
@@ -96,14 +113,7 @@ export const Trending = () => {
 					{trendingMovies &&
 						trendingMovies?.length > 0 &&
 						trendingMovies?.map((result: Movie) => {
-							return (								
-									<MediaPoster
-										show={null}
-										movie={result}
-										key={uuidv4()}
-										setShows={undefined}
-									/>
-							);
+							return <MediaPoster show={null} movie={result} key={uuidv4()} setShows={undefined} />;
 						})}
 				</InfiniteScroll>
 			</div>
