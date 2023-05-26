@@ -20,6 +20,7 @@ import {
 } from 'src/utils/API';
 import { MovieDetailsResponse } from 'src/ts/apiInterfaces';
 import { getContrast } from 'src/utils/helpers';
+import { Link } from 'react-router-dom';
 
 interface Props {
 	id: string;
@@ -37,6 +38,7 @@ interface Rating {
 export const MediaInfo = ({ id, isMovie = false }: Props) => {
 	const location = useLocation();
 	if (location.pathname.includes('movie')) isMovie = true;
+	const [showBackButton, setShowBackButton] = useState<boolean>(false);
 	const [show, setShow] = useState<ShowDetails>();
 	const [movie, setMovie] = useState<MovieDetailsResponse>();
 	const [trailer, setTrailer] = useState<string>('');
@@ -87,6 +89,13 @@ export const MediaInfo = ({ id, isMovie = false }: Props) => {
 			getShow();
 		}
 	}, [id]);
+	useEffect(() => {
+		if (location.pathname.includes('favorites')) {
+			setShowBackButton(false);
+		} else {
+			setShowBackButton(true);
+		}
+	}, [location.pathname]);
 
 	let bgPath = '';
 	if (isMovie) {
@@ -101,6 +110,11 @@ export const MediaInfo = ({ id, isMovie = false }: Props) => {
 			className={styles.showDetails}
 			style={{ backgroundColor: data.darkMuted, color: getContrast(data.darkMuted) }}
 		>
+			{showBackButton && (
+				<Link className={styles.backLink} to="/">
+					Back to home
+				</Link>
+			)}
 			<Header show={show} movie={movie} color={getContrast(data.darkMuted)} />
 			<ScoreAndTrailer show={show} movie={movie} trailer={trailer} buttonColor={getContrast(data.darkMuted)} />
 			<Classification show={show} movie={movie} rating={rating?.rating ? rating.rating : rating?.certification} />
