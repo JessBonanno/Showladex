@@ -1,14 +1,16 @@
-import React, { useContext } from 'react';
-import { ShowsContext } from '../../../context/ShowsContext';
+import { ShowResult } from 'src/ts/apiInterfaces';
 import { Show } from '../../../ts/showInterfaces';
 import Result from './Result';
 import styles from './searchResults.module.scss';
 
-const SearchResults = () => {
-  const { searchResults } = useContext(ShowsContext);
+interface Props {
+  results: ShowResult[];
+}
+
+const SearchResults = ({results}: Props) => {
   return (
     <div className={styles.searchResults}>
-      {searchResults.length > 0 && searchResults.map((show: Show) => {
+      {results && results.length > 0 && results.map((show: Show) => {
         return (<Result show={show} />);
       })}
     </div>

@@ -1,90 +1,94 @@
-import React, {
-  FC, useContext, useEffect, useState,
-} from 'react';
+import React, { FC, useContext, useEffect, useState } from 'react';
 import { GrFavorite } from 'react-icons/gr';
 import { MdFavorite } from 'react-icons/md';
 import styles from './showInfo.module.scss';
-import { ShowDetails, Show, FavResults } from '../../../ts/showInterfaces';
-import { APIContext } from '../../../context/APIContext';
-import { ShowsContext } from '../../../context/ShowsContext';
+import { ShowsContext, ShowsProvider } from '../../../context/ShowsContext';
+import { getFavorites, markFavorite } from 'src/utils/API';
+import { ShowResult } from 'src/ts/apiInterfaces';
 
 interface Props {
-  show: ShowDetails | undefined;
-  color: string;
+	show: ShowResult;
+	color: string;
 }
 
-const Favorite:FC<Props> = ({ show, color }) => {
-  const { markFavorite, getFavorites } = useContext(APIContext);
-  const {
-    favorites, setFavorites, page, setPage,
-  } = useContext(ShowsContext);
-  const [isFavorite, setIsFavorite] = useState(false);
+const Favorite: FC<Props> = ({ show, color }) => {
+	const { favoritesState } = useContext(ShowsContext);
+	const [favorites, setFavorites] = favoritesState;
+	const [isFavorite, setIsFavorite] = useState(false);
+	const [userId, setUserId] = useState<string | null>(null);
 
-  const getUsersFavorites = async () => {
-    try {
-      const favs:FavResults = await getFavorites();
-      if (favorites && favorites.length > 0 && favs.results) {
-        setFavorites([...favorites, ...favs.results]);
-      } else {
-        setFavorites([...favs.results]);
-      }
-      setPage(page + 1);
-      if (favs.total_pages > page + 1) {
-        getUsersFavorites();
-      }
-    } catch (err) {
-      console.error(err);
-    }
-  };
+	useEffect(() => {
+		const id = localStorage.getItem('accountId');
+		setUserId(id);
+	}, []);
 
-  const checkFavorites = () => {
-    if (show && favorites) {
-      return favorites.find((fav: Show) => fav.id === show.id);
-    }
-    return false;
-  };
+	const getUsersFavorites = async (currentPage?: number) => {
+		try {
+			const favsResponse = await getFavorites(currentPage && currentPage);
+			const favorites = favsResponse?.results as ShowResult[];
+			currentPage = favsResponse?.page;
+			const totalPages = favsResponse?.total_pages;
+			setFavorites(favorites);
+			if (currentPage && totalPages && totalPages > currentPage) {
+				getUsersFavorites(currentPage + 1);
+			}
+		} catch (err) {
+			console.error(err);
+		}
+	};
+	
+	useEffect(() => {
+		getUsersFavorites();
+		if (show && favorites) {
+			favorites.forEach(f => {
+				if (f.id === show.id) {
+					setIsFavorite(true);
+				}
+			});
+		}
+	}, []);
 
-  useEffect(() => {
-    getUsersFavorites();
-  }, []);
-
-  useEffect(() => {
-    if (checkFavorites()) {
-      setIsFavorite(true);
-    } else {
-      setIsFavorite(false);
-    }
-  }, [favorites]);
-
-  return (
-    <div className={styles.Favorite}>
-      <p>
-        Favorite
-      </p>
-      <div>
-        {isFavorite
-          ? (
-            <MdFavorite
-              onClick={async () => {
-                await markFavorite(show && show.id, false);
-                setIsFavorite(false);
-              }}
-              className={styles.heart}
-            />
-          )
-          : (
-
-            <GrFavorite
-              onClick={async () => {
-                await markFavorite(show && show.id, true);
-                setIsFavorite(true);
-              }}
-              className={styles.heart}
-            />
-          )}
-      </div>
-    </div>
-  );
+	useEffect(() => {
+		if (show && favorites) {
+			favorites.forEach(f => {
+				if (f.id === show.id) {
+					setIsFavorite(true);
+				}
+			});
+		} else {
+			setIsFavorite(false);
+		}
+	}, [favorites]);
+	return (
+		<div className={styles.Favorite}>
+			<p>Favorite</p>
+			<div>
+				{isFavorite ? (
+					<MdFavorite
+						onClick={async () => {
+							if (show && userId) await markFavorite(show.id, false, userId);
+							setIsFavorite(false);
+						}}
+						className={styles.heart}
+					/>
+				) : (
+					<GrFavorite
+						onClick={async () => {
+							if (show && userId) await markFavorite(show.id, true, userId);
+							setIsFavorite(true);
+						}}
+						className={styles.heart}
+					/>
+				)}
+			</div>
+		</div>
+	);
 };
 
-export default Favorite;
+const MemoizedFavorite = React.memo(Favorite);
+
+export default ({ show, color }) => (
+	<ShowsProvider>
+		<MemoizedFavorite show={show} color={color} />
+	</ShowsProvider>
+);

@@ -1,11 +1,11 @@
 import React from 'react';
 import styles from './navBar.module.scss';
-import { NavLinks } from './NavLinks';
+import MemoizedNavLinks  from './NavLinks';
 
 export const Navigation = () => {
   return (
     <nav className={styles.navigation}>
-      <NavLinks isMobile={false} />
+      <MemoizedNavLinks isMobile={false} />
     </nav>
   );
 };

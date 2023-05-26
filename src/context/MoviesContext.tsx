@@ -1,24 +1,30 @@
-import React, {
-  FC, Context, createContext, useState,
-} from 'react';
-import { MoviesResults } from '../ts/movieInterfaces';
+import { createContext, useState, Dispatch, SetStateAction, useMemo, ReactElement } from 'react';
+import { MovieResult } from 'src/ts/apiInterfaces';
 
-export const MoviesContext: Context<any> = createContext({});
+type UseState<T> = [T, Dispatch<SetStateAction<T>>];
 
-export const MoviesProvider: FC = ({ children }) => {
-  const [trendingMovies, setTrendingMovies] = useState<MoviesResults>();
-  const [page, setPage] = useState(1);
+interface ContextVal {
+	trendingMoviesState: UseState<MovieResult[] | null>;
+	moviePageState: UseState<number | null>;
+}
 
-  return (
-    <MoviesContext.Provider
-      value={{
-        trendingMovies,
-        setTrendingMovies,
-        page,
-        setPage,
-      }}
-    >
-      {children}
-    </MoviesContext.Provider>
-  );
+interface Props {
+	children: ReactElement;
+}
+
+export const MoviesContext = createContext<ContextVal>(undefined!);
+
+export const MoviesProvider = ({ children }: Props) => {
+	const trendingMoviesState = useState<MovieResult[] | null>(null);
+	const moviePageState = useState<number | null>(1);
+
+	const value = useMemo(
+		() => ({
+			trendingMoviesState,
+			moviePageState,
+		}),
+		[trendingMoviesState, moviePageState]
+	);
+
+	return <MoviesContext.Provider value={value}>{children}</MoviesContext.Provider>;
 };

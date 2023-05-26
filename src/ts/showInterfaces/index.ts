@@ -13,9 +13,26 @@ export interface Show {
   vote_average: number;
   vote_count: number;
   media_type?: string;
-}
-export interface ShowsResults {
-  results: Show[]
+  created_by?: Creator[];
+  episode_run_time?: number[];
+  genres?: Genre[];
+  homepage?: string;
+  in_production?: boolean,
+  languages?: string[];
+  last_air_date?: string;
+  last_episode_to_air?: Episode;
+  next_episode_to_air?: Episode;
+  networks?: Network[];
+  number_of_episodes?: number;
+  number_of_seasons?: number;
+  production_companies?: ProductionCompany[],
+  production_countries?: ProductionCountry[],
+  seasons?: Season[],
+  spoken_languages?: SpokenLanguage[],
+  status?: string;
+  tagline?: string;
+  type?: string;
+
 }
 
 export interface Creator {
@@ -140,8 +157,3 @@ export interface ActorDetails extends Cast{
   imdb_id: string;
 }
 
-export interface FavResults {
-  results: [Show];
-  total_pages: number;
-  total_results: number;
-}

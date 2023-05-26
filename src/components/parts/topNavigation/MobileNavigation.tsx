@@ -1,12 +1,11 @@
-import React, { useState, useContext } from 'react';
+import { useState } from 'react';
 import { RiMenu3Line } from 'react-icons/ri';
 import { CgClose } from 'react-icons/cg';
 import styles from './navBar.module.scss';
-import { NavLinks } from './NavLinks';
-import { NavigationContext } from '../../../context/NavigationContext';
+import MemoizedNavLinks  from './NavLinks';
 
 export const MobileNavigation = () => {
-  const { open, setOpen } = useContext(NavigationContext);
+  const [ open, setOpen ] = useState<boolean | null>(false);
 
   const openIcon = (
     <RiMenu3Line
@@ -24,7 +23,7 @@ export const MobileNavigation = () => {
         size="35px"
         onClick={() => setOpen(!open)}
       />
-      <NavLinks isMobile />
+      <MemoizedNavLinks isMobile />
     </>
   );
 

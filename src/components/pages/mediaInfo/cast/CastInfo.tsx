@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import styles from './cast.module.scss';
-import { Cast, ShowDetails } from '../../../../ts/showInterfaces';
+import { Cast } from '../../../../ts/showInterfaces';
 import CastCard from './CastCard';
 
 interface Props {
@@ -18,7 +18,7 @@ const CastInfo:FC<Props> = ({ cast, color }) => {
         <div className={styles.castCards} style={{ color }}>
           {cast && cast.length > 0 && cast.map((actor) => {
             return (
-              <CastCard actor={actor} character={actor.character} key={actor.id} />
+              <CastCard actor={actor} key={actor.id} />
             );
           })}
         </div>

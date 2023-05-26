@@ -1,6 +1,3 @@
-import {
-  ProductionCompany, ProductionCountry, SpokenLanguage, Genre,
-} from '../showInterfaces';
 
 export interface Movie {
   backdrop_path: string | null;
@@ -27,29 +24,3 @@ export interface Collection {
   backdrop_path: string;
 }
 
-interface Country {
-  certification: string;
-  iso_3166_1: string;
-  primary: string;
-  release_date: string;
-}
-
-export interface MovieDetails extends Movie {
-  belongs_to_collection: Collection | null;
-  budget: number;
-  genres: Genre[];
-  homepage: string;
-  imdb_id: string,
-  production_companies: ProductionCompany[],
-  production_countries: ProductionCountry[],
-  revenue: number;
-  runtime: number;
-  spoken_languages: SpokenLanguage[],
-  status: string;
-  tagline: string;
-  releases: Country[];
-}
-
-export interface MoviesResults {
-  results: Movie[]
-}
